@@ -3,6 +3,9 @@
 Group Members:
 
 Matthew Wirnowski
+
 Sean Barney
+
 Mario Ponte
+
 Yehuda Cohen
