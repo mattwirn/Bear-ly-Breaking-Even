@@ -5,15 +5,12 @@ Group Members:
 
 Front End:
 
-Mario Ponte
-
-Yehuda Cohen
+Mario Ponte, Yehuda Cohen
 
 Back End:
 
-Matthew Wirnowski
+Matthew Wirnowski, Sean Barney
 
-Sean Barney
 
 
 Project Description:
