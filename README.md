@@ -9,8 +9,10 @@ Bear-ly Breaking Even is a budgeting app that helps users track their spendings 
 
 ### Front End:
 
-Mario Ponte, Yehuda Cohen
+ - Mario Ponte 
+ - Yehuda Cohen
 
 ### Back End:
 
-Matthew Wirnowski, Sean Barney
+- Matthew Wirnowski
+- Sean Barney
