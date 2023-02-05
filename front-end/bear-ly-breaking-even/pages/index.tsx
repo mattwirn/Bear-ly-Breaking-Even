@@ -12,14 +12,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className='flex w-screen h-screen items-center justify-center'>
+      <div className='grid flex place-items-center justify-center bg-[#ad0fad]'>
         <button className='bg-[#addfad] rounded-lg pl-5 pr-5 pt-2 pb-2 border border-black'>
           <div className='font-semibold'>Login</div>
         </button>
-        <div>
-
-        </div>
       </div>
     </div>
   )
 }
+
