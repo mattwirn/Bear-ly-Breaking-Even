@@ -12,10 +12,37 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className='grid flex place-items-center justify-center bg-[#ad0fad]'>
-        <button className='bg-[#addfad] rounded-lg pl-5 pr-5 pt-2 pb-2 border border-black'>
-          <div className='font-semibold'>Login</div>
-        </button>
+      <div className='flex items-center justify-center space-y-6'>
+        <div>
+
+        </div>
+        <div className='grid flex rounded-lg px-16 mx-auto h-fit justify-center bg-[#f2eadf] pb-2 pt-4 border border-black space'>
+          <div className='mx-auto justify-center text-xl font-semibold'>
+              Welcome!
+          </div>
+          <div className=' flex pt-4 pb-1'>
+            <div>Username</div>
+          </div>
+          <input className="shadow appearance-none border rounded w-full py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username"></input>
+          <div className='flex pt-4 pb-1'>
+            <div>Password</div>
+          </div>
+          <input className="shadow appearance-none border rounded w-full py-2.5 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="********"></input>
+          <div className='flex text-gray-600 text-sm pb-4'>
+            <div className='underline'>Forgot Password</div>
+          </div>
+          <div className='mx-auto pb-2'>
+            <button className='bg-[#addfad] drop-shadow-lg rounded-lg px-6 py-3 border border-black'>
+            <div className='font-semibold'>
+              Login
+            </div>
+          </button>
+          </div>
+          <div className='flex text-gray-600 text-sm py-2'>
+            <div>Don&apos;t have an account? &nbsp;</div>
+            <div className='underline'> Sign up </div>
+          </div>
+        </div>
       </div>
     </div>
   )
