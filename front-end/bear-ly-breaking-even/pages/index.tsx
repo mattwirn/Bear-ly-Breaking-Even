@@ -14,7 +14,7 @@ export default function Home() {
 
       <div className='flex w-screen h-screen items-center justify-center'>
         <button className='bg-[#addfad] rounded-lg pl-5 pr-5 pt-2 pb-2 border border-black'>
-          <div className=''>Login</div>
+          <div className='font-semibold'>Login</div>
         </button>
         <div>
 
