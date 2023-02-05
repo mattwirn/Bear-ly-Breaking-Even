@@ -13,10 +13,12 @@ export default function Home() {
       </Head>
 
       <div className='flex w-screen h-screen items-center justify-center'>
-        
-        <button className='bg-[#addfad] pl-5 pr-5 pt-2 pb-2 border'>
-          <div className=''>Login</div>
+        <button className='bg-[#addfad] rounded-lg pl-5 pr-5 pt-2 pb-2 border border-black'>
+          <div className='font-semibold'>Login</div>
         </button>
+        <div>
+
+        </div>
       </div>
     </div>
   )
