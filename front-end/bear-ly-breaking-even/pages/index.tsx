@@ -12,9 +12,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className='flex w-screen h-screen items-center justify-center'>
-        <div className='bg-[#addfad] pl-5 pr-5 pt-2 pb-2 border'>
-        <button className=''>Login</button>
-        </div>
+        <button className='bg-[#addfad] pl-5 pr-5 pt-2 pb-2 border'>
+          <div className=''>Login</div>
+        </button>
       </div>
     </div>
   )
