@@ -11,6 +11,7 @@ export default function Home() {
         <meta name="viewport"/>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <div className='flex w-screen h-screen items-center justify-center'>
         <button className='bg-[#addfad] rounded-lg pl-5 pr-5 pt-2 pb-2 border border-black'>
           <div className=''>Login</div>
