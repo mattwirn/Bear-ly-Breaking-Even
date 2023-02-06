@@ -8,6 +8,7 @@ export default function SignUp() {
     function logLink(){
         router.push('/')
     }
+    
   return (
     <div className=''>
       <Head>
