@@ -33,10 +33,10 @@ export default function Home() {
           </div>
           <div className='mx-auto pb-2'>
             <button className='bg-[#addfad] drop-shadow-lg rounded-lg px-6 py-3 border border-black'>
-            <div className='font-semibold'>
-              Login
-            </div>
-          </button>
+              <div className='font-semibold'>
+                Login
+              </div>
+            </button>
           </div>
           <div className='flex text-gray-600 text-sm py-2'>
             <div>Don&apos;t have an account? &nbsp;</div>
