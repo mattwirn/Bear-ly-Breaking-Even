@@ -20,7 +20,7 @@ export default function Home() {
           <div className='mx-auto justify-center text-xl font-semibold'>
               Welcome!
           </div>
-          <div className=' flex pt-4 pb-1'>
+          <div className='flex pt-4 pb-1'>
             <div>Username</div>
           </div>
           <input className="shadow appearance-none border rounded w-full py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username"></input>
@@ -29,7 +29,7 @@ export default function Home() {
           </div>
           <input className="shadow appearance-none border rounded w-full py-2.5 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="********"></input>
           <div className='flex text-gray-600 text-sm pb-4'>
-            <div className='underline'>Forgot Password</div>
+            <div className='underline hover:cursor-pointer'>Forgot Password</div>
           </div>
           <div className='mx-auto pb-2'>
             <button className='bg-[#addfad] drop-shadow-lg rounded-lg px-6 py-3 border border-black'>
@@ -40,7 +40,7 @@ export default function Home() {
           </div>
           <div className='flex text-gray-600 text-sm py-2'>
             <div>Don&apos;t have an account? &nbsp;</div>
-            <div className='underline'> Sign up </div>
+            <div className='underline hover:cursor-pointer'> Sign up </div>
           </div>
         </div>
       </div>
