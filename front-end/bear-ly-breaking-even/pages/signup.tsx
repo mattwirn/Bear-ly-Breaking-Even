@@ -26,7 +26,7 @@ export default function SignUp() {
       }
 
       // check if username field isnt empty and username doesnt already exist
-      if (!username.value == '' && !users.includes(username.value)) {
+      if (!(username.value == '' || users.includes(username.value))) {
         // check if password field and confirm password field are not empty and are equal
         if (!(password.value == '' || confirmPassword.value == '') && password.value == confirmPassword.value) {
           users.push(user.name)
