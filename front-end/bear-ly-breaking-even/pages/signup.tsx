@@ -1,8 +1,13 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
+import {useRouter} from "next/router"
 
 
 export default function SignUp() {
+    const router = useRouter()
+    function logLink(){
+        router.push('/')
+    }
   return (
     <div className=''>
       <Head>
@@ -42,7 +47,7 @@ export default function SignUp() {
           </div>
           <div className='flex text-gray-600 text-sm py-2'>
             <div>Already have an account? &nbsp;</div>
-            <div className='underline hover:cursor-pointer'> Log in </div>
+        <button onClick={logLink} className='underline hover:cursor-pointer'> Log in </button>
           </div>
         </div>
       </div>
