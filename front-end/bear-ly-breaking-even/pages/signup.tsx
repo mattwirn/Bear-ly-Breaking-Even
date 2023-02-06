@@ -41,11 +41,8 @@ export default function SignUp() {
       console.log(userObjects.length)
       console.log(users.length)
     }
-<<<<<<< HEAD
     
-=======
 
->>>>>>> c1daa6f822fe2c886d0f79e613a7fe46dcc40cfb
   return (
     <div className=''>
       <Head>
