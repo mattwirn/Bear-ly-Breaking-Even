@@ -2,13 +2,50 @@ import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import {useRouter} from "next/router"
 
+var users: string[] = []
+var userObjects: object[] = []
 
 export default function SignUp() {
-    const router = useRouter()
-    function logLink(){
-        router.push('/')
-    }
     
+  const router = useRouter()
+  
+  function logLink(){
+      router.push('/login')
+  }
+
+    function storeUsername() {
+      // get username, password, and confirm password input fields
+      var username = document.getElementById('nU')
+      var password = document.getElementById('nP')
+      var confirmPassword = document.getElementById('cP')
+      
+      // create user obeject
+      const user: object = {
+        name: username.value,
+        password: password.value
+      }
+
+      // check if username field isnt empty and username doesnt already exist
+      if (!(username.value == '' || users.includes(username.value))) {
+        // check if password field and confirm password field are not empty and are equal
+        if (!(password.value == '' || confirmPassword.value == '') && password.value == confirmPassword.value) {
+          users.push(user.name)
+          userObjects.push(user)
+        }
+      }
+      // reset username, password and confirm password fields
+      username.value = ''
+      password.value = ''
+      confirmPassword.value = ''
+
+      console.log(userObjects.length)
+      console.log(users.length)
+    }
+<<<<<<< HEAD
+    
+=======
+
+>>>>>>> c1daa6f822fe2c886d0f79e613a7fe46dcc40cfb
   return (
     <div className=''>
       <Head>
@@ -29,18 +66,18 @@ export default function SignUp() {
           <div className='flex pt-4 pb-1'>
             <div>New Username</div>
           </div>
-          <input className="shadow appearance-none border rounded w-full py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username"></input>
+          <input className="shadow appearance-none border rounded w-full py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nU" type="text" placeholder="Username"></input>
           <div className='flex pt-4 pb-1'>
             <div>New Password</div>
           </div>
-          <input className="shadow appearance-none border rounded w-full py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="********"></input>
+          <input className="shadow appearance-none border rounded w-full py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nP" type="password" placeholder="********"></input>
           <div className='flex pt-4 pb-1'>
             <div>Confirm Password</div>
           </div>
-          <input className="shadow appearance-none border rounded w-full py-2.5 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="********"></input>
+          <input className="shadow appearance-none border rounded w-full py-2.5 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="cP" type="password" placeholder="********"></input>
           
           <div className='mx-auto pb-2 pt-3'>
-            <button className='bg-[#addfad] drop-shadow-lg rounded-lg px-6 py-3 border border-black'>
+            <button onClick={storeUsername} className='bg-[#addfad] drop-shadow-lg rounded-lg px-6 py-3 border border-black'>
               <div className='font-semibold'>
                 Sign Up
               </div>

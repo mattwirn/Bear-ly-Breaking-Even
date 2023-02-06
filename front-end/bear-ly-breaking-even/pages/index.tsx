@@ -19,10 +19,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className='flex items-center justify-center space-y-6'>
-        <div className='grid'>
-          <button onClick={signupLink} className='underline hover:cursor-pointer'> Sign up </button>
-          <button onClick={logLink} className='underline hover:cursor-pointer'> Log in </button>
+      <div className='flex items-center space-y-6'>
+        <div className='flex w-screen justify-end bg-[#FFFFFF] py-4 px-3 border-b-2 border-black'>
+          <button onClick={signupLink} className='underline hover:cursor-pointer mx-1'> Sign up </button>
+          <button onClick={logLink} className='underline hover:cursor-pointer mx-1'> Log in </button>
         </div>
       </div>
     </div>
