@@ -37,9 +37,6 @@ export default function SignUp() {
       username.value = ''
       password.value = ''
       confirmPassword.value = ''
-
-      console.log(userObjects.length)
-      console.log(users.length)
     }
     
 

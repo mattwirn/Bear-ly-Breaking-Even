@@ -20,7 +20,7 @@ export default function Home() {
       </Head>
 
       <div className='flex items-center space-y-6'>
-        <div className='flex w-screen justify-end bg-[#FFFFFF] py-4 px-3 border-b-2 border-black'>
+        <div className='pageHeader'>
           <button onClick={signupLink} className='underline hover:cursor-pointer mx-1'> Sign up </button>
           <button onClick={logLink} className='underline hover:cursor-pointer mx-1'> Log in </button>
         </div>
