@@ -1,12 +1,14 @@
 import Head from 'next/head'
-import styles from '@/styles/Home.module.css'
 import {useRouter} from "next/router"
+import PageHeader from '@/components/PageHeader'
 
 export default function Login() {
     const router = useRouter()
-    function signupLink(){
+
+    function signupLink() {
         router.push('/signup')
     }
+
   return (
     <div className=''>
       <Head>
@@ -16,10 +18,9 @@ export default function Login() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className='flex items-center justify-center space-y-6'>
-        <div>
+      <PageHeader/>
 
-        </div>
+      <div className='flex items-center justify-center pt-10'>
         <div className='grid flex rounded-lg px-16 mx-auto h-fit justify-center bg-[#f2eadf] pb-2 pt-4 border border-black space'>
           <div className='mx-auto justify-center text-xl font-semibold'>
               Welcome Back!
