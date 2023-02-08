@@ -15,6 +15,6 @@ func init() {
 func main() {
 	r := gin.Default()
 	r.SetTrustedProxies(nil)
-	r.GET("/", controllers.Signup)
+	r.POST("/signup", controllers.Signup)
 	r.Run()
 }
