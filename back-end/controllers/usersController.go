@@ -100,7 +100,7 @@ func Login(c *gin.Context) {
 	})
 
 	// Sign and get the complete encoded token as a string using the secret
-	tokenString, err := token.SignedString(os.Getenv("SECRET"))
+	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET")))
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -110,7 +110,9 @@ func Login(c *gin.Context) {
 		return
 	}
 	// send it back
-	c.JSON(http.StatusOK, gin.H{
-		"token": tokenString,
-	})
+	c.SetSameSite(http.SameSiteLaxMode)
+	// when hosting website change secure bool to TRUE ------>    here
+	c.SetCookie("Authorization", tokenString, 3600*24*30, "", "", false, true)
+
+	c.JSON(http.StatusOK, gin.H{})
 }
