@@ -16,4 +16,7 @@
 
 > ### *As someone living paycheck-to-paycheck, I want to know how much money is being taken monthly by subscriptions and recurring payments so that it is easier to catch and cancel those that I no longer use.*
 
-> ### *
+> ### *As a visual person, I want to be able to visualize my finances and budgeting so that I can better understand just how much of my money is going where.*
+
+## Issues Planned to Address
+
