@@ -27,3 +27,11 @@ For the first user story, we implemented a sign up and log in functionality. The
 The sixth user story is still in progress - a color palette and logo were created and utilized in the front end.
 
 Both the frontend and backend teams were unable to start implementing the eighth user story, as setting up everything for the front and back end and the first user story took longer than expected. In future sprints we plan to continue working on this.
+
+## Demos
+
+### Front-end
+- link
+
+### Back-end
+- link
