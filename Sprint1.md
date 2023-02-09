@@ -31,7 +31,7 @@ Both the frontend and backend teams were unable to start implementing the eighth
 ## Demos
 
 ### Front-end
-- link
+- [Video](https://user-images.githubusercontent.com/92817377/217709080-1c9cba5f-0502-4329-802d-300ddc52e9f3.mp4)
 
 ### Back-end
-- link
+- [Video](https://drive.google.com/file/d/1aGOP_3g5GtZbd7vre85zTHZHbR1fdDt0/view?usp=sharing)
