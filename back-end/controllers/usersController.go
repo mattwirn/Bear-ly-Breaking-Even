@@ -45,7 +45,7 @@ func Signup(c *gin.Context) {
 
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Failed to create user",
+			"error": "Username already taken",
 		})
 
 		return
