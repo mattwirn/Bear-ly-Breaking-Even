@@ -13,9 +13,10 @@ func init() {
 }
 
 func main() {
-	r := gin.Default()
-	r.SetTrustedProxies(nil)
-	r.POST("/signup", controllers.Signup)
-	r.POST("/login", controllers.Login)
-	r.Run()
+	router := gin.Default()
+	router.SetTrustedProxies(nil)
+	router.POST("/signup", controllers.Signup)
+	router.POST("/login", controllers.Login)
+	router.GET("/validate", controllers.Validate)
+	router.Run()
 }
