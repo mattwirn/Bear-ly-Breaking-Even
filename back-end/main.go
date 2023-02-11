@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/mattwirn/Bear-ly-Breaking-Even/back-end/controllers"
 	"github.com/mattwirn/Bear-ly-Breaking-Even/back-end/initializers"
@@ -14,9 +15,18 @@ func init() {
 
 func main() {
 	router := gin.Default()
-	router.SetTrustedProxies(nil)
 	router.POST("/signup", controllers.Signup)
 	router.POST("/login", controllers.Login)
-	router.GET("/validate", controllers.Validate)
+	router.GET("/validate", middleware.RequireAuth controllers.Validate)
+
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:3000"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "HEAD", "OPTIONS"},
+		AllowHeaders:     []string{"Origin"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge:           43200,
+	}))
+
 	router.Run()
 }
