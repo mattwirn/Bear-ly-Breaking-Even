@@ -12,6 +12,18 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+func Home(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"home": "This is the home page",
+	})
+	return
+}
+
+func Default(c *gin.Context) {
+	c.Redirect(http.StatusFound, "/home")
+	return
+}
+
 func Signup(c *gin.Context) {
 	// Get the username/pass of req body
 	var body struct {

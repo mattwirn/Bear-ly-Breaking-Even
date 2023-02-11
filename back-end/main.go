@@ -19,6 +19,8 @@ func main() {
 	router.POST("/signup", controllers.Signup)
 	router.POST("/login", controllers.Login)
 	router.GET("/validate", middleware.RequireAuth, controllers.Validate)
+	router.GET("/home", controllers.Home)
+	router.NoRoute(controllers.Default)
 
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:3000"},
@@ -29,5 +31,5 @@ func main() {
 		MaxAge:           43200,
 	}))
 
-	router.Run()
+	router.Run("localhost:8080")
 }
