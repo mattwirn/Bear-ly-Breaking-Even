@@ -15,12 +15,12 @@ export default function Home() {
 
       <PageHeader/>
 
-      <div className='flex grid justify-center'>
-        <div className='mx-auto'>
+      <div className='flex grid justify-center mt-20'>
+        <div className='mx-auto mb-5'>
           <Logo w={300}/>
         </div>
-        <h1 className='mx-auto font-bold text-6xl text-[#addfad]'>HomePage</h1>
-        <h1 className='font-bold text-4xl text-[#addfad]'>(insert app description and logo)</h1>
+        <h1 className='mx-auto font-bold text-6xl text-[#002533]'>Bear-ly Breaking Even</h1>
+        <h1 className='mx-auto font-bold text-4xl text-[#546B52]'>(insert app description and logo)</h1>
       </div>
       
     </div>

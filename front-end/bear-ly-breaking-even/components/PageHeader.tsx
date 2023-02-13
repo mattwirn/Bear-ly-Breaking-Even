@@ -19,12 +19,12 @@ function PageHeader() {
 
     return (
         <div className='pageHeader'>
-            <div className=''>
+            <div className='pt-1'>
                 <button onClick={homeLink} className='hover:underline mx-1'>
                     <Logo w={50}/>
                 </button>
             </div>
-            <div className='text-lg pt-3'>
+            <div className='text-lg'>
                 <button onClick={signupLink} className='hover:underline mx-1'>Sign up</button>
                 <button onClick={logLink} className='hover:underline mx-1'>Log in</button>
             </div>

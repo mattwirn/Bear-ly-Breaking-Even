@@ -6,8 +6,8 @@
 @layer components {
 
     .pageHeader {
-        @apply flex justify-between bg-[#FFFFFF] 
-            py-2 px-3 border border-b-2 border-black;
+        @apply flex justify-between bg-[#E9E8C9] 
+            py-4 px-3 border border-b-2 border-black;
     }
 
 }
