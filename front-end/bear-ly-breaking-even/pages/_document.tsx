@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head> 
-        <link rel="brear-ly breaking even icon" href="/favicon_io/favicon.ico"/> 
+        <link rel="brear-ly breaking even icon" href="/logoicon/favicon.ico"/> 
       </Head>
       <body>
         <Main />
