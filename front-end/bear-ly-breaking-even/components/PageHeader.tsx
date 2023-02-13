@@ -1,4 +1,6 @@
 import {useRouter} from 'next/router'
+import Image from 'next/image'
+import Logo from '@/components/Logo'
 
 function PageHeader() {
     const router = useRouter()
@@ -18,9 +20,11 @@ function PageHeader() {
     return (
         <div className='pageHeader'>
             <div className=''>
-                <button onClick={homeLink} className='hover:underline mx-1'>Home</button>
+                <button onClick={homeLink} className='hover:underline mx-1'>
+                    <Logo w={50}/>
+                </button>
             </div>
-            <div>
+            <div className='text-lg pt-3'>
                 <button onClick={signupLink} className='hover:underline mx-1'>Sign up</button>
                 <button onClick={logLink} className='hover:underline mx-1'>Log in</button>
             </div>
