@@ -12,6 +12,18 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+func Home(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"home": "This is the home page",
+	})
+	return
+}
+
+func Default(c *gin.Context) {
+	c.Redirect(http.StatusFound, "/home")
+	return
+}
+
 func Signup(c *gin.Context) {
 	// Get the username/pass of req body
 	var body struct {
@@ -115,4 +127,12 @@ func Login(c *gin.Context) {
 	c.SetCookie("Authorization", tokenString, 3600*24*30, "", "", false, true)
 
 	c.JSON(http.StatusOK, gin.H{})
+}
+
+func Validate(c *gin.Context) {
+	user, _ := c.Get("user")
+
+	c.JSON(http.StatusOK, gin.H{
+		"message": user,
+	})
 }
