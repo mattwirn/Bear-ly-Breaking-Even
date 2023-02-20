@@ -3,7 +3,7 @@ import {useRouter} from "next/router"
 import PageHeader from '@/components/PageHeader'
 import Image from 'next/image'
 import Logo from '@/components/Logo'
-import { createProxyMiddleware, Filter, Options, RequestHandler } from 'http-proxy-middleware'
+//import { createProxyMiddleware, Filter, Options, RequestHandler } from 'http-proxy-middleware'
 
 export default function Home() {
 
