@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Logo from '@/components/Logo'
 //import { createProxyMiddleware, Filter, Options, RequestHandler } from 'http-proxy-middleware'
 
-export default function Home() {
+export default function Home({ props }) {
 
 
   return (
@@ -17,6 +17,9 @@ export default function Home() {
       </Head>
 
       <PageHeader/>
+      <div>
+        <button onClick={post} className="border">click me </button>
+      </div>
 
       
       <div className='flex grid justify-center mt-20'>
@@ -29,4 +32,13 @@ export default function Home() {
       
     </div>
   )
+}
+
+async function post() {
+  const request = {
+    method: "POST", 
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({Username: "sean", Password: "sexybeast"})
+  }
+  fetch("http://localhost:8080/signup", request)
 }
