@@ -1,11 +1,10 @@
 package main
 
 import (
-	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/gin"
-	"github.com/mattwirn/Bear-ly-Breaking-Even/back-end/controllers"
+	"log"
+	"net/http"
+
 	"github.com/mattwirn/Bear-ly-Breaking-Even/back-end/initializers"
-	"github.com/mattwirn/Bear-ly-Breaking-Even/back-end/middleware"
 )
 
 func init() {
@@ -15,7 +14,7 @@ func init() {
 }
 
 func main() {
-	router := gin.Default()
+	/* router := gin.Default()
 	router.POST("/signup", controllers.Signup)
 	router.POST("/login", controllers.Login)
 	router.GET("/validate", middleware.RequireAuth, controllers.Validate)
@@ -32,4 +31,11 @@ func main() {
 	}))
 
 	router.Run("localhost:8080")
+	*/
+
+	host := "127.0.0.1:8080"
+	if err := http.ListenAndServe(host, httpHandler()); err != nil {
+		log.Fatalf("Failed to listen on %s: %v", host, err)
+	}
+
 }
