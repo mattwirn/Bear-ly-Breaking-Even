@@ -19,8 +19,8 @@ function PageHeader() {
     return (
         <div className='pageHeader'>
             <div className='pt-1'>
-                <button onClick={homeLink} className='hover:underline mx-1'>
-                    <Logo w={50}/>
+                <button onClick={homeLink} className='hover:underline'>
+                    <Logo w={90}/>
                 </button>
             </div>
             <div className='text-lg'>
