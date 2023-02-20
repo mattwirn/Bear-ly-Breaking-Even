@@ -1,12 +1,12 @@
 import Image from 'next/image'
 
 
-function Logo({w}: SafeNumber) {
+function Logo({w}: SafeNumber, {h}: SafeNumber) {
     return (
-      <Image 
-      
+      <img 
+        data-cy='logo'
         src='/logo.png'
-        height={0} 
+        height={h} 
         width={w}
         alt='home'
       />

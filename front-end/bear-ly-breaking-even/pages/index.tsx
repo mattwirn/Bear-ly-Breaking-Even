@@ -5,8 +5,6 @@ import Image from 'next/image'
 import Logo from '@/components/Logo'
 import { createProxyMiddleware, Filter, Options, RequestHandler } from 'http-proxy-middleware'
 
-const axios = require('axios')
-
 export default function Home() {
 
 

@@ -8,6 +8,6 @@ describe('<Logo />', () => {
   })
   it('should show the icon', () => {
     cy.mount(<Logo w={40} />)
-    cy.get('[src=/logo.png]').should('have.a.property', 'src')
+    cy.get('[data-cy=logo]').should('be.visible')
   })
 })
