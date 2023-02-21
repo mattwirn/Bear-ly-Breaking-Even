@@ -12,6 +12,38 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// Helper function that creates a new session token and sets a browser cookie with that token
+func createCookie(w http.ResponseWriter, r *http.Request, id string) (http.ResponseWriter, error) {
+	// Generate a jwt token
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"sub": id,
+		"exp": time.Now().Add(time.Hour * 24 * 30).Unix(),
+	})
+
+	// Sign and get the complete encoded token as a string using the secret
+	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET")))
+
+	if err != nil {
+		http.Error(w, "Failed to create token", http.StatusBadRequest)
+		return w, err
+	}
+
+	// send it back
+
+	// when hosting website change secure bool to TRUE
+	http.SetCookie(w, &http.Cookie{
+		Name:     "Authorization",
+		Value:    tokenString,
+		Path:     "",
+		Expires:  time.Now().Add(time.Hour * 24 * 30),
+		Secure:   false,
+		HttpOnly: true,
+		SameSite: http.SameSiteLaxMode,
+	})
+
+	return w, err
+}
+
 // Used this tutorial: https://mj-go.in/golang/rest-api-with-sql-db-in-go
 
 func Signup(w http.ResponseWriter, r *http.Request) {
@@ -36,6 +68,12 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// create session token and cookie
+	w, err = createCookie(w, r, body.Username)
+	if err != nil {
+		return
+	}
+
 	// Create the user
 	user := models.User{Username: body.Username, Password: string(hash)}
 
@@ -47,6 +85,7 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Respond
+	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Signed up\n"))
 }
 
@@ -80,30 +119,40 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Generate a jwt token
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"sub": user.ID,
-		"exp": time.Now().Add(time.Hour * 24 * 30).Unix(),
-	})
-
-	// Sign and get the complete encoded token as a string using the secret
-	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET")))
-
+	// Create a session token and cookie that stores the token
+	w, err = createCookie(w, r, user.Username)
 	if err != nil {
-		http.Error(w, "Failed to create token", http.StatusBadRequest)
 		return
 	}
 
-	// send it back
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("Logged In\n"))
+	/*
+		// Generate a jwt token
+		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+			"sub": user.ID,
+			"exp": time.Now().Add(time.Hour * 24 * 30).Unix(),
+		})
 
-	// when hosting website change secure bool to TRUE
-	http.SetCookie(w, &http.Cookie{
-		Name:     "Authorization",
-		Value:    tokenString,
-		Path:     "",
-		Expires:  time.Now().Add(time.Hour * 24 * 30),
-		Secure:   false,
-		HttpOnly: true,
-		SameSite: http.SameSiteLaxMode,
-	})
+		// Sign and get the complete encoded token as a string using the secret
+		tokenString, err := token.SignedString([]byte(os.Getenv("SECRET")))
+
+		if err != nil {
+			http.Error(w, "Failed to create token", http.StatusBadRequest)
+			return
+		}
+
+		// send it back
+
+		// when hosting website change secure bool to TRUE
+		http.SetCookie(w, &http.Cookie{
+			Name:     "Authorization",
+			Value:    tokenString,
+			Path:     "",
+			Expires:  time.Now().Add(time.Hour * 24 * 30),
+			Secure:   false,
+			HttpOnly: true,
+			SameSite: http.SameSiteLaxMode,
+		})
+	*/
 }

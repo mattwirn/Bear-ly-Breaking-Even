@@ -18,7 +18,8 @@ func RequireAuth(next http.Handler) http.Handler {
 		if err != nil {
 			if err == http.ErrNoCookie {
 				// If the cookie is not set, return an unauthorized status
-				w.WriteHeader(http.StatusUnauthorized)
+				http.Redirect(w, r, "/login", http.StatusSeeOther)
+				//w.WriteHeader(http.StatusUnauthorized)
 				return
 			}
 			// For any other type of error, return a bad request status
@@ -37,7 +38,7 @@ func RequireAuth(next http.Handler) http.Handler {
 		})
 
 		if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-			//Check the exp
+			//Check the exp to see if it expired
 			if float64(time.Now().Unix()) > claims["exp"].(float64) {
 				//rest user's cookie field
 				w.WriteHeader(http.StatusUnauthorized)
