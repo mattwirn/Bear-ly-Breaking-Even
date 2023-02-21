@@ -14,10 +14,11 @@ import (
 func httpHandler() http.Handler {
 	router := mux.NewRouter()
 	// Your REST API requests go here
+	//router.Use(middleware.RequireAuth)
 
 	router.HandleFunc("/signup", hnd.Signup).Methods("POST")
 	router.HandleFunc("/login", hnd.Login).Methods("POST")
-
+	router.HandleFunc("/validate", hnd.Validate).Methods("GET")
 	// Add your routes here.
 	// WARNING: this route must be the last route defined.
 

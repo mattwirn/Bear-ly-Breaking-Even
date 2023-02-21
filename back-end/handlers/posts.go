@@ -3,7 +3,10 @@ package handlers
 import (
 	"encoding/json"
 	"net/http"
+	"os"
+	"time"
 
+	"github.com/golang-jwt/jwt"
 	"github.com/mattwirn/Bear-ly-Breaking-Even/back-end/initializers"
 	"github.com/mattwirn/Bear-ly-Breaking-Even/back-end/models"
 	"golang.org/x/crypto/bcrypt"
@@ -48,5 +51,59 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {
+	// Get the email and pass off req body
+	var body struct {
+		Username string
+		Password string
+	}
 
+	err := json.NewDecoder(r.Body).Decode(&body)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	// Look up requested user
+	var user models.User
+	initializers.DB.First(&user, "username = ?", body.Username)
+
+	if user.ID == 0 {
+		http.Error(w, "Invalid username or password", http.StatusBadRequest)
+		return
+	}
+
+	// Compare sent in pass with saved user pass hash
+	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(body.Password))
+
+	if err != nil {
+		http.Error(w, "Invalid username or password", http.StatusBadRequest)
+		return
+	}
+
+	// Generate a jwt token
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"sub": user.ID,
+		"exp": time.Now().Add(time.Hour * 24 * 30).Unix(),
+	})
+
+	// Sign and get the complete encoded token as a string using the secret
+	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET")))
+
+	if err != nil {
+		http.Error(w, "Failed to create token", http.StatusBadRequest)
+		return
+	}
+
+	// send it back
+
+	// when hosting website change secure bool to TRUE
+	http.SetCookie(w, &http.Cookie{
+		Name:     "Authorization",
+		Value:    tokenString,
+		Path:     "",
+		Expires:  time.Now().Add(time.Hour * 24 * 30),
+		Secure:   false,
+		HttpOnly: true,
+		SameSite: http.SameSiteLaxMode,
+	})
 }
