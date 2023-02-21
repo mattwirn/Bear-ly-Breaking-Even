@@ -6,50 +6,57 @@ import (
 	"os"
 	"time"
 
-	"github.com/gin-gonic/gin"
-	"github.com/golang-jwt/jwt"
+	"github.com/golang-jwt/jwt/v4"
 	"github.com/mattwirn/Bear-ly-Breaking-Even/back-end/initializers"
 	"github.com/mattwirn/Bear-ly-Breaking-Even/back-end/models"
 )
 
-func RequireAuth(c *gin.Context) {
-	//Get the cookie off req
-	tokenString, err := c.Cookie("Authorization")
-
-	if err != nil {
-		c.AbortWithStatus(http.StatusUnauthorized)
-	}
-	//Decode/validate it
-
-	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-		// Don't forget to validate the alg is what you expect:
-		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
+func RequireAuth(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// Get cookie from request
+		sessionCookie, err := r.Cookie("Authorization")
+		if err != nil {
+			if err == http.ErrNoCookie {
+				// If the cookie is not set, return an unauthorized status
+				w.WriteHeader(http.StatusUnauthorized)
+				return
+			}
+			// For any other type of error, return a bad request status
+			w.WriteHeader(http.StatusBadRequest)
+			return
 		}
 
-		// hmacSampleSecret is a []byte containing your secret, e.g. []byte("my_secret_key")
-		return []byte(os.Getenv("SECRET")), nil
+		token, _ := jwt.Parse(sessionCookie.Value, func(token *jwt.Token) (interface{}, error) {
+			// Don't forget to validate the alg is what you expect:
+			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+				return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+			}
+
+			// hmacSampleSecret is a []byte containing your secret, e.g. []byte("my_secret_key")
+			return []byte(os.Getenv("SECRET")), nil
+		})
+
+		if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+			//Check the exp
+			if float64(time.Now().Unix()) > claims["exp"].(float64) {
+				//rest user's cookie field
+				w.WriteHeader(http.StatusUnauthorized)
+				return
+			}
+			//Find the user with token sub
+			var user models.User
+			initializers.DB.First(&user, claims["sub"])
+
+			if user.ID == 0 {
+				w.WriteHeader(http.StatusUnauthorized)
+				return
+			}
+
+			//Continue
+			next.ServeHTTP(w, r)
+		} else {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
 	})
-
-	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-		//Check the exp
-		if float64(time.Now().Unix()) > claims["exp"].(float64) {
-			c.AbortWithStatus(http.StatusUnauthorized)
-		}
-		//Find the user with token sub
-		var user models.User
-		initializers.DB.First(&user, claims["sub"])
-
-		if user.ID == 0 {
-			c.AbortWithStatus(http.StatusUnauthorized)
-		}
-		//Attach to req
-		c.Set("user", user)
-
-		//Continue
-		c.Next()
-	} else {
-		c.AbortWithStatus(http.StatusUnauthorized)
-	}
-
 }
