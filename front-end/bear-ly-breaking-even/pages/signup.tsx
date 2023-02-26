@@ -29,8 +29,7 @@ export default function SignUp() {
       if (!(username.value == '' || users.includes(username.value))) {
         // check if password field and confirm password field are not empty and are equal
         if (!(password.value == '' || confirmPassword.value == '') && password.value == confirmPassword.value) {
-          users.push(user.name)
-          userObjects.push(user)
+          post(username.value, password.value)
           router.push('/')
         }
       }
@@ -85,4 +84,13 @@ export default function SignUp() {
       </div>
     </div>
   )
+}
+
+async function post(name: string, password: string) {
+  const request = {
+    method: "POST", 
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({Username: `${name}`, Password: `${password}`})
+  }
+  const response = fetch("http://localhost:8080/signup", request)
 }
