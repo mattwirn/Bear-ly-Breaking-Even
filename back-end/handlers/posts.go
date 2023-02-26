@@ -46,6 +46,7 @@ func createCookie(w http.ResponseWriter, r *http.Request, id string) (http.Respo
 
 // Used this tutorial: https://mj-go.in/golang/rest-api-with-sql-db-in-go
 
+// POST function used to create a user. Takes in username and password strings in json, hashes the password, and stores data in database. A cookie is also made for automatic login, and the newly created user is sent back to the front end.
 func Signup(w http.ResponseWriter, r *http.Request) {
 
 	// Get the username/pass of req body
@@ -89,6 +90,7 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Signed up\n"))
 }
 
+// POST function to enter website with existing user. checks to see if input username exists, and if input password matches associated password. if valid, creates cookie for login session. user data is returned to the front end.
 func Login(w http.ResponseWriter, r *http.Request) {
 	// Get the email and pass off req body
 	var body struct {
