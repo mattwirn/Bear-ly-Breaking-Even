@@ -32,7 +32,6 @@ export default function Login() {
           </div>
         </div>
         <div className=' flex mx-5 my-5 text-gray-500 text-sm font-semibold'> Copyright © 2023 SMD Inc. </div>
-          
       </div>
     </div>
   )
