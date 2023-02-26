@@ -7,6 +7,7 @@ import (
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	hnd "github.com/mattwirn/Bear-ly-Breaking-Even/back-end/handlers"
+	"github.com/mattwirn/Bear-ly-Breaking-Even/back-end/middleware"
 )
 
 // httpHandler creates the backend HTTP router for queries, types,
@@ -14,11 +15,13 @@ import (
 func httpHandler() http.Handler {
 	router := mux.NewRouter()
 	// Your REST API requests go here
-	//router.Use(middleware.RequireAuth)
 
 	router.HandleFunc("/signup", hnd.Signup).Methods("POST")
 	router.HandleFunc("/login", hnd.Login).Methods("POST")
-	router.HandleFunc("/validate", hnd.Validate).Methods("GET")
+
+	val := router.PathPrefix("/validate").Subrouter()
+	val.HandleFunc("", hnd.Validate).Methods("GET")
+	val.Use(middleware.RequireAuth)
 	// Add your routes here.
 	// WARNING: this route must be the last route defined.
 
