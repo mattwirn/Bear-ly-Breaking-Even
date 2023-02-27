@@ -2,9 +2,6 @@ import Head from 'next/head'
 import {useRouter} from "next/router"
 import PageHeader from '@/components/PageHeader'
 
-var users: string[] = []
-var userObjects: object[] = []
-
 export default function SignUp() {
     
   const router = useRouter()
@@ -49,7 +46,7 @@ export default function SignUp() {
         <link rel="icon" />
       </Head>
       
-      <PageHeader/>
+      <PageHeader id="pageHeader"/>
 
       <div className='flex items-center justify-center pt-10'>
         <div className='grid flex rounded-lg px-16 mx-auto h-fit justify-center bg-[#f2eadf] pb-2 pt-4 border border-black space'>
