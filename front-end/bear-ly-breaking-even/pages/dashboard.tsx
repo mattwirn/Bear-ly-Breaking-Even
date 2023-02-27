@@ -27,7 +27,7 @@ export default function Login() {
           </div>
           <div className='flex px-4 py-1'>
             <div>Insert Income:</div>
-            <input className="shadow appearance-none border rounded w-1/3 mx-2 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="income" type="number" placeholder="ex. 125000"></input>
+            <input className="shadow appearance-none border rounded mx-2 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="income" type="number" placeholder="ex. 125000"></input>
             <button className=' text-sm hover:cursor-pointer bg-[#addfad] drop-shadow-lg rounded-lg px-3 py-1 border border-black'> Submit </button>
           </div>
         </div>
