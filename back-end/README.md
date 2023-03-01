@@ -4,6 +4,8 @@ Signup is a POST function used to create a user. It takes in username and passwo
 The function itself has 2 parameters, a write json body, "**w**", and a read json body, "**r**". "**w**" is the body the function will write to and send back to the front end, and "**r**" is the body that the function receives with the user's username and password.
 If the function returns "Username already taken", the username input already exists. All accounts must be unique. If the account was successfully created, the function will return "Signed up"
 
+##
+
 The json received should look like this for both Signup and Login:
 ```
 {
