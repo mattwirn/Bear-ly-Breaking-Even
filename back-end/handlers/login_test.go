@@ -1,17 +1,18 @@
-package main
+package handlers
 
 import (
 	"bytes"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
-	"github.com/mattwirn/Bear-ly-Breaking-Even/back-end/handlers"
+	"github.com/mattwirn/Bear-ly-Breaking-Even/back-end/initializers"
 )
 
 func TestLogin(t *testing.T) {
+	initializers.StartDatabase()
 	expected := "Logged In\n"
 
 	postBody := map[string]interface{}{
@@ -24,13 +25,13 @@ func TestLogin(t *testing.T) {
 	r := httptest.NewRequest(http.MethodPost, "/login", bytes.NewReader(body))
 	w := httptest.NewRecorder()
 
-	handlers.Login(w, r)
+	Login(w, r)
 
 	res := w.Result()
 
 	defer res.Body.Close()
 
-	data, err := ioutil.ReadAll(res.Body)
+	data, err := io.ReadAll(res.Body)
 
 	if err != nil {
 		t.Errorf("Error: %v", err)
