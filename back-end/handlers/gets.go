@@ -9,7 +9,7 @@ import (
 	"github.com/mattwirn/Bear-ly-Breaking-Even/back-end/models"
 )
 
-func Validate(w http.ResponseWriter, r *http.Request) {
+func Dashboard(w http.ResponseWriter, r *http.Request) {
 	// Retrieve cookie from request
 	cookie, err := r.Cookie("Authorization")
 	if err != nil {
@@ -22,7 +22,7 @@ func Validate(w http.ResponseWriter, r *http.Request) {
 
 	// Look up user in database with token
 	var user models.User
-	initializers.DB.First(&user, "sessiontoken = ?", token)
+	initializers.DB.First(&user, "session_token = ?", token)
 
 	if user.ID == 0 {
 		http.Error(w, "Server side error", http.StatusInternalServerError)

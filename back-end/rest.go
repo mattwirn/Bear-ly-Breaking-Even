@@ -19,8 +19,8 @@ func httpHandler() http.Handler {
 	router.HandleFunc("/signup", hnd.Signup).Methods("POST")
 	router.HandleFunc("/login", hnd.Login).Methods("POST")
 
-	val := router.PathPrefix("/validate").Subrouter()
-	val.HandleFunc("", hnd.Validate).Methods("GET")
+	val := router.PathPrefix("/dashboard").Subrouter()
+	val.HandleFunc("", hnd.Dashboard).Methods("GET")
 	val.Use(middleware.RequireAuth)
 	// Add your routes here.
 	// WARNING: this route must be the last route defined.

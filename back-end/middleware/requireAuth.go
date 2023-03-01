@@ -46,7 +46,7 @@ func RequireAuth(next http.Handler) http.Handler {
 			}
 			//Find the user with token sub
 			var user models.User
-			initializers.DB.First(&user, claims["sub"])
+			initializers.DB.First(&user, "username = ?", claims["sub"])
 
 			if user.ID == 0 {
 				w.WriteHeader(http.StatusUnauthorized)

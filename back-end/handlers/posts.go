@@ -128,32 +128,5 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Logged In\n"))
-	/*
-		// Generate a jwt token
-		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-			"sub": user.ID,
-			"exp": time.Now().Add(time.Hour * 24 * 30).Unix(),
-		})
 
-		// Sign and get the complete encoded token as a string using the secret
-		tokenString, err := token.SignedString([]byte(os.Getenv("SECRET")))
-
-		if err != nil {
-			http.Error(w, "Failed to create token", http.StatusBadRequest)
-			return
-		}
-
-		// send it back
-
-		// when hosting website change secure bool to TRUE
-		http.SetCookie(w, &http.Cookie{
-			Name:     "Authorization",
-			Value:    tokenString,
-			Path:     "",
-			Expires:  time.Now().Add(time.Hour * 24 * 30),
-			Secure:   false,
-			HttpOnly: true,
-			SameSite: http.SameSiteLaxMode,
-		})
-	*/
 }
