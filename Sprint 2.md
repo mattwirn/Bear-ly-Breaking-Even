@@ -4,7 +4,7 @@ The front end has testing for components, as well as end-to-end testing of the l
 
 The front end has two component tests: 
 1. A component test for the logo that checks if the logo renders and is visible
-2. A test fort the Page Header to check that it renders and displays
+2. A component test for the Page Header to check that it renders and displays
 
 The  four e2e tests are as follows:
 1. Testing that the Log in button redirects from the Home page to the Login page
