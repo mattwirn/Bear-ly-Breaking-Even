@@ -16,14 +16,9 @@ export default function SignUp() {
       var password = document.getElementById('nP')
       var confirmPassword = document.getElementById('cP')
       
-      // create user obeject
-      const user: object = {
-        name: username.value,
-        password: password.value
-      }
 
       // check if username field isnt empty and username doesnt already exist
-      if (!(username.value == '' || users.includes(username.value))) {
+      if (!(username.value == '')) {
         // check if password field and confirm password field are not empty and are equal
         if (!(password.value == '' || confirmPassword.value == '') && password.value == confirmPassword.value) {
           post(username.value, password.value)
@@ -46,7 +41,7 @@ export default function SignUp() {
         <link rel="icon" />
       </Head>
       
-      <PageHeader id="pageHeader"/>
+      <PageHeader/>
 
       <div className='flex items-center justify-center pt-10'>
         <div className='grid flex rounded-lg px-16 mx-auto h-fit justify-center bg-[#f2eadf] pb-2 pt-4 border border-black space'>

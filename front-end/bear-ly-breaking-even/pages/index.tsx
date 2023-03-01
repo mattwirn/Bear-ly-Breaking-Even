@@ -24,7 +24,7 @@ export default function Home() {
           <Logo w={300}/>
         </div>
         <h1 className='mx-auto font-bold text-6xl text-[#002533]'>Bear-ly Breaking Even</h1>
-        <h1 className='mx-auto font-bold text-4xl text-[#546B52]'>(insert app description and logo)</h1>
+        <h1 className='mx-auto font-bold text-4xl text-[#546B52]'>(insert app description)</h1>
       </div>
       
     </div>
