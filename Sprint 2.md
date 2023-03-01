@@ -1,6 +1,6 @@
 ## Front End
 
-The front end has testing for components, as well as end-to-end testing of the login, signup, and home pages. A new dashboard page is in process now that the front and back end are integrated. 
+The front end has testing for components, as well as end-to-end testing of the login, signup, and home pages. A new dashboard page is in process now that the front and back ends are integrated. 
 
 The front end has two component tests: 
 1. A component test for the logo that checks if the logo renders and is visible
