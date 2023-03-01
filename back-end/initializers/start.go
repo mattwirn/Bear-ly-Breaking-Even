@@ -1,7 +1,7 @@
 package initializers
 
-func StartDatabase() {
-	LoadEnvVariables()
+func StartDatabase(path string) {
+	LoadEnvVariables(path)
 	ConnectToDB()
 	SyncDatabases()
 }

@@ -13,7 +13,7 @@ import (
 )
 
 // Helper function that creates a new session token and sets a browser cookie with that token
-func createCookie(w http.ResponseWriter, r *http.Request, id string) (http.ResponseWriter, error) {
+func createCookie(w http.ResponseWriter, r *http.Request, id string) (http.ResponseWriter, string, error) {
 	// Generate a jwt token
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"sub": id,
@@ -25,7 +25,7 @@ func createCookie(w http.ResponseWriter, r *http.Request, id string) (http.Respo
 
 	if err != nil {
 		http.Error(w, "Failed to create token", http.StatusBadRequest)
-		return w, err
+		return w, "", err
 	}
 
 	// send it back
@@ -41,7 +41,7 @@ func createCookie(w http.ResponseWriter, r *http.Request, id string) (http.Respo
 		SameSite: http.SameSiteLaxMode,
 	})
 
-	return w, err
+	return w, tokenString, err
 }
 
 // Used this tutorial: https://mj-go.in/golang/rest-api-with-sql-db-in-go
@@ -68,15 +68,14 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Failed to encrypt password", http.StatusInternalServerError)
 		return
 	}
-
+	var t string
 	// create session token and cookie
-	w, err = createCookie(w, r, body.Username)
+	w, t, err = createCookie(w, r, body.Username)
 	if err != nil {
 		return
 	}
-
 	// Create the user
-	user := models.User{Username: body.Username, Password: string(hash)}
+	user := models.User{Username: body.Username, Password: string(hash), SessionToken: t}
 
 	result := initializers.DB.Create(&user) // pass pointer of data to Create
 
@@ -122,7 +121,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Create a session token and cookie that stores the token
-	w, err = createCookie(w, r, user.Username)
+	w, _, err = createCookie(w, r, user.Username)
 	if err != nil {
 		return
 	}
