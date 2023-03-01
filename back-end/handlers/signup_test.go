@@ -1,4 +1,4 @@
-package main
+package handlers
 
 import (
 	"bytes"
@@ -8,7 +8,6 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/mattwirn/Bear-ly-Breaking-Even/back-end/handlers"
 	"github.com/mattwirn/Bear-ly-Breaking-Even/back-end/initializers"
 )
 
@@ -23,7 +22,7 @@ func TestSignup(t *testing.T) {
 	body, _ := json.Marshal(postBody)
 	req := httptest.NewRequest(http.MethodPost, "/signup", bytes.NewReader(body))
 	w := httptest.NewRecorder()
-	handlers.Signup(w, req)
+	Signup(w, req)
 	res := w.Result()
 
 	defer res.Body.Close()
