@@ -1,29 +1,43 @@
 import Head from 'next/head'
 import {useRouter} from "next/router"
+import {useState} from "react"
 import PageHeader from '@/components/PageHeader'
 
 export default function SignUp() {
     
   const router = useRouter()
+  const [taken, setTaken] = useState(false)
+  const [match, setMatch] = useState(false)
+  let t = false;
   
+
   function logLink() {
       router.push('/login')
   }
 
     function storeUsername() {
       // get username, password, and confirm password input fields
-      var username = document.getElementById('nU')
-      var password = document.getElementById('nP')
-      var confirmPassword = document.getElementById('cP')
+      let username = document.getElementById('nU')
+      let password = document.getElementById('nP')
+      let confirmPassword = document.getElementById('cP')
       
+      // handle if username already exists, then update taken variable
+      t = checkIfUsernameIsTaken(username)
+      setTaken(t ? true : false)
 
+      if (t == false) {
       // check if username field isnt empty and username doesnt already exist
       if (!(username.value == '')) {
         // check if password field and confirm password field are not empty and are equal
         if (!(password.value == '' || confirmPassword.value == '') && password.value == confirmPassword.value) {
           post(username.value, password.value)
+          setMatch(false)
           router.push('/')
         }
+        else {
+          setMatch(true)
+        }
+      }
       }
       // reset username, password and confirm password fields
       username.value = ''
@@ -52,6 +66,13 @@ export default function SignUp() {
             <div>New Username</div>
           </div>
           <input className="shadow appearance-none border rounded w-full py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nU" type="text" placeholder="Username"></input>
+
+          { taken ? <div className='mt-3 rounded w-52 border border-red-300'>
+            <div className='p-2 text-red-500 font-bold font-mono text-sm'>
+              The username you entered is taken. Please choose another.
+            </div>
+          </div> : null}
+
           <div className='flex pt-4 pb-1'>
             <div>New Password</div>
           </div>
@@ -61,6 +82,12 @@ export default function SignUp() {
           </div>
           <input className="shadow appearance-none border rounded w-full py-2.5 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="cP" type="password" placeholder="********"></input>
           
+          { match ? <div className='mt-2 rounded w-52 border border-red-300'>
+            <div className='p-2 text-red-500 font-bold font-mono text-sm'>
+              Passwords do not match.
+            </div>
+          </div> : null}
+
           <div className='mx-auto pb-2 pt-3'>
             <button onClick={storeUsername} className='bg-[#addfad] drop-shadow-lg rounded-lg px-6 py-3 border border-black'>
               <div className='font-semibold'>
@@ -84,5 +111,23 @@ async function post(name: string, password: string) {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({Username: `${name}`, Password: `${password}`})
   }
-  const response = fetch("http://localhost:8080/signup", request)
+  const response = await fetch("http://localhost:8080/signup", request).catch(() => console.log("failed"))
+}
+
+function checkIfUsernameIsTaken(username: string): boolean {
+  const request = {
+    method: "GET",
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({Username: `${username}`})
+  }
+  const response = fetch("http://localhost:8080/signup", request).catch(() => {return false})
+  let bool = false    
+  if (response.status === undefined) { 
+    bool = true;
+  }
+  else if (response.status === 200) {
+    bool = false;
+  }
+  console.log(response)
+  return bool
 }
