@@ -3,12 +3,13 @@ import {useRouter} from "next/router"
 import {useState} from "react"
 import PageHeader from '@/components/PageHeader'
 
+
+
 export default function SignUp() {
     
   const router = useRouter()
   const [taken, setTaken] = useState(false)
   const [match, setMatch] = useState(false)
-  let t = false;
   
 
   function logLink() {
@@ -20,24 +21,23 @@ export default function SignUp() {
       let username = document.getElementById('nU')
       let password = document.getElementById('nP')
       let confirmPassword = document.getElementById('cP')
-      
-      // handle if username already exists, then update taken variable
-      t = checkIfUsernameIsTaken(username)
-      setTaken(t ? true : false)
 
-      if (t == false) {
       // check if username field isnt empty and username doesnt already exist
       if (!(username.value == '')) {
+
         // check if password field and confirm password field are not empty and are equal
         if (!(password.value == '' || confirmPassword.value == '') && password.value == confirmPassword.value) {
-          post(username.value, password.value)
           setMatch(false)
-          router.push('/')
+
+          post(username.value, password.value)
+          
+          if (taken === false) {
+            router.push('/')
+          }
         }
         else {
           setMatch(true)
         }
-      }
       }
       // reset username, password and confirm password fields
       username.value = ''
@@ -106,28 +106,20 @@ export default function SignUp() {
 }
 
 async function post(name: string, password: string) {
+  let value: boolean = true;
   const request = {
     method: "POST", 
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({Username: `${name}`, Password: `${password}`})
   }
-  const response = await fetch("http://localhost:8080/signup", request).catch(() => console.log("failed"))
-}
-
-function checkIfUsernameIsTaken(username: string): boolean {
-  const request = {
-    method: "GET",
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({Username: `${username}`})
-  }
-  const response = fetch("http://localhost:8080/signup", request).catch(() => {return false})
-  let bool = false    
-  if (response.status === undefined) { 
-    bool = true;
-  }
-  else if (response.status === 200) {
-    bool = false;
-  }
-  console.log(response)
-  return bool
+  const response = await fetch("http://localhost:8080/signup", request)
+  .then((response) => {
+    console.log(response)
+    if (response.status == 200) {
+      value = false;
+    }
+    else {
+      value = true;
+    }
+  })
 }
