@@ -17,7 +17,32 @@ type Income struct {
 
 // Expense Categories
 
-type Cat1 struct {
+type Home_Uts struct {
+	gorm.Model
+	Username    string
+	ExpenseName string
+	Amount      uint
+}
+
+type Trans struct {
+	gorm.Model
+	Username    string
+	ExpenseName string
+	Amount      uint
+}
+type Food struct {
+	gorm.Model
+	Username    string
+	ExpenseName string
+	Amount      uint
+}
+type Edu struct {
+	gorm.Model
+	Username    string
+	ExpenseName string
+	Amount      uint
+}
+type Health struct {
 	gorm.Model
 	Username    string
 	ExpenseName string
