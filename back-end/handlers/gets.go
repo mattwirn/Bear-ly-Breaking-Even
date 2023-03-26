@@ -36,7 +36,6 @@ func Dashboard(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Server side error", http.StatusInternalServerError)
 		return
 	}
-
 	// Write json to response
 	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
