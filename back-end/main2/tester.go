@@ -6,12 +6,12 @@ import (
 )
 
 type Ex1 struct {
-	Name   string `json: name`
-	Amount uint   `json: amount`
+	Name   string `json:"name"`
+	Amount uint   `json:"amount"`
 }
 type Ex2 struct {
-	Name   string `json: name`
-	Amount uint   `json: amount`
+	Name   string `json:"name"`
+	Amount uint   `json:"amount"`
 }
 
 func main() {

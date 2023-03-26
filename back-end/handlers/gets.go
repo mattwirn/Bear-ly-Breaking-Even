@@ -42,3 +42,31 @@ func Dashboard(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(response))
 
 }
+
+func getHomeUts(username string) []interface{} {
+	type HomeUt struct {
+		ExpenseType string `json:"expensetype"`
+		ExpenseName string `json:"expensename"`
+		Amount      uint   `json:"amount"`
+	}
+
+	homeuts := []interface{}{}
+
+	//var exp models.Home_Uts
+	var exps []models.Home_Uts
+	result := initializers.DB.Find(&exps, "username = ?", username)
+
+	if result.RowsAffected == 0 {
+		return homeuts
+	}
+
+	for _, expense := range exps {
+		reformat := HomeUt{
+			ExpenseType: "HomeUtils",
+			ExpenseName: expense.ExpenseName,
+			Amount:      expense.Amount,
+		}
+		homeuts = append(homeuts, reformat)
+	}
+	return homeuts
+}
