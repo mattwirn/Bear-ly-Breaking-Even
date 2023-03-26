@@ -84,6 +84,15 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	income := models.Income{Username: body.Username, Amount: 0}
+
+	result = initializers.DB.Create(&income) // pass pointer of data to Create
+
+	if result.Error != nil {
+		http.Error(w, "Username already taken", http.StatusInternalServerError)
+		return
+	}
+
 	// Respond
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Signed up\n"))
@@ -129,4 +138,30 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Logged In\n"))
 
+}
+
+func InputIncome(w http.ResponseWriter, r *http.Request) {
+	var body struct {
+		Username string
+		Amount   uint
+	}
+
+	err := json.NewDecoder(r.Body).Decode(&body)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	var user models.Income
+	initializers.DB.First(&user, "username = ?", body.Username)
+
+	if user.ID == 0 {
+		http.Error(w, "Username does not exist", http.StatusBadRequest)
+		return
+	}
+
+	user.Amount = body.Amount
+
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(string(user.Amount)))
 }
