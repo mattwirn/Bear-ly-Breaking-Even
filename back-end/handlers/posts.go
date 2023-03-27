@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"os"
 	"time"
@@ -84,6 +85,7 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Create income amount of 0 for new user
 	income := models.Income{Username: body.Username, Amount: 0}
 
 	result = initializers.DB.Create(&income) // pass pointer of data to Create
@@ -153,15 +155,9 @@ func InputIncome(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var user models.Income
-	initializers.DB.First(&user, "username = ?", body.Username)
-
-	if user.ID == 0 {
-		http.Error(w, "Username does not exist", http.StatusBadRequest)
-		return
-	}
-
-	user.Amount = body.Amount
+	initializers.DB.First(&user, "username = ?", body.Username).UpdateColumn("amount", body.Amount)
 
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(string(user.Amount)))
+	w.Write([]byte(fmt.Sprint(body.Amount)))
+
 }

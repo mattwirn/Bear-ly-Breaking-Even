@@ -22,3 +22,22 @@ If the function returns "Invalid username or password", the username doesn't exi
 Dashboard is a GET function that provides the front end with a json of all the user's fields. It identifies the user via their session cookie.
 The function itself has 2 parameters, a write json body, "**w**", and a read json body, "**r**". "**w**" is the body the function will write to and send back to the front end, and "**r**" is the body that the function receives with the user's session cookie.
 If the session cookie does not exist, it returns "Server side error", otherwise it returns a json with all the user's fields.
+
+The order of the provided json is as follows:
+- ***Username***
+- ***Income***
+- Expenses of ***Home and Utilities***
+- Expenses of ***Transportation***
+- Expenses of ***Food***
+- Expenses of ***Education***
+- Expenses of ***Health***
+
+The first two entries can be guaranteed to be the **Username** and **Income**, with the rest being expenses that can be distinguished by the *ExpenseType* field. Here is an example of what one expense may look like:
+
+```
+{
+   ExpenseType: "Food"
+   ExpenseName: "Grocery Store"
+   Amount: 109
+}
+```
