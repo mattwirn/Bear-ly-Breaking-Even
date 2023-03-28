@@ -161,3 +161,72 @@ func InputIncome(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(fmt.Sprint(body.Amount)))
 
 }
+
+func addExpense(w http.ResponseWriter, r *http.Request) {
+	var body struct {
+		Username    string
+		ExpenseType string
+		ExpenseName string
+		Amount      uint
+	}
+
+	err := json.NewDecoder(r.Body).Decode(&body)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	switch body.ExpenseType {
+	case "HomeUtils":
+		exp := models.Home_Uts{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
+
+		result := initializers.DB.Create(&exp) // pass pointer of data to Create
+
+		if result.Error != nil {
+			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
+			return
+		}
+	case "Transportation":
+		exp := models.Trans{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
+
+		result := initializers.DB.Create(&exp) // pass pointer of data to Create
+
+		if result.Error != nil {
+			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
+			return
+		}
+	case "Food":
+		exp := models.Food{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
+
+		result := initializers.DB.Create(&exp) // pass pointer of data to Create
+
+		if result.Error != nil {
+			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
+			return
+		}
+	case "Education":
+		exp := models.Edu{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
+
+		result := initializers.DB.Create(&exp) // pass pointer of data to Create
+
+		if result.Error != nil {
+			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
+			return
+		}
+	case "Health":
+		exp := models.Health{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
+
+		result := initializers.DB.Create(&exp) // pass pointer of data to Create
+
+		if result.Error != nil {
+			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
+			return
+		}
+	default:
+		http.Error(w, "Failed to create expense", http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("Expense Added\n"))
+}
