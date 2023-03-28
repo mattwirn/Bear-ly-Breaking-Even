@@ -8,7 +8,7 @@ export default function Login() {
     function signupLink() {
         router.push('/signup')
     }
-
+  var Username = "bean"
   return (
     <div className=''>
       <Head>
@@ -23,7 +23,8 @@ export default function Login() {
       <div className=' px-3 pt-10'>
         <div className=' flex grid rounded-lg  mx-auto h-max  bg-[#f2eadf] pb-2 pt-4 border border-black space'>
           <div className=' flex mx-6 my-5  text-xl font-semibold'>
-              Welcome -insert username here-!
+              Welcome { Username }! 
+              
           </div>
           <div className='flex px-4 py-1'>
             <div>Insert Income:</div>

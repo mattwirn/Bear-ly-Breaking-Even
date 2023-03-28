@@ -16,7 +16,7 @@ export default function SignUp() {
       var password = document.getElementById('nP')
       var confirmPassword = document.getElementById('cP')
       
-      // create user obeject
+      // create user object
       const user: object = {
         name: username.value,
         password: password.value
