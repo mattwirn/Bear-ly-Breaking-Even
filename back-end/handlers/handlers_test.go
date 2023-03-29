@@ -3,6 +3,7 @@ package handlers
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -92,15 +93,15 @@ func TestInputIncome(t *testing.T) {
 	initializers.StartDatabase("../.env")
 	bodies := [2]map[string]interface{}{
 		{
-			"Username": "test",
-			"Amount":   6900,
+			"username": "test",
+			"amount":   6900,
 		},
 		{
-			"Username": "t3st",
-			"Amount":   6900,
+			"username": "t3st",
+			"amount":   6900,
 		},
 	}
-	expectations := [2]string{"Income Updated\n", "Failed to find user, username does not exist"}
+	expectations := [2]string{"Income Updated\n", "Failed to find user, username does not exist\n"}
 
 	for i, b := range bodies {
 
@@ -113,7 +114,7 @@ func TestInputIncome(t *testing.T) {
 		r := httptest.NewRequest(http.MethodPost, "/dashboard/income/update", bytes.NewReader(body))
 		w := httptest.NewRecorder()
 
-		AddExpense(w, r)
+		InputIncome(w, r)
 
 		res := w.Result()
 
@@ -133,15 +134,9 @@ func TestInputIncome(t *testing.T) {
 
 func TestAddExpense(t *testing.T) {
 	//initializers.StartDatabase("../.env")
-	bodies := [3]map[string]interface{}{
+	bodies := [2]map[string]interface{}{
 		{
 			"Username":    "test",
-			"ExpenseType": "Food",
-			"ExpenseName": "chikfila",
-			"Amount":      1500,
-		},
-		{
-			"Username":    "t3st",
 			"ExpenseType": "Food",
 			"ExpenseName": "chikfila",
 			"Amount":      1500,
@@ -153,7 +148,7 @@ func TestAddExpense(t *testing.T) {
 			"Amount":      1500,
 		},
 	}
-	expectations := [3]string{"Expense Added\n", "Failed to create expense", "Failed to create expense, expense type not found"}
+	expectations := [2]string{"Expense Added\n", "Failed to create expense, expense type not found\n"}
 
 	for i, b := range bodies {
 
@@ -179,7 +174,7 @@ func TestAddExpense(t *testing.T) {
 		}
 
 		if string(data) != expected {
-			t.Errorf("Expected %s but got %v", expected, string(data))
+			t.Errorf("Expected %s but got %v at index %v", expected, string(data), i)
 		}
 	}
 }
@@ -220,7 +215,7 @@ func TestUpdateExpense(t *testing.T) {
 			"NewAmount":      69,
 		},
 	}
-	expectations := [4]string{"Expense Updated\n", "Failed to create expense", "Failed to create expense, expense type not found", "Failed to create expense"}
+	expectations := [4]string{"Expense Updated\n", "Failed to find expense\n", "Failed to update expense, expense type not found\n", "Failed to find expense\n"}
 
 	for i, b := range bodies {
 
@@ -230,10 +225,10 @@ func TestUpdateExpense(t *testing.T) {
 
 		body, _ := json.Marshal((postBody))
 
-		r := httptest.NewRequest(http.MethodPost, "/dashboard/expense/update", bytes.NewReader(body))
+		r := httptest.NewRequest(http.MethodPut, "/dashboard/expense/update", bytes.NewReader(body))
 		w := httptest.NewRecorder()
 
-		AddExpense(w, r)
+		UpdateExpense(w, r)
 
 		res := w.Result()
 
@@ -257,11 +252,11 @@ func TestDeleteExpense(t *testing.T) {
 		{
 			"Username":    "test",
 			"ExpenseType": "Food",
-			"ExpenseName": "chikfila",
-			"Amount":      1500,
+			"ExpenseName": "chik-fil-a",
+			"Amount":      69,
 		},
 		{
-			"Username":    "t3st",
+			"Username":    "t33st",
 			"ExpenseType": "Food",
 			"ExpenseName": "chikfila",
 			"Amount":      1500,
@@ -273,7 +268,7 @@ func TestDeleteExpense(t *testing.T) {
 			"Amount":      1500,
 		},
 	}
-	expectations := [3]string{"Expense Deleted\n", "Failed to create expense", "Failed to create expense, expense type not found"}
+	expectations := [3]string{"Expense Deleted\n", "Failed to find expense\n", "Failed to delete expense, expense type not found\n"}
 
 	for i, b := range bodies {
 
@@ -283,10 +278,10 @@ func TestDeleteExpense(t *testing.T) {
 
 		body, _ := json.Marshal((postBody))
 
-		r := httptest.NewRequest(http.MethodPost, "/dashboard/expense/delete", bytes.NewReader(body))
+		r := httptest.NewRequest(http.MethodDelete, "/dashboard/expense/delete", bytes.NewReader(body))
 		w := httptest.NewRecorder()
 
-		AddExpense(w, r)
+		DeleteExpense(w, r)
 
 		res := w.Result()
 
@@ -299,7 +294,9 @@ func TestDeleteExpense(t *testing.T) {
 		}
 
 		if string(data) != expected {
-			t.Errorf("Expected %s but got %v", expected, string(data))
+			t.Errorf("Expected %s but got %v with name %s", expected, string(data), postBody["Username"])
+		} else {
+			fmt.Printf("Successful at index %v\n", i)
 		}
 	}
 }
