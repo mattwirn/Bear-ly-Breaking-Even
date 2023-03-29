@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"os"
 	"time"
@@ -159,12 +158,17 @@ func InputIncome(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var user models.Income
-	initializers.DB.First(&user, "username = ?", body.Username)
+	result := initializers.DB.First(&user, "username = ?", body.Username)
+	if result.Error != nil {
+		http.Error(w, "Failed to find user, username does not exist", http.StatusInternalServerError)
+		return
+	}
+
 	user.Amount = body.Amount
 	initializers.DB.Save(&user)
 
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(fmt.Sprint(body.Amount)))
+	w.Write([]byte("Income Updated\n"))
 
 }
 
