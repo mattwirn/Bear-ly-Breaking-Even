@@ -21,6 +21,10 @@ func httpHandler() http.Handler {
 
 	val := router.PathPrefix("/dashboard").Subrouter()
 	val.HandleFunc("", hnd.Dashboard).Methods("GET")
+	val.HandleFunc("/expense/add", hnd.AddExpense).Methods("POST")
+	val.HandleFunc("/expense/update", hnd.UpdateExpense).Methods("PUT")
+	val.HandleFunc("/expense/delete", hnd.DeleteExpense).Methods("DELETE")
+	val.HandleFunc("/income/update", hnd.InputIncome).Methods("POST")
 	val.Use(middleware.RequireAuth)
 	// Add your routes here.
 	// WARNING: this route must be the last route defined.
@@ -36,7 +40,7 @@ func httpHandler() http.Handler {
 			handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization",
 				"DNT", "Keep-Alive", "User-Agent", "X-Requested-With", "If-Modified-Since",
 				"Cache-Control", "Content-Range", "Range"}),
-			handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "OPTIONS"}),
+			handlers.AllowedMethods([]string{"GET", "POST", "PUT", "HEAD", "OPTIONS", "DELETE"}),
 			handlers.AllowedOrigins([]string{"http://localhost:3000"}),
 			handlers.ExposedHeaders([]string{"DNT", "Keep-Alive", "User-Agent",
 				"X-Requested-With", "If-Modified-Since", "Cache-Control",
