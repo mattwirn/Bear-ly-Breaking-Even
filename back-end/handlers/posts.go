@@ -162,7 +162,7 @@ func InputIncome(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func addExpense(w http.ResponseWriter, r *http.Request) {
+func AddExpense(w http.ResponseWriter, r *http.Request) {
 	var body struct {
 		Username    string
 		ExpenseType string
@@ -223,7 +223,7 @@ func addExpense(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	default:
-		http.Error(w, "Failed to create expense", http.StatusInternalServerError)
+		http.Error(w, "Failed to create expense, expense type not found", http.StatusBadRequest)
 		return
 	}
 
