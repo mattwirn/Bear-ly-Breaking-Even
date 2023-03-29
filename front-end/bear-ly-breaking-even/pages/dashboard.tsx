@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import {useRouter} from "next/router"
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import PageHeader from '@/components/PageHeader'
 
 export default function Login() {
@@ -13,14 +13,14 @@ export default function Login() {
   }
 
   var Username = "Bean"
-  var Income = 30000
-  var HnU = 100
-  var transp = 200
-  var food = 300
-  var enter = 400
-  var health = 500
-  var other = 600
-  var total = 12*(HnU + transp +food + enter + health + other)
+  const [Income, setIncome] = useState(30000)
+  const [HnU, setHnU] = useState(100)
+  const [transp, setTransp] = useState(200)
+  const [food, setFood] = useState(300)
+  const [enter, setEnter] = useState(400)
+  const [health, setHealth] = useState(500)
+  const [other, setOther] = useState(600)
+  var total: number = 12*(+HnU + +transp + +food + +enter + +health + +other)
   var surplus = Income - total
   var exc = surplus/12
 
@@ -30,33 +30,33 @@ export default function Login() {
       else
         setEditIn(true)
     }
+    
     function toggleEditEx(){
       if (editEx)
         setEditEx(false)
       else
         setEditEx(true)
     }
-    function changei(){
 
-      Income = document.getElementById("income")
-    }
-    function changef(num: number, id: string ){
-      if (id == "income")
-      Income = document.getElementById(id)
-      else if (id == "h&u")
-      HnU = num
-      else if (id == "transp")
-      transp = num
-      else if (id == "food")
-      food = num
-      else if (id == "enter")
-      enter = num
-      else if (id == "health")
-      health = num
-      else if (id == "other")
-      other = num
+    function changeIncome(){
+      const newIncome = document.getElementById('income')
+      setIncome(newIncome === null ? 0 : newIncome.value)
+      setEditIn(true)  
     }
 
+    function changeF(){
+      setHnU(document.getElementById('h&u').value)
+      setTransp(document.getElementById('transp').value)
+      setFood(document.getElementById('food').value)
+      setEnter(document.getElementById('enter').value)
+      setHealth(document.getElementById('health').value)
+      setOther(document.getElementById('other').value)
+      setEditEx(true)
+    }
+
+    useEffect(() => {
+      total = (HnU + transp + food + enter + health + other)
+    }, [total, HnU, transp, food, enter, health, other])
 
   return (
     <div className=''>
@@ -75,10 +75,14 @@ export default function Login() {
               Welcome { Username }!
           </div>
           <div className='flex grid px-4 py-1'>
+          
           {editIn ? <div className=''> Current Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} </div> : 
-          <div className=''> Edit Yearly Income: <input className="shadow appearance-none border rounded mx-2 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="income" type="number" placeholder="ex. 125000" ></input>
-            <button onClick={changei} className='text-sm underline mx-1 my-2'> Submit </button></div>}
-            <button onClick= {toggleEditIn} className='flex text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Income</button><br/>
+          <div className=''> Edit Yearly Income: 
+            <input className="shadow appearance-none border rounded mx-2 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="income" type="number" placeholder="ex. 125000" ></input>
+            <button onClick={changeIncome} className='text-sm underline mx-1 my-2'> Submit </button>
+          </div>}
+          <button onClick= {toggleEditIn} className='flex text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Income</button><br/>
+            
             {editEx ? <div>Current Monthly Expenses: <br/>
             - Expenses of Home and Utilities: ${HnU.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
             - Expenses of Transportation: ${transp.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
@@ -87,21 +91,16 @@ export default function Login() {
             - Expenses of Health: ${health.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
             - Other Expenses: ${other.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/></div> : 
             <div>Current Monthly Expenses: <br/>
-            - Edit Expenses of Home and Utilities: <input className="shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="h&u" type="number" placeholder="ex. 1300"></input>
-            <button className='text-sm underline mx-1 my-2'> Submit </button> <br/>
-            - Edit Expenses of Transportation: <input className="shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="transp" type="number" placeholder="ex. 1300"></input>
-            <button className='text-sm underline mx-1 my-2'> Submit </button> <br/>
-            - Edit Expenses of Food: <input className="shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="food" type="number" placeholder="ex. 1300"></input>
-            <button className='text-sm underline mx-1 my-2'> Submit </button> <br/>
-            - Edit Expenses of Entertainment:<input className="shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="enter" type="number" placeholder="ex. 1300"></input>
-            <button className='text-sm underline mx-1 my-2'> Submit </button> <br/>
-            - Edit Expenses of Health: <input className="shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="health" type="number" placeholder="ex. 1300"></input>
-            <button className='text-sm underline mx-1 my-2'> Submit </button> <br/>
-            - Edit Other Expenses: <input className="shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="other" type="number" placeholder="ex. 1300"></input>
-            <button className='text-sm underline mx-1 my-2'> Submit </button> <br/></div>}
-
-
+            - Edit Expenses of Home and Utilities: <input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="h&u" type="number" placeholder="ex. 1300"></input><br/>
+            - Edit Expenses of Transportation: <input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="transp" type="number" placeholder="ex. 1300"></input><br/>
+            - Edit Expenses of Food: <input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="food" type="number" placeholder="ex. 1300"></input><br/>
+            - Edit Expenses of Entertainment:<input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="enter" type="number" placeholder="ex. 1300"></input><br/>
+            - Edit Expenses of Health: <input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="health" type="number" placeholder="ex. 1300"></input><br/>
+            - Edit Other Expenses: <input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="other" type="number" placeholder="ex. 1300"></input><br/>
+            <button onClick={changeF} className='text-sm underline mx-1 my-2'>Submit</button>
+            </div>}
             <button onClick={toggleEditEx} className='flex text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Expenses</button><br/>
+            
             Total Yearly Expenses: ${total.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
             Capital After Expenses: ${surplus.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})}<br/>
             Monthly Excess Income: ${exc.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})}
