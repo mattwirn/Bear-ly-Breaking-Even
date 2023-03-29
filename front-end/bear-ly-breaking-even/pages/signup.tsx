@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import {useRouter} from "next/router"
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import PageHeader from '@/components/PageHeader'
 import ErrorMessage from '@/components/ErrorMessage'
 
@@ -10,12 +10,20 @@ export default function SignUp() {
   const router = useRouter()
   const [taken, setTaken] = useState(false)
   const [match, setMatch] = useState(false)
-  let status = 0;
+  const [status, setStatus] = useState(0)
   
 
   function logLink() {
       router.push('/login')
   }
+
+  useEffect(() => {
+    if (taken === false && status === 200) {
+      if (!(match || taken)) {
+        router.push('/')
+      }
+    }
+  }, [taken, match, status, router])
 
     function storeUsername() {
       // get username, password, and confirm password input fields
@@ -32,9 +40,6 @@ export default function SignUp() {
           
           post(username.value, password.value)
 
-          if (status != 0) {
-            setTaken(true)
-          }
         }
         else {
           setMatch(true)
@@ -44,12 +49,7 @@ export default function SignUp() {
       username.value = ''
       password.value = ''
       confirmPassword.value = ''
-    }
 
-    function reroute() {
-      if (!(match || taken)) {
-        router.push('/')
-      }
     }
 
     async function post(name: string, password: string) {
@@ -61,17 +61,15 @@ export default function SignUp() {
       const response = await fetch("http://localhost:8080/signup", request)
       .then((response) => {
         if (response.status != 200) {
-          status = 500
+          setStatus(500)
           setTaken(true)
         }
+        else {
+          setStatus(200)
+          setTaken(false)
+        }
       })
-      .catch(() => {
-        console.log("failed to fetch")
-        setTaken(true)
-      })
-      if (status != 200) {
-        setTaken(true)
-      }
+
     }
     
 
@@ -97,7 +95,7 @@ export default function SignUp() {
           <input className="shadow appearance-none border rounded w-full py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nU" type="text" placeholder="Username"></input>
 
           <div>
-            <ErrorMessage taken={ taken } updateValue={reroute}/>
+            <ErrorMessage taken={ taken }/>
           </div>
 
           <div className='flex pt-4 pb-1'>
