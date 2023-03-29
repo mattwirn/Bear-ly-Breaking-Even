@@ -52,7 +52,9 @@ export default function Login() {
               Welcome { Username }!
           </div>
           <div className='flex grid px-4 py-1'>
-          {editIn ? <div className=''> Current Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} </div> : null}
+          {editIn ? <div className=''> Current Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} </div> : 
+          <div className=''> Edit Yearly Income: <input className="shadow appearance-none border rounded mx-2 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="income" type="number" placeholder="ex. 125000"></input>
+            <button className=' text-sm hover:cursor-pointer bg-[#addfad] drop-shadow-lg rounded-lg px-3 py-1 border border-black'> Submit </button></div>}
             <button onClick= {toggleEditIn} className='flex text-gray-600 text-sm py-2 underline hover:cursor-pointer'>Edit Income</button><br/>
             {editEx ? <div>Current Monthly Expenses: <br/>
             - Expenses of Home and Utilities: ${HnU.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
@@ -60,7 +62,22 @@ export default function Login() {
             - Expenses of Food: ${food.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
             - Expenses of Entertainment: ${enter.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
             - Expenses of Health: ${health.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
-            - Other Expenses: ${other.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/></div> : null}
+            - Other Expenses: ${other.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/></div> : 
+            <div>Current Monthly Expenses: <br/>
+            - Edit Expenses of Home and Utilities: <input className="shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="h&u" type="number" placeholder="ex. 1300"></input>
+            <button className=' text-sm hover:cursor-pointer bg-[#addfad] drop-shadow-lg rounded-lg px-3 py-1 border border-black'> Submit </button> <br/>
+            - Edit Expenses of Transportation: <input className="shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="transp" type="number" placeholder="ex. 1300"></input>
+            <button className=' text-sm hover:cursor-pointer bg-[#addfad] drop-shadow-lg rounded-lg px-3 py-1 border border-black'> Submit </button> <br/>
+            - Edit Expenses of Food: <input className="shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="food" type="number" placeholder="ex. 1300"></input>
+            <button className=' text-sm hover:cursor-pointer bg-[#addfad] drop-shadow-lg rounded-lg px-3 py-1 border border-black'> Submit </button> <br/>
+            - Edit Expenses of Entertainment:<input className="shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="enter" type="number" placeholder="ex. 1300"></input>
+            <button className=' text-sm hover:cursor-pointer bg-[#addfad] drop-shadow-lg rounded-lg px-3 py-1 border border-black'> Submit </button> <br/>
+            - Edit Expenses of Health: <input className="shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="health" type="number" placeholder="ex. 1300"></input>
+            <button className=' text-sm hover:cursor-pointer bg-[#addfad] drop-shadow-lg rounded-lg px-3 py-1 border border-black'> Submit </button> <br/>
+            - Edit Other Expenses: <input className="shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="other" type="number" placeholder="ex. 1300"></input>
+            <button className=' text-sm hover:cursor-pointer bg-[#addfad] drop-shadow-lg rounded-lg px-3 py-1 border border-black'> Submit </button> <br/></div>}
+
+
             <button onClick={toggleEditEx} className='flex text-gray-600 text-sm py-2 underline hover:cursor-pointer'>Edit Expenses</button><br/>
             Total Yearly Expenses: ${total.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
             Capital After Expenses: ${surplus.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})}<br/>
@@ -77,6 +94,5 @@ export default function Login() {
         <div className=' flex mx-5 my-5 text-gray-500 text-sm font-semibold'> Copyright © 2023 SMD Inc. </div>
       </div>
     </div>
-    //</div>
 )
 }
