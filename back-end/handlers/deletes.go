@@ -28,7 +28,7 @@ func DeleteExpense(w http.ResponseWriter, r *http.Request) {
 		result := initializers.DB.Where("username = ?", body.Username).Where("expensename = ?", body.ExpenseName).Where("amount = ?", body.Amount).Delete(&user)
 
 		if result.Error != nil {
-			http.Error(w, "Failed to delete expense", http.StatusInternalServerError)
+			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
 		}
 
@@ -37,7 +37,7 @@ func DeleteExpense(w http.ResponseWriter, r *http.Request) {
 		result := initializers.DB.Where("username = ?", body.Username).Where("expensename = ?", body.ExpenseName).Where("amount = ?", body.Amount).Delete(&user)
 
 		if result.Error != nil {
-			http.Error(w, "Failed to delete expense", http.StatusInternalServerError)
+			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
 		}
 
@@ -46,7 +46,7 @@ func DeleteExpense(w http.ResponseWriter, r *http.Request) {
 		result := initializers.DB.Where("username = ?", body.Username).Where("expensename = ?", body.ExpenseName).Where("amount = ?", body.Amount).Delete(&user)
 
 		if result.Error != nil {
-			http.Error(w, "Failed to delete expense", http.StatusInternalServerError)
+			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
 		}
 
@@ -55,7 +55,7 @@ func DeleteExpense(w http.ResponseWriter, r *http.Request) {
 		result := initializers.DB.Where("username = ?", body.Username).Where("expensename = ?", body.ExpenseName).Where("amount = ?", body.Amount).Delete(&user)
 
 		if result.Error != nil {
-			http.Error(w, "Failed to delete expense", http.StatusInternalServerError)
+			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
 		}
 
@@ -64,7 +64,7 @@ func DeleteExpense(w http.ResponseWriter, r *http.Request) {
 		result := initializers.DB.Where("username = ?", body.Username).Where("expensename = ?", body.ExpenseName).Where("amount = ?", body.Amount).Delete(&user)
 
 		if result.Error != nil {
-			http.Error(w, "Failed to delete expense", http.StatusInternalServerError)
+			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
 		}
 
