@@ -85,3 +85,50 @@ func TestLogin(t *testing.T) {
 		}
 	}
 }
+
+//func TestAddExpense(t *testing.T) {
+//	// initializers.StartDatabase("../.env")
+//	bodies := [3]map[string]interface{}{
+//		{
+//			"username": "unittest",
+//			"password": "testunit",
+//		},
+//		{
+//			"username": "unittest2",
+//			"password": "testunit",
+//		},
+//		{
+//			"username": "unittest",
+//			"password": "testunit2",
+//		},
+//	}
+//	expectations := [3]string{"Logged In\n", "Invalid username or password\n", "Invalid username or password\n"}
+//
+//	for i, b := range bodies {
+//
+//		expected := expectations[i]
+//
+//		postBody := b
+//
+//		body, _ := json.Marshal((postBody))
+//
+//		r := httptest.NewRequest(http.MethodPost, "/login", bytes.NewReader(body))
+//		w := httptest.NewRecorder()
+//
+//		Login(w, r)
+//
+//		res := w.Result()
+//
+//		defer res.Body.Close()
+//
+//		data, err := io.ReadAll(res.Body)
+//
+//		if err != nil {
+//			t.Errorf("Error: %v", err)
+//		}
+//
+//		if string(data) != expected {
+//			t.Errorf("Expected %s but got %v", expected, string(data))
+//		}
+//	}
+//}
