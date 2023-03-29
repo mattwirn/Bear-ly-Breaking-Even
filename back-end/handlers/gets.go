@@ -40,7 +40,7 @@ func Dashboard(w http.ResponseWriter, r *http.Request) {
 	allData = append(allData, getIncome(username))
 
 	// Gather all expenses from DB
-	allData = getAllExpenses(username)
+	allData = append(allData, getAllExpenses(username))
 
 	// Marshal all data to json
 	response, err := json.Marshal(allData)
