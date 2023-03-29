@@ -25,48 +25,53 @@ func DeleteExpense(w http.ResponseWriter, r *http.Request) {
 	switch body.ExpenseType {
 	case "HomeUtils":
 		var user models.Home_Uts
-		result := initializers.DB.Where("username = ?", body.Username).Where("expense_name = ?", body.ExpenseName).Where("amount = ?", body.Amount).Delete(&user)
+		result := initializers.DB.Where("username = ?", body.Username).Where("expense_name = ?", body.ExpenseName).Where("amount = ?", body.Amount).First(&user)
 
 		if result.Error != nil {
 			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
 		}
+		initializers.DB.Delete(&user)
 
 	case "Trans":
 		var user models.Trans
-		result := initializers.DB.Where("username = ?", body.Username).Where("expense_name = ?", body.ExpenseName).Where("amount = ?", body.Amount).Delete(&user)
+		result := initializers.DB.Where("username = ?", body.Username).Where("expense_name = ?", body.ExpenseName).Where("amount = ?", body.Amount).First(&user)
 
 		if result.Error != nil {
 			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
 		}
+		initializers.DB.Delete(&user)
 
 	case "Food":
 		var user models.Food
-		result := initializers.DB.Where("username = ?", body.Username).Where("expense_name = ?", body.ExpenseName).Where("amount = ?", body.Amount).Delete(&user)
+		result := initializers.DB.Where("username = ?", body.Username).Where("expense_name = ?", body.ExpenseName).Where("amount = ?", body.Amount).First(&user)
 
 		if result.Error != nil {
 			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
 		}
+		initializers.DB.Delete(&user)
 
 	case "Edu":
 		var user models.Edu
-		result := initializers.DB.Where("username = ?", body.Username).Where("expense_name = ?", body.ExpenseName).Where("amount = ?", body.Amount).Delete(&user)
+		result := initializers.DB.Where("username = ?", body.Username).Where("expense_name = ?", body.ExpenseName).Where("amount = ?", body.Amount).First(&user)
 
 		if result.Error != nil {
 			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
 		}
+		initializers.DB.Delete(&user)
 
 	case "Health":
 		var user models.Health
-		result := initializers.DB.Where("username = ?", body.Username).Where("expense_name = ?", body.ExpenseName).Where("amount = ?", body.Amount).Delete(&user)
+		result := initializers.DB.Where("username = ?", body.Username).Where("expense_name = ?", body.ExpenseName).Where("amount = ?", body.Amount).First(&user)
 
 		if result.Error != nil {
 			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
 		}
+		initializers.DB.Delete(&user)
 
 	default:
 		http.Error(w, "Failed to delete expense, expense type not found", http.StatusBadRequest)
