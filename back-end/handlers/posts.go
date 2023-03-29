@@ -159,7 +159,9 @@ func InputIncome(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var user models.Income
-	initializers.DB.First(&user, "username = ?", body.Username).UpdateColumn("amount", body.Amount)
+	initializers.DB.First(&user, "username = ?", body.Username)
+	user.Amount = body.Amount
+	initializers.DB.Save(&user)
 
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(fmt.Sprint(body.Amount)))
