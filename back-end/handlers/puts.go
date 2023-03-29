@@ -28,7 +28,7 @@ func UpdateExpense(w http.ResponseWriter, r *http.Request) {
 	case "HomeUtils":
 		var user models.Home_Uts
 
-		result := initializers.DB.Where("username = ?", body.Username).Where("expensename = ?", body.OldExpenseName).Where("amount = ?", body.OldAmount).First(&user)
+		result := initializers.DB.Where("username = ?", body.Username).Where("expense_name = ?", body.OldExpenseName).Where("amount = ?", body.OldAmount).First(&user)
 		if result.Error != nil {
 			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
@@ -41,7 +41,7 @@ func UpdateExpense(w http.ResponseWriter, r *http.Request) {
 	case "Transportation":
 		var user models.Trans
 
-		result := initializers.DB.Where("username = ?", body.Username).Where("expensename = ?", body.OldExpenseName).Where("amount = ?", body.OldAmount).First(&user)
+		result := initializers.DB.Where("username = ?", body.Username).Where("expense_name = ?", body.OldExpenseName).Where("amount = ?", body.OldAmount).First(&user)
 		if result.Error != nil {
 			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
@@ -54,7 +54,7 @@ func UpdateExpense(w http.ResponseWriter, r *http.Request) {
 	case "Food":
 		var user models.Food
 
-		result := initializers.DB.Where("username = ?", body.Username).Where("expensename = ?", body.OldExpenseName).Where("amount = ?", body.OldAmount).First(&user)
+		result := initializers.DB.Where("username = ?", body.Username).Where("expense_name = ?", body.OldExpenseName).Where("amount = ?", body.OldAmount).First(&user)
 		if result.Error != nil {
 			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
@@ -67,7 +67,7 @@ func UpdateExpense(w http.ResponseWriter, r *http.Request) {
 	case "Education":
 		var user models.Edu
 
-		result := initializers.DB.Where("username = ?", body.Username).Where("expensename = ?", body.OldExpenseName).Where("amount = ?", body.OldAmount).First(&user)
+		result := initializers.DB.Where("username = ?", body.Username).Where("expense_name = ?", body.OldExpenseName).Where("amount = ?", body.OldAmount).First(&user)
 		if result.Error != nil {
 			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
@@ -80,7 +80,7 @@ func UpdateExpense(w http.ResponseWriter, r *http.Request) {
 	case "Health":
 		var user models.Health
 
-		result := initializers.DB.Where("username = ?", body.Username).Where("expensename = ?", body.OldExpenseName).Where("amount = ?", body.OldAmount).First(&user)
+		result := initializers.DB.Where("username = ?", body.Username).Where("expense_name = ?", body.OldExpenseName).Where("amount = ?", body.OldAmount).First(&user)
 		if result.Error != nil {
 			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
