@@ -1,13 +1,39 @@
 import Head from 'next/head'
 import {useRouter} from "next/router"
+import {useState} from "react"
 import PageHeader from '@/components/PageHeader'
 
 export default function Login() {
     const router = useRouter()
+    const [editIn, setEditIn] = useState(true)
+    const [editEx, setEditEx] = useState(true)
 
     function signupLink() {
         router.push('/signup')
     }
+    function toggleEditIn(){
+      if (editIn)
+        setEditIn(false)
+      else
+        setEditIn(true)
+    }
+    function toggleEditEx(){
+      if (editEx)
+        setEditEx(false)
+      else
+        setEditEx(true)
+    }
+  var Username = "Bean"
+  var Income = 30000
+  var HnU = 100
+  var transp = 200
+  var food = 300
+  var enter = 400
+  var health = 500
+  var other = 600
+  var total = 12*(HnU + transp +food + enter + health + other)
+  var surplus = Income - total
+  var exc = surplus/12
 
   return (
     <div className=''>
@@ -23,16 +49,34 @@ export default function Login() {
       <div className=' px-3 pt-10'>
         <div className=' flex grid rounded-lg  mx-auto h-max  bg-[#f2eadf] pb-2 pt-4 border border-black space'>
           <div className=' flex mx-6 my-5  text-xl font-semibold'>
-              Welcome -insert username here-!
+              Welcome { Username }!
           </div>
-          <div className='flex px-4 py-1'>
-            <div>Insert Income:</div>
+          <div className='flex grid px-4 py-1'>
+          {editIn ? <div className=''> Current Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} </div> : null}
+            <button onClick= {toggleEditIn} className='flex text-gray-600 text-sm py-2 underline hover:cursor-pointer'>Edit Income</button><br/>
+            {editEx ? <div>Current Monthly Expenses: <br/>
+            - Expenses of Home and Utilities: ${HnU.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
+            - Expenses of Transportation: ${transp.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
+            - Expenses of Food: ${food.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
+            - Expenses of Entertainment: ${enter.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
+            - Expenses of Health: ${health.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
+            - Other Expenses: ${other.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/></div> : null}
+            <button onClick={toggleEditEx} className='flex text-gray-600 text-sm py-2 underline hover:cursor-pointer'>Edit Expenses</button><br/>
+            Total Yearly Expenses: ${total.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
+            Capital After Expenses: ${surplus.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})}<br/>
+            Monthly Excess Income: ${exc.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})}
+            </div>
+
+            <div className=' hidden mt-6'>
+            <div>Insert Income:
             <input className="shadow appearance-none border rounded mx-2 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="income" type="number" placeholder="ex. 125000"></input>
             <button className=' text-sm hover:cursor-pointer bg-[#addfad] drop-shadow-lg rounded-lg px-3 py-1 border border-black'> Submit </button>
-          </div>
+            </div>
+            </div>
         </div>
         <div className=' flex mx-5 my-5 text-gray-500 text-sm font-semibold'> Copyright © 2023 SMD Inc. </div>
       </div>
     </div>
-  )
+    //</div>
+)
 }
