@@ -2,7 +2,7 @@ import Head from 'next/head'
 import {useRouter} from "next/router"
 import {useState} from "react"
 import PageHeader from '@/components/PageHeader'
-
+import ErrorMessage from '@/components/ErrorMessage'
 
 
 export default function SignUp() {
@@ -10,6 +10,7 @@ export default function SignUp() {
   const router = useRouter()
   const [taken, setTaken] = useState(false)
   const [match, setMatch] = useState(false)
+  let status = 0;
   
 
   function logLink() {
@@ -28,11 +29,11 @@ export default function SignUp() {
         // check if password field and confirm password field are not empty and are equal
         if (!(password.value == '' || confirmPassword.value == '') && password.value == confirmPassword.value) {
           setMatch(false)
-
-          post(username.value, password.value)
           
-          if (taken === false) {
-            router.push('/')
+          post(username.value, password.value)
+
+          if (status != 0) {
+            setTaken(true)
           }
         }
         else {
@@ -43,6 +44,34 @@ export default function SignUp() {
       username.value = ''
       password.value = ''
       confirmPassword.value = ''
+    }
+
+    function reroute() {
+      if (!(match || taken)) {
+        router.push('/')
+      }
+    }
+
+    async function post(name: string, password: string) {
+      const request = {
+        method: "POST", 
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({Username: `${name}`, Password: `${password}`})
+      }
+      const response = await fetch("http://localhost:8080/signup", request)
+      .then((response) => {
+        if (response.status != 200) {
+          status = 500
+          setTaken(true)
+        }
+      })
+      .catch(() => {
+        console.log("failed to fetch")
+        setTaken(true)
+      })
+      if (status != 200) {
+        setTaken(true)
+      }
     }
     
 
@@ -67,11 +96,9 @@ export default function SignUp() {
           </div>
           <input className="shadow appearance-none border rounded w-full py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nU" type="text" placeholder="Username"></input>
 
-          { taken ? <div className='mt-3 rounded w-52 border border-red-300'>
-            <div className='p-2 text-red-500 font-bold font-mono text-sm'>
-              The username you entered is taken. Please choose another.
-            </div>
-          </div> : null}
+          <div>
+            <ErrorMessage taken={ taken } updateValue={reroute}/>
+          </div>
 
           <div className='flex pt-4 pb-1'>
             <div>New Password</div>
@@ -103,23 +130,4 @@ export default function SignUp() {
       </div>
     </div>
   )
-}
-
-async function post(name: string, password: string) {
-  let value: boolean = true;
-  const request = {
-    method: "POST", 
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({Username: `${name}`, Password: `${password}`})
-  }
-  const response = await fetch("http://localhost:8080/signup", request)
-  .then((response) => {
-    console.log(response)
-    if (response.status == 200) {
-      value = false;
-    }
-    else {
-      value = true;
-    }
-  })
 }
