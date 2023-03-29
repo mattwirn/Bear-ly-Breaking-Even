@@ -77,7 +77,7 @@ This is a POST function that adds a new expense to the database. It takes in a j
    "Amount": 109
 }
 ```
-If the delete is successful, the returned message will be "*Expense Added*." If the Expense Type is incorrect, an error will return stating "*Failed to create expense, expense type not found*." If any of the fields Username, ExpenseName, or Amount is incorrect, an error will return stating "*Failed to find expense*."
+If the delete is successful, the returned message will be "*Expense Added*." If the Expense Type is incorrect, an error will return stating "*Failed to create expense, expense type not found*." If the Username is incorrect, an error will return stating "*Failed to create expense*."
 
 
 ## Update Expense Handler
