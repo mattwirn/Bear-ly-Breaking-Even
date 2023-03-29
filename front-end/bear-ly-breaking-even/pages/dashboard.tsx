@@ -81,7 +81,7 @@ export default function Login() {
             <input className="shadow appearance-none border rounded mx-2 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="income" type="number" placeholder="ex. 125000" ></input>
             <button onClick={changeIncome} className='text-sm underline mx-1 my-2'> Submit </button>
           </div>}
-          <button onClick= {toggleEditIn} className='flex text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Income</button><br/>
+          <button id="inputButton" onClick= {toggleEditIn} className='flex text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Income</button><br/>
             
             {editEx ? <div>Current Monthly Expenses: <br/>
             - Expenses of Home and Utilities: ${HnU.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
@@ -99,7 +99,7 @@ export default function Login() {
             - Edit Other Expenses: <input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="other" type="number" placeholder="ex. 1300"></input><br/>
             <button onClick={changeF} className='text-sm underline mx-1 my-2'>Submit</button>
             </div>}
-            <button onClick={toggleEditEx} className='flex text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Expenses</button><br/>
+            <button id="expensesButton" onClick={toggleEditEx} className='flex text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Expenses</button><br/>
             
             Total Yearly Expenses: ${total.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
             Capital After Expenses: ${surplus.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})}<br/>
