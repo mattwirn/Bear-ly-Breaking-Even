@@ -20,7 +20,7 @@ export default function SignUp() {
   useEffect(() => {
     if (taken === false && status === 200) {
       if (!(match || taken)) {
-        router.push('/')
+        router.push('/dashboard')
       }
     }
   }, [taken, match, status, router])
