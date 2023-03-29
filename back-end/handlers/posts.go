@@ -196,7 +196,7 @@ func AddExpense(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
 		}
-	case "Transportation":
+	case "Trans":
 		exp := models.Trans{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
 
 		result := initializers.DB.Create(&exp) // pass pointer of data to Create
@@ -214,7 +214,7 @@ func AddExpense(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
 		}
-	case "Education":
+	case "Edu":
 		exp := models.Edu{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
 
 		result := initializers.DB.Create(&exp) // pass pointer of data to Create
