@@ -104,7 +104,7 @@ export default function Login() {
             - Edit Expenses of Entertainment: ${enter.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =><input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="enter" type="number"></input><br/>
             - Edit Expenses of Health: ${health.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =><input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="health" type="number"></input><br/>
             - Edit Other Expenses: ${other.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =><input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="other" type="number"></input><br/>
-            <button onClick={changeF} className='text-sm underline mx-1 my-2'>Submit</button>
+            <button id="changeExpenses" onClick={changeF} className='text-sm underline mx-1 my-2'>Submit</button>
             </div>}
             <button id="expensesButton" onClick={toggleEditEx} className='flex text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Expenses</button><br/>
             
