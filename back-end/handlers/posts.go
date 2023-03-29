@@ -130,12 +130,16 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid username or password", http.StatusBadRequest)
 		return
 	}
-
+	var token string
 	// Create a session token and cookie that stores the token
-	w, _, err = createCookie(w, r, user.Username)
+	w, token, err = createCookie(w, r, user.Username)
 	if err != nil {
 		return
 	}
+
+	// Update session token in DB with new token
+	user.SessionToken = token
+	initializers.DB.Save(&user)
 
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Logged In\n"))
