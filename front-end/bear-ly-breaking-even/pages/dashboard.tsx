@@ -40,17 +40,24 @@ export default function Login() {
 
     function changeIncome(){
       const newIncome = document.getElementById('income')
-      setIncome(newIncome === null ? 0 : newIncome.value)
+      if (document.getElementById('income').value !== ""){
+      setIncome(newIncome.value)}
       setEditIn(true)  
     }
 
     function changeF(){
-      setHnU(document.getElementById('h&u').value)
-      setTransp(document.getElementById('transp').value)
-      setFood(document.getElementById('food').value)
-      setEnter(document.getElementById('enter').value)
-      setHealth(document.getElementById('health').value)
-      setOther(document.getElementById('other').value)
+      if (document.getElementById('h&u').value !== ""){
+      setHnU(document.getElementById('h&u').value)}
+      if (document.getElementById('transp').value !== ""){
+      setTransp(document.getElementById('transp').value)}
+      if (document.getElementById('food').value !== ""){
+      setFood(document.getElementById('food').value)}
+      if (document.getElementById('enter').value !== ""){
+      setEnter(document.getElementById('enter').value)}
+      if (document.getElementById('health').value !== ""){
+      setHealth(document.getElementById('health').value)}
+      if (document.getElementById('other').value !== ""){
+      setOther(document.getElementById('other').value)}
       setEditEx(true)
     }
 
@@ -77,7 +84,7 @@ export default function Login() {
           <div className='flex grid px-4 py-1'>
           
           {editIn ? <div className=''> Current Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} </div> : 
-          <div className=''> Edit Yearly Income: 
+          <div className=''> Edit Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =>
             <input className="shadow appearance-none border rounded mx-2 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="income" type="number" placeholder="ex. 125000" ></input>
             <button onClick={changeIncome} className='text-sm underline mx-1 my-2'> Submit </button>
           </div>}
@@ -91,12 +98,12 @@ export default function Login() {
             - Expenses of Health: ${health.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
             - Other Expenses: ${other.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/></div> : 
             <div>Current Monthly Expenses: <br/>
-            - Edit Expenses of Home and Utilities: <input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="h&u" type="number" placeholder="ex. 1300"></input><br/>
-            - Edit Expenses of Transportation: <input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="transp" type="number" placeholder="ex. 1300"></input><br/>
-            - Edit Expenses of Food: <input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="food" type="number" placeholder="ex. 1300"></input><br/>
-            - Edit Expenses of Entertainment:<input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="enter" type="number" placeholder="ex. 1300"></input><br/>
-            - Edit Expenses of Health: <input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="health" type="number" placeholder="ex. 1300"></input><br/>
-            - Edit Other Expenses: <input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="other" type="number" placeholder="ex. 1300"></input><br/>
+            - Edit Expenses of Home and Utilities: ${HnU.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =><input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="h&u" type="number"></input><br/>
+            - Edit Expenses of Transportation: ${transp.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =><input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="transp" type="number" ></input><br/>
+            - Edit Expenses of Food: ${food.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =><input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="food" type="number"></input><br/>
+            - Edit Expenses of Entertainment: ${enter.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =><input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="enter" type="number"></input><br/>
+            - Edit Expenses of Health: ${health.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =><input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="health" type="number"></input><br/>
+            - Edit Other Expenses: ${other.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =><input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="other" type="number"></input><br/>
             <button onClick={changeF} className='text-sm underline mx-1 my-2'>Submit</button>
             </div>}
             <button id="expensesButton" onClick={toggleEditEx} className='flex text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Expenses</button><br/>
