@@ -43,6 +43,18 @@ The first two entries can be guaranteed to be the **Username** and **Income**, w
 ```
 
 
+## Update Income Handler
+### Path - "dashboard/income/update"
+This is a POST function that edits the income of the user. It takes in a json that contains the *Username*, and *Amount*. Here is an example input:
+```JSON
+{
+    "Username": "test",
+    "Amount": 6900
+}
+```
+If the update is successful, the returned message will be "*Income Updated*." If the Username is incorrect, an error will return stating "*Failed to find user, username does not exist*."
+
+
 ## Input Format of ExpenseTypes
 When inputting the ExpenseType field to the json to be sent to the API, there are 5 possible types of expenses to choose from. They must be written in these specific ways in order for the input to be valid and function correctly:
 ```
@@ -55,6 +67,7 @@ Health           --> "Health"
 
 
 ## Add Expense Handler
+### Path - "dashboard/expense/add"
 This is a POST function that adds a new expense to the database. It takes in a json that contains the *Username*, *ExpenseType*, *ExpenseName*, *Amount*. Here is an example input:
 ```JSON
 {
@@ -68,6 +81,7 @@ If the delete is successful, the returned message will be "*Expense Added*." If 
 
 
 ## Update Expense Handler
+### Path - "dashboard/expense/update"
 This is a PUT function that updates an exisiting expense with new value(s). It takes in a json that contains the *Username*, *ExpenseType*, *OldExpenseName*, *OldAmount*, *NewExpenseName*, *NewAmount*. Here is an example input:
 ```JSON
 {
@@ -83,6 +97,7 @@ If the update is successful, the returned message will be "*Expense Updated*." I
 
 
 ## Delete Expense Handler
+### Path - "dashboard/expense/delete"
 This is a DELETE function that deletes an existing expense from the database. It takes in a json that contains the *Username*, *ExpenseType*, *ExpenseName*, *Amount*. Here is an example input:
 ```JSON
 {
