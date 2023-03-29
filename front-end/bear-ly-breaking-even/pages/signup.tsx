@@ -114,7 +114,7 @@ export default function SignUp() {
           </div> : null}
 
           <div className='mx-auto pb-2 pt-3'>
-            <button onClick={storeUsername} className='bg-[#addfad] drop-shadow-lg rounded-lg px-6 py-3 border border-black'>
+            <button id='signUpButton' onClick={storeUsername} className='bg-[#addfad] drop-shadow-lg rounded-lg px-6 py-3 border border-black'>
               <div className='font-semibold'>
                 Sign Up
               </div>
