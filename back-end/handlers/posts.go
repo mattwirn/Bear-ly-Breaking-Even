@@ -193,7 +193,7 @@ func AddExpense(w http.ResponseWriter, r *http.Request) {
 		result := initializers.DB.Create(&exp) // pass pointer of data to Create
 
 		if result.Error != nil {
-			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
+			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
 		}
 	case "Transportation":
@@ -202,7 +202,7 @@ func AddExpense(w http.ResponseWriter, r *http.Request) {
 		result := initializers.DB.Create(&exp) // pass pointer of data to Create
 
 		if result.Error != nil {
-			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
+			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
 		}
 	case "Food":
@@ -211,7 +211,7 @@ func AddExpense(w http.ResponseWriter, r *http.Request) {
 		result := initializers.DB.Create(&exp) // pass pointer of data to Create
 
 		if result.Error != nil {
-			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
+			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
 		}
 	case "Education":
@@ -220,7 +220,7 @@ func AddExpense(w http.ResponseWriter, r *http.Request) {
 		result := initializers.DB.Create(&exp) // pass pointer of data to Create
 
 		if result.Error != nil {
-			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
+			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
 		}
 	case "Health":
@@ -229,7 +229,7 @@ func AddExpense(w http.ResponseWriter, r *http.Request) {
 		result := initializers.DB.Create(&exp) // pass pointer of data to Create
 
 		if result.Error != nil {
-			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
+			http.Error(w, "Failed to find expense", http.StatusInternalServerError)
 			return
 		}
 	default:
