@@ -34,10 +34,62 @@ The order of the provided json is as follows:
 
 The first two entries can be guaranteed to be the **Username** and **Income**, with the rest being expenses that can be distinguished by the *ExpenseType* field. Here is an example of what one expense may look like:
 
-```
+```JSON
 {
-   ExpenseType: "Food"
-   ExpenseName: "Grocery Store"
-   Amount: 109
+   "ExpenseType": "Food",
+   "ExpenseName": "Grocery Store",
+   "Amount": 109
 }
 ```
+
+
+## Input Format of ExpenseTypes
+When inputting the ExpenseType field to the json to be sent to the API, there are 5 possible types of expenses to choose from. They must be written in these specific ways in order for the input to be valid and function correctly:
+```
+Home & Utilities --> "HomeUtils"
+Transportation   --> "Trans"
+Food             --> "Food"
+Education        --> "Edu"
+Health           --> "Health"
+```
+
+
+## Add Expense Handler
+This is a POST function that adds a new expense to the database. It takes in a json that contains the *Username*, *ExpenseType*, *ExpenseName*, *Amount*. Here is an example input:
+```JSON
+{
+   "Username": "ex",
+   "ExpenseType": "Food",
+   "ExpenseName": "Grocery Store",
+   "Amount": 109
+}
+```
+If the delete is successful, the returned message will be "*Expense Added*." If the Expense Type is incorrect, an error will return stating "*Failed to create expense, expense type not found*." If any of the fields Username, ExpenseName, or Amount is incorrect, an error will return stating "*Failed to find expense*."
+
+
+## Update Expense Handler
+This is a PUT function that updates an exisiting expense with new value(s). It takes in a json that contains the *Username*, *ExpenseType*, *OldExpenseName*, *OldAmount*, *NewExpenseName*, *NewAmount*. Here is an example input:
+```JSON
+{
+   "Username": "ex",
+   "ExpenseType": "Food",
+   "OldExpenseName": "Grocery Store",
+   "OldAmount": 109,
+   "NewExpenseName": "Fast Food",
+   "NewAmount": 12
+}
+```
+If the update is successful, the returned message will be "*Expense Updated*." If the Expense Type is incorrect, an error will return stating "*Failed to update expense, expense type not found*." If any of the fields Username, OldExpenseName, or OldAmount is incorrect, an error will return stating "*Failed to find expense*."
+
+
+## Delete Expense Handler
+This is a DELETE function that deletes an existing expense from the database. It takes in a json that contains the *Username*, *ExpenseType*, *ExpenseName*, *Amount*. Here is an example input:
+```JSON
+{
+   "Username": "ex",
+   "ExpenseType": "Food",
+   "ExpenseName": "Fast Food",
+   "Amount": 12
+}
+```
+If the delete is successful, the returned message will be "*Expense Deleted*." If the Expense Type is incorrect, an error will return stating "*Failed to delete expense, expense type not found*." If any of the fields Username, ExpenseName, or Amount is incorrect, an error will return stating "*Failed to find expense*."
