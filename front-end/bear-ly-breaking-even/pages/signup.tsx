@@ -1,34 +1,75 @@
 import Head from 'next/head'
 import {useRouter} from "next/router"
+import {useState, useEffect} from "react"
 import PageHeader from '@/components/PageHeader'
+import ErrorMessage from '@/components/ErrorMessage'
+
 
 export default function SignUp() {
     
   const router = useRouter()
+  const [taken, setTaken] = useState(false)
+  const [match, setMatch] = useState(false)
+  const [status, setStatus] = useState(0)
   
+
   function logLink() {
       router.push('/login')
   }
 
+  useEffect(() => {
+    if (taken === false && status === 200) {
+      if (!(match || taken)) {
+        router.push('/dashboard')
+      }
+    }
+  }, [taken, match, status, router])
+
     function storeUsername() {
       // get username, password, and confirm password input fields
-      var username = document.getElementById('nU')
-      var password = document.getElementById('nP')
-      var confirmPassword = document.getElementById('cP')
-      
+      let username = document.getElementById('nU')
+      let password = document.getElementById('nP')
+      let confirmPassword = document.getElementById('cP')
 
       // check if username field isnt empty and username doesnt already exist
       if (!(username.value == '')) {
+
         // check if password field and confirm password field are not empty and are equal
         if (!(password.value == '' || confirmPassword.value == '') && password.value == confirmPassword.value) {
+          setMatch(false)
+          
           post(username.value, password.value)
-          router.push('/')
+
+        }
+        else {
+          setMatch(true)
         }
       }
       // reset username, password and confirm password fields
       username.value = ''
       password.value = ''
       confirmPassword.value = ''
+
+    }
+
+    async function post(name: string, password: string) {
+      const request = {
+        method: "POST", 
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({Username: `${name}`, Password: `${password}`})
+      }
+      const response = await fetch("http://localhost:8080/signup", request)
+      .then((response) => {
+        if (response.status != 200) {
+          setStatus(500)
+          setTaken(true)
+        }
+        else {
+          setStatus(200)
+          setTaken(false)
+        }
+      })
+
     }
     
 
@@ -52,6 +93,11 @@ export default function SignUp() {
             <div>New Username</div>
           </div>
           <input className="shadow appearance-none border rounded w-full py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nU" type="text" placeholder="Username"></input>
+
+          <div>
+            <ErrorMessage taken={ taken }/>
+          </div>
+
           <div className='flex pt-4 pb-1'>
             <div>New Password</div>
           </div>
@@ -61,8 +107,14 @@ export default function SignUp() {
           </div>
           <input className="shadow appearance-none border rounded w-full py-2.5 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="cP" type="password" placeholder="********"></input>
           
+          { match ? <div className='mt-2 rounded w-52 border border-red-300'>
+            <div className='p-2 text-red-500 font-bold font-mono text-sm'>
+              Passwords do not match.
+            </div>
+          </div> : null}
+
           <div className='mx-auto pb-2 pt-3'>
-            <button onClick={storeUsername} className='bg-[#addfad] drop-shadow-lg rounded-lg px-6 py-3 border border-black'>
+            <button id='signUpButton' onClick={storeUsername} className='bg-[#addfad] drop-shadow-lg rounded-lg px-6 py-3 border border-black'>
               <div className='font-semibold'>
                 Sign Up
               </div>
@@ -76,13 +128,4 @@ export default function SignUp() {
       </div>
     </div>
   )
-}
-
-async function post(name: string, password: string) {
-  const request = {
-    method: "POST", 
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({Username: `${name}`, Password: `${password}`})
-  }
-  const response = fetch("http://localhost:8080/signup", request)
 }
