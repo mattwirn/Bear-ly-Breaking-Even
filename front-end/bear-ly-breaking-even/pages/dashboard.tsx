@@ -12,7 +12,7 @@ export default function Login() {
     router.push('/signup')
   }
 
-  var Username = "Bean"
+  var Username = "User123"
   const [Income, setIncome] = useState(30000)
   const [HnU, setHnU] = useState(100)
   const [transp, setTransp] = useState(200)
