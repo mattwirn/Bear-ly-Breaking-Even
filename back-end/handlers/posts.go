@@ -84,6 +84,16 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Create income amount of 0 for new user
+	income := models.Income{Username: body.Username, Amount: 0}
+
+	result = initializers.DB.Create(&income) // pass pointer of data to Create
+
+	if result.Error != nil {
+		http.Error(w, "Username already taken", http.StatusInternalServerError)
+		return
+	}
+
 	// Respond
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Signed up\n"))
@@ -119,14 +129,114 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid username or password", http.StatusBadRequest)
 		return
 	}
-
+	var token string
 	// Create a session token and cookie that stores the token
-	w, _, err = createCookie(w, r, user.Username)
+	w, token, err = createCookie(w, r, user.Username)
 	if err != nil {
 		return
 	}
 
+	// Update session token in DB with new token
+	user.SessionToken = token
+	initializers.DB.Save(&user)
+
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Logged In\n"))
 
+}
+
+func InputIncome(w http.ResponseWriter, r *http.Request) {
+	var body struct {
+		Username string
+		Amount   uint
+	}
+
+	err := json.NewDecoder(r.Body).Decode(&body)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	var user models.Income
+	result := initializers.DB.First(&user, "username = ?", body.Username)
+	if result.Error != nil {
+		http.Error(w, "Failed to find user, username does not exist", http.StatusInternalServerError)
+		return
+	}
+
+	user.Amount = body.Amount
+	initializers.DB.Save(&user)
+
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("Income Updated\n"))
+
+}
+
+func AddExpense(w http.ResponseWriter, r *http.Request) {
+	var body struct {
+		Username    string
+		ExpenseType string
+		ExpenseName string
+		Amount      uint
+	}
+
+	err := json.NewDecoder(r.Body).Decode(&body)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	switch body.ExpenseType {
+	case "HomeUtils":
+		exp := models.Home_Uts{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
+
+		result := initializers.DB.Create(&exp) // pass pointer of data to Create
+
+		if result.Error != nil {
+			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
+			return
+		}
+	case "Trans":
+		exp := models.Trans{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
+
+		result := initializers.DB.Create(&exp) // pass pointer of data to Create
+
+		if result.Error != nil {
+			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
+			return
+		}
+	case "Food":
+		exp := models.Food{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
+
+		result := initializers.DB.Create(&exp) // pass pointer of data to Create
+
+		if result.Error != nil {
+			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
+			return
+		}
+	case "Edu":
+		exp := models.Edu{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
+
+		result := initializers.DB.Create(&exp) // pass pointer of data to Create
+
+		if result.Error != nil {
+			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
+			return
+		}
+	case "Health":
+		exp := models.Health{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
+
+		result := initializers.DB.Create(&exp) // pass pointer of data to Create
+
+		if result.Error != nil {
+			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
+			return
+		}
+	default:
+		http.Error(w, "Failed to create expense, expense type not found", http.StatusBadRequest)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("Expense Added\n"))
 }
