@@ -16,16 +16,15 @@ In this sprint, the dashboard page was worked on and new functionality was added
 - Show capital after expenses and monthly excess income based on input income and expense values
 Towards the end of the sprint, we found out there was some disconnect between the front and back end in how expenses were implemented. These issues will be resolved in Sprint 4 and allow for personalized data saved on a user object instead of requiring placeholder values and user input on every refresh.
 
-Additionally, we improved the signup page and added error-checking funtionality:
-- Return error message if input Username is already taken
+Additionally, error handling has been implemented in the signup page for both usernames that are taken and passwords that don’t match:
+- Return error message if input Username is already taken/exists in the database
 - Return error message if password and confirm password inputs do not match
 - Redirect from the signup page to dashboard upon successful signup
 
-The front end has new component tests: 
-1. 
-
-The  new e2e tests are as follows:
-1. 
+Three new Cypress tests have been written to test the new features:
+- Testing the e2e aspect of the error handling
+- Testing the error-message-rendering component on the signup page.
+- Test if the function that enables the user to edit their income and different expense categories works as intended.
 
 
 ## Back End
