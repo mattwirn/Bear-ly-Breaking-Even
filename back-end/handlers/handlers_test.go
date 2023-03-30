@@ -12,7 +12,6 @@ import (
 	"github.com/mattwirn/Bear-ly-Breaking-Even/back-end/initializers"
 )
 
-/*
 func TestSignup(t *testing.T) {
 	initializers.StartDatabase("../.env")
 	expectations := [2]string{"Signed up\n", "Username already taken\n"}
@@ -87,13 +86,12 @@ func TestLogin(t *testing.T) {
 		}
 	}
 }
-*/
 
 func TestInputIncome(t *testing.T) {
-	initializers.StartDatabase("../.env")
+	//initializers.StartDatabase("../.env")
 	bodies := [2]map[string]interface{}{
 		{
-			"username": "test",
+			"username": "unittest",
 			"amount":   6900,
 		},
 		{
@@ -250,12 +248,6 @@ func TestDeleteExpense(t *testing.T) {
 	//initializers.StartDatabase("../.env")
 	bodies := [3]map[string]interface{}{
 		{
-			"Username":    "test",
-			"ExpenseType": "Food",
-			"ExpenseName": "chik-fil-a",
-			"Amount":      69,
-		},
-		{
 			"Username":    "t33st",
 			"ExpenseType": "Food",
 			"ExpenseName": "chikfila",
@@ -267,8 +259,14 @@ func TestDeleteExpense(t *testing.T) {
 			"ExpenseName": "chikfila",
 			"Amount":      1500,
 		},
+		{
+			"Username":    "test",
+			"ExpenseType": "Food",
+			"ExpenseName": "chik-fil-a",
+			"Amount":      69,
+		},
 	}
-	expectations := [3]string{"Expense Deleted\n", "Failed to find expense\n", "Failed to delete expense, expense type not found\n"}
+	expectations := [3]string{"Failed to find expense\n", "Failed to delete expense, expense type not found\n", "Expense Deleted\n"}
 
 	for i, b := range bodies {
 
