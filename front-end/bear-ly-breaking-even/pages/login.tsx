@@ -1,12 +1,51 @@
 import Head from 'next/head'
 import {useRouter} from "next/router"
+import {useState, useEffect} from 'react'
 import PageHeader from '@/components/PageHeader'
+import LoginErrorMessage from '@/components/LoginErrorMessage'
 
 export default function Login() {
     const router = useRouter()
 
+    const [exists, setExists] = useState(true)
+    const [status, setStatus] = useState(0)
+
     function signupLink() {
         router.push('/signup')
+    }
+
+    useEffect(() => {
+      if (exists && status === 200) {
+        router.push('/dashboard')
+      }
+    }, [exists, status, router])
+
+    function attemptLogin() {
+      const username = document.getElementById('username').value
+      const password = document.getElementById('password').value
+
+      getUser(username, password)
+    }
+
+
+    async function getUser(name: string, password: string) {
+      const contents = {
+        method: "POST", 
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({Username: `${name}`, Password: `${password}`})
+      }
+      const response = await fetch("http://localhost:8080/login", contents)
+        .then((response) => {
+          if (response.status === 200) {
+            setExists(true)
+            setStatus(200)
+          }
+          else {
+            setExists(false)
+            setStatus(400)
+          }
+        })
+        .catch((response) => {console.log(response, "error")})
     }
 
   return (
@@ -25,6 +64,11 @@ export default function Login() {
           <div className='mx-auto justify-center text-xl font-semibold'>
               Welcome Back!
           </div>
+
+          <div>
+            <LoginErrorMessage exists={exists} />
+          </div>
+
           <div className='flex pt-4 pb-1'>
             <div>Username</div>
           </div>
@@ -37,7 +81,7 @@ export default function Login() {
             <div className='underline hover:cursor-pointer'>Forgot Password</div>
           </div>
           <div className='mx-auto pb-2'>
-            <button className='bg-[#addfad] drop-shadow-lg rounded-lg px-6 py-3 border border-black'>
+            <button onClick={attemptLogin} className='bg-[#addfad] drop-shadow-lg rounded-lg px-6 py-3 border border-black'>
               <div className='font-semibold'>
                 Login
               </div>
