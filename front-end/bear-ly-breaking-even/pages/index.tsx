@@ -24,7 +24,13 @@ export default function Home() {
           <Logo w={300}/>
         </div>
         <h1 className='mx-auto font-bold text-6xl text-[#002533]'>Bear-ly Breaking Even</h1>
-        <h1 className='mx-auto font-bold text-4xl text-[#546B52]'>(insert app description)</h1>
+        <h1 className='my-3 px-8 mx-auto font-bold text-xl text-[#546B52]'>
+          Bear-ly Breaking Even is a budgeting app that helps users track their spendings
+          and savings. Users will input their income as well as categories of expenses that
+          they would like to keep track of, and will be able to input specific instances of 
+          spending into those categories, which will populate a database. Using this data, 
+          the user will be able to see their spending patterns in each category of spending, 
+          so that they will be more mindful of their budgeting.</h1>
       </div>
       
     </div>
