@@ -3,7 +3,7 @@ import {useRouter} from "next/router"
 import {useState, useEffect} from "react"
 import PageHeader from '@/components/PageHeader'
 
-export default function Login() {
+export default function Dashboard() {
   const router = useRouter()
   const [editIn, setEditIn] = useState(true)
   const [editEx, setEditEx] = useState(true)
@@ -115,3 +115,12 @@ export default function Login() {
     </div>
 )
 }
+
+/*export async function getServerSideProps(){
+  const data= await fetch('http://localhost:8080/dashboard')
+  return {
+    props: {
+      results: data
+    }
+  }
+}*/
