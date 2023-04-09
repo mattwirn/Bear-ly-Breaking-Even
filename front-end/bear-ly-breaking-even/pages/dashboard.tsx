@@ -3,7 +3,7 @@ import {useRouter} from "next/router"
 import {useState, useEffect} from "react"
 import PageHeader from '@/components/PageHeader'
 import HomeUtilTable from '@/components/HomeUtilTable'
-import TestTable from '@/components/TestTable'
+import ExpenseTable1 from '@/components/ExpenseTable1'
 
 export default function Dashboard() {
   const router = useRouter()
@@ -83,7 +83,6 @@ export default function Dashboard() {
           <div className=' flex mx-6 my-5  text-xl font-semibold'>
               Welcome { Username }!
           </div>
-          <TestTable/>
           <div className='flex grid px-4 py-1'>
           {editIn ? <div className=''> Current Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} </div> : 
           <div className=''> Edit Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =>
@@ -93,6 +92,7 @@ export default function Dashboard() {
           <button id="inputButton" onClick= {toggleEditIn} className='flex text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Income</button><br/>
             {editEx ? <div>Current Monthly Expenses: <br/>
             - Expenses of Home and Utilities: ${HnU.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
+          <ExpenseTable1/>
             - Expenses of Transportation: ${transp.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
             - Expenses of Food: ${food.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
             - Expenses of Entertainment: ${enter.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
