@@ -12,7 +12,7 @@ export default function Dashboard() {
     router.push('/signup')
   }
 
-  var Username = "User123"
+  var Username = 'User123'
   const [Income, setIncome] = useState(30000)
   const [HnU, setHnU] = useState(100)
   const [transp, setTransp] = useState(200)
@@ -116,11 +116,16 @@ export default function Dashboard() {
 )
 }
 
-/*export async function getServerSideProps(){
-  const data= await fetch('http://localhost:8080/dashboard')
-  return {
-    props: {
-      results: data
-    }
-  }
-}*/
+// export async function getServerSideProps(){
+//   const data= await fetch('http://localhost:8080/dashboard')
+//     .then((response) => {
+//       response.json()
+//       console.log(response)
+//     })
+//     .catch((error) => {console.log(error)})
+//   return {
+//     props: {
+//       results: data
+//     }
+//   }
+// }
