@@ -3,6 +3,7 @@ import {useRouter} from "next/router"
 import {useState, useEffect} from "react"
 import PageHeader from '@/components/PageHeader'
 import HomeUtilTable from '@/components/HomeUtilTable'
+import TestTable from '@/components/TestTable'
 
 export default function Dashboard() {
   const router = useRouter()
@@ -82,7 +83,7 @@ export default function Dashboard() {
           <div className=' flex mx-6 my-5  text-xl font-semibold'>
               Welcome { Username }!
           </div>
-          <HomeUtilTable/>
+          <TestTable/>
           <div className='flex grid px-4 py-1'>
           {editIn ? <div className=''> Current Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} </div> : 
           <div className=''> Edit Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =>
