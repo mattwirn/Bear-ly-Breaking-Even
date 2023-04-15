@@ -33,8 +33,8 @@ func DeleteExpense(w http.ResponseWriter, r *http.Request) {
 		}
 		initializers.DB.Delete(&user)
 
-	case "Trans":
-		var user models.Trans
+	case "Travel":
+		var user models.Travel
 		result := initializers.DB.Where("username = ?", body.Username).Where("expense_name = ?", body.ExpenseName).Where("amount = ?", body.Amount).First(&user)
 
 		if result.Error != nil {
@@ -53,8 +53,8 @@ func DeleteExpense(w http.ResponseWriter, r *http.Request) {
 		}
 		initializers.DB.Delete(&user)
 
-	case "Edu":
-		var user models.Edu
+	case "Ent":
+		var user models.Entertainment
 		result := initializers.DB.Where("username = ?", body.Username).Where("expense_name = ?", body.ExpenseName).Where("amount = ?", body.Amount).First(&user)
 
 		if result.Error != nil {

@@ -196,8 +196,8 @@ func AddExpense(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
 			return
 		}
-	case "Trans":
-		exp := models.Trans{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
+	case "Travel":
+		exp := models.Travel{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
 
 		result := initializers.DB.Create(&exp) // pass pointer of data to Create
 
@@ -214,8 +214,8 @@ func AddExpense(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
 			return
 		}
-	case "Edu":
-		exp := models.Edu{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
+	case "Ent":
+		exp := models.Entertainment{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
 
 		result := initializers.DB.Create(&exp) // pass pointer of data to Create
 

@@ -24,7 +24,7 @@ type Home_Uts struct {
 	Amount      uint
 }
 
-type Trans struct {
+type Travel struct {
 	gorm.Model
 	Username    string
 	ExpenseName string
@@ -36,7 +36,7 @@ type Food struct {
 	ExpenseName string
 	Amount      uint
 }
-type Edu struct {
+type Entertainment struct {
 	gorm.Model
 	Username    string
 	ExpenseName string

@@ -38,8 +38,8 @@ func UpdateExpense(w http.ResponseWriter, r *http.Request) {
 		user.Amount = body.NewAmount
 		initializers.DB.Save(&user)
 
-	case "Trans":
-		var user models.Trans
+	case "Travel":
+		var user models.Travel
 
 		result := initializers.DB.Where("username = ?", body.Username).Where("expense_name = ?", body.OldExpenseName).Where("amount = ?", body.OldAmount).First(&user)
 		if result.Error != nil {
@@ -64,8 +64,8 @@ func UpdateExpense(w http.ResponseWriter, r *http.Request) {
 		user.Amount = body.NewAmount
 		initializers.DB.Save(&user)
 
-	case "Edu":
-		var user models.Edu
+	case "Ent":
+		var user models.Entertainment
 
 		result := initializers.DB.Where("username = ?", body.Username).Where("expense_name = ?", body.OldExpenseName).Where("amount = ?", body.OldAmount).First(&user)
 		if result.Error != nil {

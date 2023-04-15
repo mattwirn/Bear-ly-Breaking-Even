@@ -27,9 +27,9 @@ The order of the provided json is as follows:
 - ***Username***
 - ***Income***
 - Expenses of ***Home and Utilities***
-- Expenses of ***Transportation***
+- Expenses of ***Travel***
 - Expenses of ***Food***
-- Expenses of ***Education***
+- Expenses of ***Entertainment***
 - Expenses of ***Health***
 
 The first two entries can be guaranteed to be the **Username** and **Income**, with the rest being expenses that can be distinguished by the *ExpenseType* field. Here is an example of what one expense may look like:
@@ -59,9 +59,9 @@ If the update is successful, the returned message will be "*Income Updated*." If
 When inputting the ExpenseType field to the json to be sent to the API, there are 5 possible types of expenses to choose from. They must be written in these specific ways in order for the input to be valid and function correctly:
 ```
 Home & Utilities --> "HomeUtils"
-Transportation   --> "Trans"
+Travel           --> "Trans"
 Food             --> "Food"
-Education        --> "Edu"
+Entertainment    --> "Ent"
 Health           --> "Health"
 ```
 

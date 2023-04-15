@@ -34,13 +34,13 @@ func Dashboard(w http.ResponseWriter, r *http.Request) {
 
 	// Write username to json
 	username := user.Username
-	allData = append(allData, getUsername(username))
+	allData = append(allData, getUsername(username), getIncome(username), getAllExpenses(username))
 
 	// Get income of user
-	allData = append(allData, getIncome(username))
+	//allData = append(allData, getIncome(username))
 
 	// Gather all expenses from DB
-	allData = append(allData, getAllExpenses(username))
+	//allData = append(allData, getAllExpenses(username))
 
 	// Marshal all data to json
 	response, err := json.Marshal(allData)
@@ -112,12 +112,12 @@ func getHomeUts(username string) []interface{} {
 	return expenses
 }
 
-func getTrans(username string) []interface{} {
+func getTravel(username string) []interface{} {
 
 	expenses := []interface{}{}
 
 	// Search table for all expenses created the user
-	var exps []models.Trans
+	var exps []models.Travel
 	result := initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
@@ -127,7 +127,7 @@ func getTrans(username string) []interface{} {
 	// Convert expense struct to new struct to be used by front-end
 	for _, exp := range exps {
 		reformat := expense{
-			ExpenseType: "Transportation",
+			ExpenseType: "Travel",
 			ExpenseName: exp.ExpenseName,
 			Amount:      exp.Amount,
 		}
@@ -160,12 +160,12 @@ func getFood(username string) []interface{} {
 	return expenses
 }
 
-func getEdu(username string) []interface{} {
+func getEnt(username string) []interface{} {
 
 	expenses := []interface{}{}
 
 	// Search table for all expenses created the user
-	var exps []models.Edu
+	var exps []models.Entertainment
 	result := initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
@@ -175,7 +175,7 @@ func getEdu(username string) []interface{} {
 	// Convert expense struct to new struct to be used by front-end
 	for _, exp := range exps {
 		reformat := expense{
-			ExpenseType: "Education",
+			ExpenseType: "Entertainment",
 			ExpenseName: exp.ExpenseName,
 			Amount:      exp.Amount,
 		}
@@ -211,7 +211,7 @@ func getHealth(username string) []interface{} {
 func getAllExpenses(username string) []interface{} {
 	all := []interface{}{}
 
-	all = append(all, getHomeUts(username), getTrans(username), getFood(username),
-		getEdu(username), getHealth(username))
+	all = append(all, getHomeUts(username), getTravel(username), getFood(username),
+		getEnt(username), getHealth(username))
 	return all
 }
