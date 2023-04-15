@@ -119,16 +119,16 @@ export default function Dashboard() {
 )
 }
 
-// export async function getServerSideProps(){
-//   const data= await fetch('http://localhost:8080/dashboard')
-//     .then((response) => {
-//       response.json()
-//       console.log(response)
-//     })
-//     .catch((error) => {console.log(error)})
-//   return {
-//     props: {
-//       results: data
-//     }
-//   }
-// }
+export async function getServerSideProps(){
+  const data= await fetch('http://localhost:8080/dashboard')
+    .then((response) => {
+      response.json()
+      console.log(response)
+    })
+    .catch((error) => {console.log(error)})
+  return {
+    props: {
+      results: data
+    }
+  }
+}
