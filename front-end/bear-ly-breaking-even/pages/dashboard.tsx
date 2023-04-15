@@ -2,8 +2,10 @@ import Head from 'next/head'
 import {useRouter} from "next/router"
 import {useState, useEffect} from "react"
 import PageHeader from '@/components/PageHeader'
+import HomeUtilTable from '@/components/HomeUtilTable'
+import ExpenseTable1 from '@/components/ExpenseTable1'
 
-export default function Login() {
+export default function Dashboard() {
   const router = useRouter()
   const [editIn, setEditIn] = useState(true)
   const [editEx, setEditEx] = useState(true)
@@ -12,7 +14,7 @@ export default function Login() {
     router.push('/signup')
   }
 
-  var Username = "Bean"
+  var Username = 'User123'
   const [Income, setIncome] = useState(30000)
   const [HnU, setHnU] = useState(100)
   const [transp, setTransp] = useState(200)
@@ -42,7 +44,7 @@ export default function Login() {
       const newIncome = document.getElementById('income')
       if (document.getElementById('income').value !== ""){
       setIncome(newIncome.value)}
-      setEditIn(true)  
+      setEditIn(true)
     }
 
     function changeF(){
@@ -77,21 +79,20 @@ export default function Login() {
       <PageHeader/>
 
       <div className=' px-3 pt-10'>
-        <div className=' flex grid rounded-lg  mx-auto h-max  bg-[#f2eadf] pb-2 pt-4 border border-black space'>
+        <div className=' flex grid rounded-lg pb-5 mx-auto h-max  bg-[#f2eadf] pb-2 pt-4 border border-black space'>
           <div className=' flex mx-6 my-5  text-xl font-semibold'>
               Welcome { Username }!
           </div>
           <div className='flex grid px-4 py-1'>
-          
           {editIn ? <div className=''> Current Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} </div> : 
           <div className=''> Edit Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =>
             <input className="shadow appearance-none border rounded mx-2 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="income" type="number" placeholder="ex. 125000" ></input>
             <button onClick={changeIncome} className='text-sm underline mx-1 my-2'> Submit </button>
           </div>}
           <button id="inputButton" onClick= {toggleEditIn} className='flex text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Income</button><br/>
-            
             {editEx ? <div>Current Monthly Expenses: <br/>
             - Expenses of Home and Utilities: ${HnU.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
+          <ExpenseTable1/>
             - Expenses of Transportation: ${transp.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
             - Expenses of Food: ${food.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
             - Expenses of Entertainment: ${enter.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
@@ -107,7 +108,6 @@ export default function Login() {
             <button id="changeExpenses" onClick={changeF} className='text-sm underline mx-1 my-2'>Submit</button>
             </div>}
             <button id="expensesButton" onClick={toggleEditEx} className='flex text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Expenses</button><br/>
-            
             Total Yearly Expenses: ${total.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
             Capital After Expenses: ${surplus.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})}<br/>
             Monthly Excess Income: ${exc.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})}
@@ -117,4 +117,18 @@ export default function Login() {
       </div>
     </div>
 )
+}
+
+export async function getServerSideProps(){
+  const data= await fetch('http://localhost:8080/dashboard')
+    .then((response) => {
+      response.json()
+      console.log(response)
+    })
+    .catch((error) => {console.log(error)})
+  return {
+    props: {
+      results: data
+    }
+  }
 }
