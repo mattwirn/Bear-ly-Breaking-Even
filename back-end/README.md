@@ -26,19 +26,39 @@ If the session cookie does not exist, it returns "Server side error", otherwise 
 The order of the provided json is as follows:
 - ***Username***
 - ***Income***
+- ***Total Spent***
 - Expenses of ***Home and Utilities***
+    - Total of Expenses
+    - Individual Expenses
 - Expenses of ***Travel***
+    - Total of Expenses
+    - Individual Expenses
 - Expenses of ***Food***
+    - Total of Expenses
+    - Individual Expenses
 - Expenses of ***Entertainment***
+    - Total of Expenses
+    - Individual Expenses
 - Expenses of ***Health***
+    - Total of Expenses
+    - Individual Expenses
 
-The first two entries can be guaranteed to be the **Username** and **Income**, with the rest being expenses that can be distinguished by the *ExpenseType* field. Here is an example of what one expense may look like:
+The first three entries can be guaranteed to be the **Username**, **Income**, and **Total Spent**. The rest of the expenses can be distinguished by the *ExpenseType* field. Here is an example of what one expense category may look like:
 
 ```JSON
 {
    "ExpenseType": "Food",
+   "Total": 122
+},
+{
+   "ExpenseType": "Food",
    "ExpenseName": "Grocery Store",
    "Amount": 109
+},
+{
+   "ExpenseType": "Food",
+   "ExpenseName": "Fast Food",
+   "Amount": 13
 }
 ```
 
@@ -77,7 +97,7 @@ This is a POST function that adds a new expense to the database. It takes in a j
    "Amount": 109
 }
 ```
-If the delete is successful, the returned message will be "*Expense Added*." If the Expense Type is incorrect, an error will return stating "*Failed to create expense, expense type not found*." If the Username is incorrect, an error will return stating "*Failed to create expense*."
+If the addition is successful, the returned message will be "*Expense Added*." If the Expense Type is incorrect, an error will return stating "*Failed to create expense, expense type not found*." If the Username is incorrect, an error will return stating "*Failed to find user, username does not exist*."
 
 
 ## Update Expense Handler
