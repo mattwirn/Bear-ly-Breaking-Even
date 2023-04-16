@@ -79,7 +79,7 @@ If the update is successful, the returned message will be "*Income Updated*." If
 When inputting the ExpenseType field to the json to be sent to the API, there are 5 possible types of expenses to choose from. They must be written in these specific ways in order for the input to be valid and function correctly:
 ```
 Home & Utilities --> "HomeUtils"
-Travel           --> "Trans"
+Travel           --> "Travel"
 Food             --> "Food"
 Entertainment    --> "Ent"
 Health           --> "Health"
