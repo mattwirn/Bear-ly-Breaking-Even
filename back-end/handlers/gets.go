@@ -25,7 +25,7 @@ func Dashboard(w http.ResponseWriter, r *http.Request) {
 	initializers.DB.First(&user, "session_token = ?", token)
 
 	if user.ID == 0 {
-		http.Error(w, "Server side error", http.StatusInternalServerError)
+		http.Error(w, "ID error", http.StatusInternalServerError)
 		return
 	}
 
@@ -97,6 +97,12 @@ func getHomeUts(username string) []interface{} {
 	result := initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
+		null := expense{
+			ExpenseType: "HomeUtils",
+			ExpenseName: "null",
+			Amount:      0,
+		}
+		expenses = append(expenses, null)
 		return expenses
 	}
 
@@ -121,6 +127,12 @@ func getTravel(username string) []interface{} {
 	result := initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
+		null := expense{
+			ExpenseType: "Travel",
+			ExpenseName: "null",
+			Amount:      0,
+		}
+		expenses = append(expenses, null)
 		return expenses
 	}
 
@@ -145,6 +157,12 @@ func getFood(username string) []interface{} {
 	result := initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
+		null := expense{
+			ExpenseType: "Food",
+			ExpenseName: "null",
+			Amount:      0,
+		}
+		expenses = append(expenses, null)
 		return expenses
 	}
 
@@ -169,6 +187,12 @@ func getEnt(username string) []interface{} {
 	result := initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
+		null := expense{
+			ExpenseType: "Entertainment",
+			ExpenseName: "null",
+			Amount:      0,
+		}
+		expenses = append(expenses, null)
 		return expenses
 	}
 
@@ -193,6 +217,12 @@ func getHealth(username string) []interface{} {
 	result := initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
+		null := expense{
+			ExpenseType: "Health",
+			ExpenseName: "null",
+			Amount:      0,
+		}
+		expenses = append(expenses, null)
 		return expenses
 	}
 
