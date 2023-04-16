@@ -7,6 +7,11 @@ type User struct {
 	Username     string `gorm:"unique"`
 	Password     string
 	SessionToken string `gorm:"unique"`
+	huTotal      uint
+	tTotal       uint
+	fTotal       uint
+	eTotal       uint
+	hTotal       uint
 }
 
 type Income struct {
