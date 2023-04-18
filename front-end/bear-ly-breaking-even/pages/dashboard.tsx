@@ -5,18 +5,19 @@ import PageHeader from '@/components/PageHeader'
 import ExpenseTable from '@/components/ExpenseTable'
 import classNames from "classnames";
 import Test from '@/components/Test'
+import GetData from '@/components/GetData'
 
 
 export default function Dashboard({  }) {
   const router = useRouter()
   const [editIn, setEditIn] = useState(true)
   const [editEx, setEditEx] = useState(true)
-  
+
   function signupLink() {
     router.push('/signup')
   }
 
-  var Username = 'results.Income'
+  var Username = "results"
   const [Income, setIncome] = useState(30000)
   const [HnU, setHnU] = useState(100)
   const [transp, setTransp] = useState(200)
@@ -27,6 +28,23 @@ export default function Dashboard({  }) {
   var total: number = 12*(+HnU + +transp + +food + +enter + +health + +other)
   var surplus = Income - total
   var exc = surplus/12
+
+   async function get() {
+    const data = await fetch('http://localhost:8080/dashboard/get')
+     .then((data) => {
+       data.json()
+       console.log(data.body)
+     })
+     .catch((error) => {console.log("error")})
+ 
+   return {
+     props: {
+       results: data
+     }
+   }
+  }
+  
+
 
     function toggleEditIn(){
       if (editIn)
@@ -48,45 +66,6 @@ export default function Dashboard({  }) {
       setIncome(newIncome.value)}
       setEditIn(true)
     }
-    ////////// TESTTING ////////
-    // function Tab({ label, active, onClick }) {
-    //   return (
-    //     <li
-    //       className={classNames(
-    //         "cursor-pointer",
-    //         "text-gray-600",
-    //         "py-4",
-    //         "px-6",
-    //         "border-b-4",
-    //         active ? "border-blue-500" : ""
-    //       )}
-    //       onClick={onClick}
-    //     >
-    //       {label}
-    //     </li>
-    //   );
-    // }
-    // function App() {
-    //   const [activeTab, setActiveTab] = useState(1);
-    
-    //   const renderTable = () => {
-    //     switch (activeTab) {
-    //       case 1:
-    //         return <ExpenseTable />;
-    //       case 2:
-    //         return <ExpenseTable />;
-    //       case 3:
-    //         return <ExpenseTable />;
-    //       case 4:
-    //         return <ExpenseTable />;
-    //       case 5:
-    //         return <ExpenseTable />;
-    //       default:
-    //         return null;
-    //     }
-    //   }
-    // };
-
 
     function changeF(){
       if (document.getElementById('h&u').value !== ""){
@@ -106,6 +85,8 @@ export default function Dashboard({  }) {
 
     useEffect(() => {
       total = (HnU + transp + food + enter + health + other)
+      const data = get()
+      console.log(data)
     }, [total, HnU, transp, food, enter, health, other])
 
     function load() {
@@ -128,6 +109,7 @@ export default function Dashboard({  }) {
               Welcome { Username }!
           </div>
 
+          
 
           <div className='flex grid px-4 py-1'>
           {editIn === true ? <div className=''> Current Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} </div> : 
@@ -138,23 +120,6 @@ export default function Dashboard({  }) {
           <button id="inputButton" onClick= {toggleEditIn} className='text-left text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Income</button><br/>
             {editEx ? <div className=''>Current Monthly Expenses: <br/>
             
-{/* <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
-    <li class="mr-2">
-        <a href="#" class="inline-block px-4 py-3 text-white bg-blue-600 rounded-lg active" aria-current="page">Home & Utilities</a>
-    </li>
-    <li class="mr-2">
-        <a href="#"  class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Travel</a>
-    </li>
-    <li class="mr-2">
-        <a href="#" class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Food & groceries</a>
-    </li>
-    <li class="mr-2">
-        <a href="#" class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Entertainment</a>
-    </li>
-    <li>
-        <a href="#" class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Health</a>
-    </li>
-</ul> */}
            <Test/>
 
             - Expenses of Home and Utilities: ${HnU.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
@@ -190,21 +155,3 @@ export default function Dashboard({  }) {
     </div>
 )
   }
-
-// export async function getServerSideProps() {
-//   const data = await fetch('http://localhost:8080/dashboard/get')
-//     .then((data) => {
-//       data.json()
-//       console.log(data)
-//       console.log("worked")
-//     })
-//     .catch((error) => {console.log(error)})
-
-//     console.log("done")
-
-//   return {
-//     props: {
-//       results: data
-//     }
-//   }
-// }
