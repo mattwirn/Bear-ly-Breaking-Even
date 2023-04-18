@@ -82,20 +82,39 @@ export default function Dashboard({ }) {
       <PageHeader/>
 
       <div className='px-3 pt-10'>
-        <div className='justify-center flex grid rounded-lg pb-5 mx-auto h-max  bg-[#f2eadf] pb-2 pt-4 border border-black space'>
+        <div className=' flex grid rounded-lg pb-5 mx-auto h-max  bg-[#f2eadf] pb-2 pt-4 border border-black space'>
           <div className=' flex mx-6 my-5  text-xl font-semibold'>
               Welcome { Username }!
           </div>
 
 
           <div className='flex grid px-4 py-1'>
-          {editIn ? <div className='flex'> Current Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} </div> : 
+          {editIn ? <div className=''> Current Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} </div> : 
           <div className=''> Edit Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =>
             <input className="shadow appearance-none border rounded mx-2 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="income" type="number" placeholder="ex. 125000" ></input>
             <button onClick={changeIncome} className='text-sm underline mx-1 my-2'> Submit </button>
           </div>}
-          <button id="inputButton" onClick= {toggleEditIn} className='text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Income</button><br/>
+          <button id="inputButton" onClick= {toggleEditIn} className='text-left text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Income</button><br/>
             {editEx ? <div className=''>Current Monthly Expenses: <br/>
+            
+<ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+    <li class="mr-2">
+        <a href="#" class="inline-block px-4 py-3 text-white bg-blue-600 rounded-lg active" aria-current="page">Home & Utilities</a>
+    </li>
+    <li class="mr-2">
+        <a href="#"  class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Travel</a>
+    </li>
+    <li class="mr-2">
+        <a href="#" class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Food & groceries</a>
+    </li>
+    <li class="mr-2">
+        <a href="#" class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Entertainment</a>
+    </li>
+    <li>
+        <a href="#" class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Health</a>
+    </li>
+</ul>
+
             - Expenses of Home and Utilities: ${HnU.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
             <ExpenseTable/>
             - Expenses of Transportation: ${transp.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
