@@ -30,12 +30,14 @@ export default function Table() {
 
   return (
     <div className='mx-10 my-4'>
-      <table className='border border-black-700'>
+      <table className=' border border-black-700'>
         <tbody>
           {rows.map((row, index) => (
             <tr key={index}>
-              <td className='border border-slate-700'>
-                <div className='flex justify-between'>
+              <td className='content-center border border-slate-700'>
+                <th className= 'px-10 '> Expense Name </th>
+                <th className= 'px-10 '> Expense Amount</th>
+                    <div className='flex justify-between'>
                   <input
                     className='mx-3 my-2 border border-slate-700'
                     type='text'
