@@ -120,7 +120,7 @@ export default function Dashboard({ }) {
             
            <Test/>
 
-            - Expenses of Home and Utilities: ${HnU.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
+            {/* - Expenses of Home and Utilities: ${HnU.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
             <ExpenseTable/>
             - Expenses of Transportation: ${transp.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
             <ExpenseTable/>
@@ -131,7 +131,7 @@ export default function Dashboard({ }) {
             - Expenses of Health: ${health.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
             <ExpenseTable/>
             - Other Expenses: ${other.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
-            <ExpenseTable/>
+            <ExpenseTable/> */}
             </div> : 
             <div>Current Monthly Expenses: <br/>
             - Edit Expenses of Home and Utilities: ${HnU.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =><input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="h&u" type="number"></input><br/>
