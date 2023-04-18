@@ -7,10 +7,11 @@ import classNames from "classnames";
 import Test from '@/components/Test'
 
 
-export default function Dashboard({ }) {
+export default function Dashboard() {
   const router = useRouter()
   const [editIn, setEditIn] = useState(true)
   const [editEx, setEditEx] = useState(true)
+  const [data, setData] = useState()
 
   function signupLink() {
     router.push('/signup')
@@ -29,17 +30,12 @@ export default function Dashboard({ }) {
 
   async function get() {
     const result = await fetch('http://localhost:8080/dashboard/get')
-    const data = result.json()
-     
-    return {
-      props: {
-        results: data
-      }
-    } 
+    .then((result) => {
+      result.json()
+      setData(result)
+    })
   }
-  const data = get()
-  console.log(data)
-  
+    
   
     function toggleEditIn(){
       if (editIn)
@@ -80,15 +76,15 @@ export default function Dashboard({ }) {
 
     useEffect(() => {
       total = (HnU + transp + food + enter + health + other)
-      get()
-    }, [total, HnU, transp, food, enter, health, other])
+      //get()
+    }, [data, total, HnU, transp, food, enter, health, other])
 
 
     function load() {
       console.log("")
     }
 
-    var Username = "data"
+    var Username = "data.username"
 
   return (
     <div className=''>
