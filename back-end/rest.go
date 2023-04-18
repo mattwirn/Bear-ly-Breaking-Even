@@ -20,7 +20,7 @@ func httpHandler() http.Handler {
 	router.HandleFunc("/login", hnd.Login).Methods("POST")
 
 	val := router.PathPrefix("/dashboard").Subrouter()
-	val.HandleFunc("", hnd.Dashboard).Methods("GET")
+	val.HandleFunc("/get", hnd.Dashboard).Methods("GET")
 	val.HandleFunc("/expense/add", hnd.AddExpense).Methods("POST")
 	val.HandleFunc("/expense/update", hnd.UpdateExpense).Methods("PUT")
 	val.HandleFunc("/expense/delete", hnd.DeleteExpense).Methods("DELETE")
