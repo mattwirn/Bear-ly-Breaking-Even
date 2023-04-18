@@ -2,10 +2,11 @@ import Head from 'next/head'
 import {useRouter} from "next/router"
 import {useState, useEffect} from "react"
 import PageHeader from '@/components/PageHeader'
-import HomeUtilTable from '@/components/HomeUtilTable'
-import ExpenseTable1 from '@/components/ExpenseTable1'
+import ExpenseTable from '@/components/ExpenseTable'
+import classNames from "classnames";
 
-export default function Dashboard() {
+
+export default function Dashboard({  }) {
   const router = useRouter()
   const [editIn, setEditIn] = useState(true)
   const [editEx, setEditEx] = useState(true)
@@ -14,7 +15,7 @@ export default function Dashboard() {
     router.push('/signup')
   }
 
-  var Username = 'User123'
+  var Username = 'results.Income'
   const [Income, setIncome] = useState(30000)
   const [HnU, setHnU] = useState(100)
   const [transp, setTransp] = useState(200)
@@ -46,6 +47,45 @@ export default function Dashboard() {
       setIncome(newIncome.value)}
       setEditIn(true)
     }
+    ////////// TESTTING ////////
+    function Tab({ label, active, onClick }) {
+      return (
+        <li
+          className={classNames(
+            "cursor-pointer",
+            "text-gray-600",
+            "py-4",
+            "px-6",
+            "border-b-4",
+            active ? "border-blue-500" : ""
+          )}
+          onClick={onClick}
+        >
+          {label}
+        </li>
+      );
+    }
+    function App() {
+      const [activeTab, setActiveTab] = useState(1);
+    
+      const renderTable = () => {
+        switch (activeTab) {
+          case 1:
+            return <ExpenseTable />;
+          case 2:
+            return <ExpenseTable />;
+          case 3:
+            return <ExpenseTable />;
+          case 4:
+            return <ExpenseTable />;
+          case 5:
+            return <ExpenseTable />;
+          default:
+            return null;
+        }
+      }
+    };
+
 
     function changeF(){
       if (document.getElementById('h&u').value !== ""){
@@ -67,6 +107,10 @@ export default function Dashboard() {
       total = (HnU + transp + food + enter + health + other)
     }, [total, HnU, transp, food, enter, health, other])
 
+    function load() {
+      console.log("")
+    }
+
   return (
     <div className=''>
       <Head>
@@ -78,26 +122,90 @@ export default function Dashboard() {
 
       <PageHeader/>
 
-      <div className=' px-3 pt-10'>
+      <div className='px-3 pt-10'>
         <div className=' flex grid rounded-lg pb-5 mx-auto h-max  bg-[#f2eadf] pb-2 pt-4 border border-black space'>
           <div className=' flex mx-6 my-5  text-xl font-semibold'>
               Welcome { Username }!
           </div>
+
+
+
+
+          <div className="container mx-auto px-4">
+      <ul className="flex border-b">
+        <Tab
+          label="Table 1"
+          active={activeTab === 1}
+          onClick={() => setActiveTab(1)}
+        />
+        <Tab
+          label="Table 2"
+          active={activeTab === 2}
+          onClick={() => setActiveTab(2)}
+        />
+        <Tab
+          label="Table 3"
+          active={activeTab === 3}
+          onClick={() => setActiveTab(3)}
+        />
+        <Tab
+          label="Table 4"
+          active={activeTab === 4}
+          onClick={() => setActiveTab(4)}
+        />
+        <Tab
+          label="Table 5"
+          active={activeTab === 5}
+          onClick={() => setActiveTab(5)}
+        />
+      </ul>
+      {renderTable()}
+    </div>
+
+
+
+
+
           <div className='flex grid px-4 py-1'>
-          {editIn ? <div className=''> Current Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} </div> : 
+          {editIn === true ? <div className=''> Current Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} </div> : 
           <div className=''> Edit Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =>
             <input className="shadow appearance-none border rounded mx-2 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="income" type="number" placeholder="ex. 125000" ></input>
             <button onClick={changeIncome} className='text-sm underline mx-1 my-2'> Submit </button>
           </div>}
-          <button id="inputButton" onClick= {toggleEditIn} className='flex text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Income</button><br/>
-            {editEx ? <div>Current Monthly Expenses: <br/>
+          <button id="inputButton" onClick= {toggleEditIn} className='text-left text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Income</button><br/>
+            {editEx ? <div className=''>Current Monthly Expenses: <br/>
+            
+<ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+    <li class="mr-2">
+        <a href="#" class="inline-block px-4 py-3 text-white bg-blue-600 rounded-lg active" aria-current="page">Home & Utilities</a>
+    </li>
+    <li class="mr-2">
+        <a href="#"  class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Travel</a>
+    </li>
+    <li class="mr-2">
+        <a href="#" class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Food & groceries</a>
+    </li>
+    <li class="mr-2">
+        <a href="#" class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Entertainment</a>
+    </li>
+    <li>
+        <a href="#" class="inline-block px-4 py-3 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white">Health</a>
+    </li>
+</ul>
+
             - Expenses of Home and Utilities: ${HnU.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
-          <ExpenseTable1/>
+            <ExpenseTable/>
             - Expenses of Transportation: ${transp.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
+            <ExpenseTable/>
             - Expenses of Food: ${food.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
+            <ExpenseTable/>
             - Expenses of Entertainment: ${enter.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
+            <ExpenseTable/>
             - Expenses of Health: ${health.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
-            - Other Expenses: ${other.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/></div> : 
+            <ExpenseTable/>
+            - Other Expenses: ${other.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
+            <ExpenseTable/>
+            </div> : 
             <div>Current Monthly Expenses: <br/>
             - Edit Expenses of Home and Utilities: ${HnU.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =><input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="h&u" type="number"></input><br/>
             - Edit Expenses of Transportation: ${transp.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =><input className="m-1 shadow appearance-none border rounded mx-1 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="transp" type="number" ></input><br/>
@@ -117,15 +225,19 @@ export default function Dashboard() {
       </div>
     </div>
 )
-}
+  }
 
-export async function getServerSideProps(){
-  const data= await fetch('http://localhost:8080/dashboard')
-    .then((response) => {
-      response.json()
-      console.log(response)
+export async function getServerSideProps() {
+  const data = await fetch('http://localhost:8080/dashboard/get')
+    .then((data) => {
+      data.json()
+      console.log(data)
+      console.log("worked")
     })
     .catch((error) => {console.log(error)})
+
+    console.log("done")
+
   return {
     props: {
       results: data
