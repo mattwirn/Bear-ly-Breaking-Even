@@ -5,10 +5,9 @@ import PageHeader from '@/components/PageHeader'
 import ExpenseTable from '@/components/ExpenseTable'
 import classNames from "classnames";
 import Test from '@/components/Test'
-import GetData from '@/components/GetData'
 
 
-export default function Dashboard({  }) {
+export default function Dashboard({ }) {
   const router = useRouter()
   const [editIn, setEditIn] = useState(true)
   const [editEx, setEditEx] = useState(true)
@@ -17,7 +16,6 @@ export default function Dashboard({  }) {
     router.push('/signup')
   }
 
-  var Username = "results"
   const [Income, setIncome] = useState(30000)
   const [HnU, setHnU] = useState(100)
   const [transp, setTransp] = useState(200)
@@ -29,23 +27,20 @@ export default function Dashboard({  }) {
   var surplus = Income - total
   var exc = surplus/12
 
-   async function get() {
-    const data = await fetch('http://localhost:8080/dashboard/get')
-     .then((data) => {
-       data.json()
-       console.log(data.body)
-     })
-     .catch((error) => {console.log("error")})
- 
-   return {
-     props: {
-       results: data
-     }
-   }
+  async function get() {
+    const result = await fetch('http://localhost:8080/dashboard/get')
+    const data = result.json()
+     
+    return {
+      props: {
+        results: data
+      }
+    } 
   }
+  const data = get()
+  console.log(data)
   
-
-
+  
     function toggleEditIn(){
       if (editIn)
         setEditIn(false)
@@ -85,13 +80,16 @@ export default function Dashboard({  }) {
 
     useEffect(() => {
       total = (HnU + transp + food + enter + health + other)
-      const data = get()
-      console.log(data)
+      get()
     }, [total, HnU, transp, food, enter, health, other])
+
 
     function load() {
       console.log("")
     }
+
+    var Username = "data"
+
   return (
     <div className=''>
       <Head>
