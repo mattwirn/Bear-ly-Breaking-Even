@@ -3,6 +3,8 @@ import {useRouter} from "next/router"
 import {useState, useEffect} from "react"
 import PageHeader from '@/components/PageHeader'
 import ExpenseTable from '@/components/ExpenseTable'
+import classNames from "classnames";
+
 
 export default function Dashboard({ }) {
   const router = useRouter()
@@ -45,6 +47,45 @@ export default function Dashboard({ }) {
       setIncome(newIncome.value)}
       setEditIn(true)
     }
+    ////////// TESTTING ////////
+    function Tab({ label, active, onClick }) {
+      return (
+        <li
+          className={classNames(
+            "cursor-pointer",
+            "text-gray-600",
+            "py-4",
+            "px-6",
+            "border-b-4",
+            active ? "border-blue-500" : ""
+          )}
+          onClick={onClick}
+        >
+          {label}
+        </li>
+      );
+    }
+    function App() {
+      const [activeTab, setActiveTab] = useState(1);
+    
+      const renderTable = () => {
+        switch (activeTab) {
+          case 1:
+            return <ExpenseTable />;
+          case 2:
+            return <ExpenseTable />;
+          case 3:
+            return <ExpenseTable />;
+          case 4:
+            return <ExpenseTable />;
+          case 5:
+            return <ExpenseTable />;
+          default:
+            return null;
+        }
+      }
+    };
+
 
     function changeF(){
       if (document.getElementById('h&u').value !== ""){
@@ -88,8 +129,45 @@ export default function Dashboard({ }) {
           </div>
 
 
+
+
+          <div className="container mx-auto px-4">
+      <ul className="flex border-b">
+        <Tab
+          label="Table 1"
+          active={activeTab === 1}
+          onClick={() => setActiveTab(1)}
+        />
+        <Tab
+          label="Table 2"
+          active={activeTab === 2}
+          onClick={() => setActiveTab(2)}
+        />
+        <Tab
+          label="Table 3"
+          active={activeTab === 3}
+          onClick={() => setActiveTab(3)}
+        />
+        <Tab
+          label="Table 4"
+          active={activeTab === 4}
+          onClick={() => setActiveTab(4)}
+        />
+        <Tab
+          label="Table 5"
+          active={activeTab === 5}
+          onClick={() => setActiveTab(5)}
+        />
+      </ul>
+      {renderTable()}
+    </div>
+
+
+
+
+
           <div className='flex grid px-4 py-1'>
-          {editIn ? <div className=''> Current Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} </div> : 
+          {editIn === true ? <div className=''> Current Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} </div> : 
           <div className=''> Edit Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =>
             <input className="shadow appearance-none border rounded mx-2 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="income" type="number" placeholder="ex. 125000" ></input>
             <button onClick={changeIncome} className='text-sm underline mx-1 my-2'> Submit </button>
@@ -147,7 +225,7 @@ export default function Dashboard({ }) {
       </div>
     </div>
 )
-}
+  }
 
 // async function get() {
 //   const data = await fetch('http://localhost:8080/dashboard')
