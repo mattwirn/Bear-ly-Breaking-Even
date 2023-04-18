@@ -4,7 +4,7 @@ import {useState, useEffect} from "react"
 import PageHeader from '@/components/PageHeader'
 import ExpenseTable from '@/components/ExpenseTable'
 
-export default function Dashboard({ }) {
+export default function Dashboard({  }) {
   const router = useRouter()
   const [editIn, setEditIn] = useState(true)
   const [editEx, setEditEx] = useState(true)
@@ -13,7 +13,7 @@ export default function Dashboard({ }) {
     router.push('/signup')
   }
 
-  var Username = 'User123'
+  var Username = 'results.Income'
   const [Income, setIncome] = useState(30000)
   const [HnU, setHnU] = useState(100)
   const [transp, setTransp] = useState(200)
@@ -149,16 +149,20 @@ export default function Dashboard({ }) {
 )
 }
 
-// async function get() {
-//   const data = await fetch('http://localhost:8080/dashboard')
-//     .then((data) => {
-//       data.json()
-//       console.log(data.body)
-//     })
-//     .catch((error) => {console.log(error)})
-//   return {
-//     props: {
-//       results: data
-//     }
-//   }
-// }
+export async function getServerSideProps() {
+  const data = await fetch('http://localhost:8080/dashboard/get')
+    .then((data) => {
+      data.json()
+      console.log(data)
+      console.log("worked")
+    })
+    .catch((error) => {console.log(error)})
+
+    console.log("done")
+
+  return {
+    props: {
+      results: data
+    }
+  }
+}
