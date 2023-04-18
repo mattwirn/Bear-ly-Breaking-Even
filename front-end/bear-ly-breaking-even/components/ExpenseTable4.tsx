@@ -34,7 +34,9 @@ export default function Table() {
         <tbody>
           {rows.map((row, index) => (
             <tr key={index}>
-              <td className='border border-slate-700'>
+              <td className='content-center border border-slate-700'>
+                <th className= 'px-10 '> Expense Name </th>
+                <th className= 'px-10 '> Expense Amount</th>
                 <div className='flex justify-between'>
                   <input
                     className='mx-3 my-2 border border-slate-700'
