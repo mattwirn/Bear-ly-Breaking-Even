@@ -6,8 +6,8 @@ func SyncDatabases() {
 	DB.AutoMigrate(&models.User{})
 	DB.AutoMigrate(&models.Income{})
 	DB.AutoMigrate(&models.Home_Uts{})
-	DB.AutoMigrate(&models.Trans{})
+	DB.AutoMigrate(&models.Travel{})
 	DB.AutoMigrate(&models.Food{})
-	DB.AutoMigrate(&models.Edu{})
+	DB.AutoMigrate(&models.Entertainment{})
 	DB.AutoMigrate(&models.Health{})
 }

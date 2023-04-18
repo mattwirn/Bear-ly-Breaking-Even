@@ -25,7 +25,7 @@ func Dashboard(w http.ResponseWriter, r *http.Request) {
 	initializers.DB.First(&user, "session_token = ?", token)
 
 	if user.ID == 0 {
-		http.Error(w, "Server side error", http.StatusInternalServerError)
+		http.Error(w, "ID error", http.StatusInternalServerError)
 		return
 	}
 
@@ -34,13 +34,13 @@ func Dashboard(w http.ResponseWriter, r *http.Request) {
 
 	// Write username to json
 	username := user.Username
-	allData = append(allData, getUsername(username))
+	allData = append(allData, getUsername(username), getIncome(username), getTotalSpent(username), getAllExpenses(username))
 
 	// Get income of user
-	allData = append(allData, getIncome(username))
+	//allData = append(allData, getIncome(username))
 
 	// Gather all expenses from DB
-	allData = append(allData, getAllExpenses(username))
+	//allData = append(allData, getAllExpenses(username))
 
 	// Marshal all data to json
 	response, err := json.Marshal(allData)
@@ -81,6 +81,25 @@ func getIncome(username string) []interface{} {
 	return []interface{}{reformat}
 }
 
+func getTotalSpent(username string) []interface{} {
+	type spent struct {
+		TotalSpent uint `json:"totalspent"`
+	}
+
+	// Search table for user
+	var user models.User
+	initializers.DB.First(&user, "username = ?", username)
+
+	// Add up to get total spent
+	totalspent := user.HUTotal + user.FTotal + user.ETotal + user.HTotal + user.TTotal
+
+	// Reformat to front-end friendly struct
+	reformat := spent{TotalSpent: totalspent}
+
+	// Add to interface and return
+	return []interface{}{reformat}
+}
+
 // Template expense struct for all expenses to front-end
 type expense struct {
 	ExpenseType string `json:"expensetype"`
@@ -88,13 +107,29 @@ type expense struct {
 	Amount      uint   `json:"amount"`
 }
 
+// Template total expense category struct
+type total struct {
+	ExpenseType string `json:"expensetype"`
+	Total       uint   `json:"total"`
+}
+
 func getHomeUts(username string) []interface{} {
 
 	expenses := []interface{}{}
 
+	// Search user table for expense total
+	var user models.User
+	result := initializers.DB.First(&user, "username = ?", username)
+
+	total := total{
+		ExpenseType: "HomeUtils",
+		Total:       user.HUTotal,
+	}
+	expenses = append(expenses, total)
+
 	// Search table for all expenses created the user
 	var exps []models.Home_Uts
-	result := initializers.DB.Find(&exps, "username = ?", username)
+	result = initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
 		return expenses
@@ -112,13 +147,23 @@ func getHomeUts(username string) []interface{} {
 	return expenses
 }
 
-func getTrans(username string) []interface{} {
+func getTravel(username string) []interface{} {
 
 	expenses := []interface{}{}
 
+	// Search user table for expense total
+	var user models.User
+	result := initializers.DB.First(&user, "username = ?", username)
+
+	total := total{
+		ExpenseType: "Travel",
+		Total:       user.TTotal,
+	}
+	expenses = append(expenses, total)
+
 	// Search table for all expenses created the user
-	var exps []models.Trans
-	result := initializers.DB.Find(&exps, "username = ?", username)
+	var exps []models.Travel
+	result = initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
 		return expenses
@@ -127,7 +172,7 @@ func getTrans(username string) []interface{} {
 	// Convert expense struct to new struct to be used by front-end
 	for _, exp := range exps {
 		reformat := expense{
-			ExpenseType: "Transportation",
+			ExpenseType: "Travel",
 			ExpenseName: exp.ExpenseName,
 			Amount:      exp.Amount,
 		}
@@ -140,9 +185,19 @@ func getFood(username string) []interface{} {
 
 	expenses := []interface{}{}
 
+	// Search user table for expense total
+	var user models.User
+	result := initializers.DB.First(&user, "username = ?", username)
+
+	total := total{
+		ExpenseType: "Food",
+		Total:       user.FTotal,
+	}
+	expenses = append(expenses, total)
+
 	// Search table for all expenses created the user
 	var exps []models.Food
-	result := initializers.DB.Find(&exps, "username = ?", username)
+	result = initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
 		return expenses
@@ -160,13 +215,23 @@ func getFood(username string) []interface{} {
 	return expenses
 }
 
-func getEdu(username string) []interface{} {
+func getEnt(username string) []interface{} {
 
 	expenses := []interface{}{}
 
+	// Search user table for expense total
+	var user models.User
+	result := initializers.DB.First(&user, "username = ?", username)
+
+	total := total{
+		ExpenseType: "Entertainment",
+		Total:       user.ETotal,
+	}
+	expenses = append(expenses, total)
+
 	// Search table for all expenses created the user
-	var exps []models.Edu
-	result := initializers.DB.Find(&exps, "username = ?", username)
+	var exps []models.Entertainment
+	result = initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
 		return expenses
@@ -175,7 +240,7 @@ func getEdu(username string) []interface{} {
 	// Convert expense struct to new struct to be used by front-end
 	for _, exp := range exps {
 		reformat := expense{
-			ExpenseType: "Education",
+			ExpenseType: "Entertainment",
 			ExpenseName: exp.ExpenseName,
 			Amount:      exp.Amount,
 		}
@@ -188,9 +253,19 @@ func getHealth(username string) []interface{} {
 
 	expenses := []interface{}{}
 
+	// Search user table for expense total
+	var user models.User
+	result := initializers.DB.First(&user, "username = ?", username)
+
+	total := total{
+		ExpenseType: "Health",
+		Total:       user.HTotal,
+	}
+	expenses = append(expenses, total)
+
 	// Search table for all expenses created the user
 	var exps []models.Health
-	result := initializers.DB.Find(&exps, "username = ?", username)
+	result = initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
 		return expenses
@@ -211,7 +286,7 @@ func getHealth(username string) []interface{} {
 func getAllExpenses(username string) []interface{} {
 	all := []interface{}{}
 
-	all = append(all, getHomeUts(username), getTrans(username), getFood(username),
-		getEdu(username), getHealth(username))
+	all = append(all, getHomeUts(username), getTravel(username), getFood(username),
+		getEnt(username), getHealth(username))
 	return all
 }

@@ -75,7 +75,7 @@ func Signup(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// Create the user
-	user := models.User{Username: body.Username, Password: string(hash), SessionToken: t}
+	user := models.User{Username: body.Username, Password: string(hash), SessionToken: t, HUTotal: 0, TTotal: 0, FTotal: 0, ETotal: 0, HTotal: 0}
 
 	result := initializers.DB.Create(&user) // pass pointer of data to Create
 
@@ -190,16 +190,37 @@ func AddExpense(w http.ResponseWriter, r *http.Request) {
 	case "HomeUtils":
 		exp := models.Home_Uts{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
 
-		result := initializers.DB.Create(&exp) // pass pointer of data to Create
+		var user models.User
+		result := initializers.DB.First(&user, "username = ?", body.Username)
+		if result.Error != nil {
+			http.Error(w, "Failed to find user, username does not exist", http.StatusInternalServerError)
+			return
+		}
+
+		user.HUTotal = user.HUTotal + body.Amount
+		initializers.DB.Save(&user)
+
+		result = initializers.DB.Create(&exp) // pass pointer of data to Create
 
 		if result.Error != nil {
 			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
 			return
 		}
-	case "Trans":
-		exp := models.Trans{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
 
-		result := initializers.DB.Create(&exp) // pass pointer of data to Create
+	case "Travel":
+		exp := models.Travel{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
+
+		var user models.User
+		result := initializers.DB.First(&user, "username = ?", body.Username)
+		if result.Error != nil {
+			http.Error(w, "Failed to find user, username does not exist", http.StatusInternalServerError)
+			return
+		}
+
+		user.TTotal = user.TTotal + body.Amount
+		initializers.DB.Save(&user)
+
+		result = initializers.DB.Create(&exp) // pass pointer of data to Create
 
 		if result.Error != nil {
 			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
@@ -208,16 +229,36 @@ func AddExpense(w http.ResponseWriter, r *http.Request) {
 	case "Food":
 		exp := models.Food{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
 
-		result := initializers.DB.Create(&exp) // pass pointer of data to Create
+		var user models.User
+		result := initializers.DB.First(&user, "username = ?", body.Username)
+		if result.Error != nil {
+			http.Error(w, "Failed to find user, username does not exist", http.StatusInternalServerError)
+			return
+		}
+
+		user.FTotal = user.FTotal + body.Amount
+		initializers.DB.Save(&user)
+
+		result = initializers.DB.Create(&exp) // pass pointer of data to Create
 
 		if result.Error != nil {
 			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
 			return
 		}
-	case "Edu":
-		exp := models.Edu{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
+	case "Ent":
+		exp := models.Entertainment{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
 
-		result := initializers.DB.Create(&exp) // pass pointer of data to Create
+		var user models.User
+		result := initializers.DB.First(&user, "username = ?", body.Username)
+		if result.Error != nil {
+			http.Error(w, "Failed to find user, username does not exist", http.StatusInternalServerError)
+			return
+		}
+
+		user.ETotal = user.ETotal + body.Amount
+		initializers.DB.Save(&user)
+
+		result = initializers.DB.Create(&exp) // pass pointer of data to Create
 
 		if result.Error != nil {
 			http.Error(w, "Failed to create expense", http.StatusInternalServerError)
@@ -226,7 +267,17 @@ func AddExpense(w http.ResponseWriter, r *http.Request) {
 	case "Health":
 		exp := models.Health{Username: body.Username, ExpenseName: body.ExpenseName, Amount: body.Amount}
 
-		result := initializers.DB.Create(&exp) // pass pointer of data to Create
+		var user models.User
+		result := initializers.DB.First(&user, "username = ?", body.Username)
+		if result.Error != nil {
+			http.Error(w, "Failed to find user, username does not exist", http.StatusInternalServerError)
+			return
+		}
+
+		user.HTotal = user.HTotal + body.Amount
+		initializers.DB.Save(&user)
+
+		result = initializers.DB.Create(&exp) // pass pointer of data to Create
 
 		if result.Error != nil {
 			http.Error(w, "Failed to create expense", http.StatusInternalServerError)

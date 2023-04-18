@@ -7,6 +7,11 @@ type User struct {
 	Username     string `gorm:"unique"`
 	Password     string
 	SessionToken string `gorm:"unique"`
+	HUTotal      uint
+	TTotal       uint
+	FTotal       uint
+	ETotal       uint
+	HTotal       uint
 }
 
 type Income struct {
@@ -24,7 +29,7 @@ type Home_Uts struct {
 	Amount      uint
 }
 
-type Trans struct {
+type Travel struct {
 	gorm.Model
 	Username    string
 	ExpenseName string
@@ -36,7 +41,7 @@ type Food struct {
 	ExpenseName string
 	Amount      uint
 }
-type Edu struct {
+type Entertainment struct {
 	gorm.Model
 	Username    string
 	ExpenseName string
