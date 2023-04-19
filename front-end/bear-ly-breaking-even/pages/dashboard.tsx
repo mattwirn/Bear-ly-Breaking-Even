@@ -121,7 +121,7 @@ export default function Dashboard() {
            <div className=' grid place-items-center'>
            
            <Test/>
-           </div> : <div><button onClick={showExp} className='bg-[#addfad] text-xl drop-shadow-lg rounded-lg px-6 py-3 border border-black'>  Show Expenses  </button></div>}
+           </div> : <div><button id='ExpButton' onClick={showExp} className='bg-[#addfad] text-xl drop-shadow-lg rounded-lg px-6 py-3 border border-black'>  Show Expenses  </button></div>}
 
             Total Yearly Expenses: ${total.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
             Capital After Expenses: ${surplus.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})}<br/>

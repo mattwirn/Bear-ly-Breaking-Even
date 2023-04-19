@@ -70,6 +70,7 @@ export default function Table() {
                   />
                   <div className='flex justify-end'>
                     <button
+                      id='deleteRowButton'
                       className=' my-2'
                       onClick={() => deleteRow(index)}
                     >
@@ -84,7 +85,7 @@ export default function Table() {
       </table>
       <table className='grid place-items-left'>
         <tr>
-              <button className='mx-1 my-2 underline' onClick={addRow}> Add Row </button>
+              <button id='addRowButton' className='mx-1 my-2 underline' onClick={addRow}> Add Row </button>
         </tr>
         <tr className='font-bold '>Total: ${getTotal()}</tr>
       </table>
