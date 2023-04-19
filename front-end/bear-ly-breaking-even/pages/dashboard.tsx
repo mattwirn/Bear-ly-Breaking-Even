@@ -121,7 +121,11 @@ export default function Dashboard() {
            <div className=' grid place-items-center'>
            
            <Test/>
+<<<<<<< HEAD
            </div> : <div><button onClick={showExp} className='bg-[#addfad] text-xl drop-shadow-lg rounded-lg px-6 py-3 border border-black py-4 my-5'>  Load Expenses  </button></div>}
+=======
+           </div> : <div><button id='ExpButton' onClick={showExp} className='bg-[#addfad] text-xl drop-shadow-lg rounded-lg px-6 py-3 border border-black'>  Show Expenses  </button></div>}
+>>>>>>> 605b74c1da1bcae0ff16ec9f91e8580dc7ccf039
 
             </div>
         </div>
