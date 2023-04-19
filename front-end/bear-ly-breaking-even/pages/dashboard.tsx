@@ -118,10 +118,10 @@ export default function Dashboard() {
           </div>}
           <button id="inputButton" onClick= {toggleEditIn} className='text-left text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Income</button><br/> 
            {exp ?
-           <div className=' grid place-items-center'>
+           <div className=' grid place-items-center pb-10'>
            
            <Test/>
-           </div> : <div><button id='ExpButton' onClick={showExp} className='bg-[#addfad] text-xl drop-shadow-lg rounded-lg px-6 py-3 border border-black'>  Show Expenses  </button></div>}
+           </div> : <div><button id='ExpButton' onClick={showExp} className='bg-[#addfad] text-xl drop-shadow-lg rounded-lg px-6 py-3 my-5 border border-black'>  Show Expenses  </button></div>}
 
             </div>
         </div>
