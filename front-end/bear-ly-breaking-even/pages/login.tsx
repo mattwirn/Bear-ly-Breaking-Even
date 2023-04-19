@@ -57,7 +57,7 @@ export default function Login() {
         <link rel="icon" />
       </Head>
 
-      <PageHeader/>
+      <PageHeader display={true}/>
 
       <div className='flex items-center justify-center pt-10'>
         <div className='grid flex rounded-lg px-16 mx-auto h-fit justify-center bg-[#f2eadf] pb-2 pt-4 border border-black space'>

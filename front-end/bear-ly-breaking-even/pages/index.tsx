@@ -16,7 +16,7 @@ export default function Home() {
         <link rel="icon" />
       </Head>
 
-      <PageHeader/>
+      <PageHeader display={true}/>
 
       <div className='flex grid justify-center mt-20'>
         <div className='mx-auto mb-5'>
