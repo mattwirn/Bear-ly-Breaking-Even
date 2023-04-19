@@ -19,6 +19,7 @@ The function itself has 2 parameters, a write json body, "**w**", and a read jso
 If the function returns "Invalid username or password", the username doesn't exist or the password was incorrect. If the username exists and the input password matches the stored password, the function will return "Logged in".
 
 ## Dashboard Handler
+### Path - "/dashboard/get"
 Dashboard is a GET function that provides the front end with a json of all the user's fields. It identifies the user via their session cookie.
 The function itself has 2 parameters, a write json body, "**w**", and a read json body, "**r**". "**w**" is the body the function will write to and send back to the front end, and "**r**" is the body that the function receives with the user's session cookie.
 If the session cookie does not exist, it returns "Server side error", otherwise it returns a json with all the user's fields.
@@ -64,7 +65,7 @@ The first three entries can be guaranteed to be the **Username**, **Income**, an
 
 
 ## Update Income Handler
-### Path - "dashboard/income/update"
+### Path - "/dashboard/income/update"
 This is a POST function that edits the income of the user. It takes in a json that contains the *Username*, and *Amount*. Here is an example input:
 ```JSON
 {
@@ -87,7 +88,7 @@ Health           --> "Health"
 
 
 ## Add Expense Handler
-### Path - "dashboard/expense/add"
+### Path - "/dashboard/expense/add"
 This is a POST function that adds a new expense to the database. It takes in a json that contains the *Username*, *ExpenseType*, *ExpenseName*, *Amount*. Here is an example input:
 ```JSON
 {
@@ -101,7 +102,7 @@ If the addition is successful, the returned message will be "*Expense Added*." I
 
 
 ## Update Expense Handler
-### Path - "dashboard/expense/update"
+### Path - "/dashboard/expense/update"
 This is a PUT function that updates an exisiting expense with new value(s). It takes in a json that contains the *Username*, *ExpenseType*, *OldExpenseName*, *OldAmount*, *NewExpenseName*, *NewAmount*. Here is an example input:
 ```JSON
 {
@@ -117,7 +118,7 @@ If the update is successful, the returned message will be "*Expense Updated*." I
 
 
 ## Delete Expense Handler
-### Path - "dashboard/expense/delete"
+### Path - "/dashboard/expense/delete"
 This is a DELETE function that deletes an existing expense from the database. It takes in a json that contains the *Username*, *ExpenseType*, *ExpenseName*, *Amount*. Here is an example input:
 ```JSON
 {
