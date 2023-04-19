@@ -33,33 +33,42 @@ export default function Table() {
     setRows(newRows);
   };
 
+  const getTotal = () => {
+    let total = 0;
+    rows.forEach((row) => {
+      total += parseInt(row[1]) || 0;
+    });
+    return total;
+  };
+
   return (
     <div className='mx-10 my-4'>
-      <table className=' border border-black-700'>
-        <tbody>
+      <table className=''>
+        <thead>
+          <td>
+            <th className=' px-12'> Expense Name </th>
+            <th className=' px-12'> Expense Amount</th>
+          </td>
+        </thead>
+      
+        <tbody className='content-center border border-slate-700'>
           {rows.map((row, index) => (
             <tr key={index}>
               <td className='content-center border border-slate-700'>
-                <th className='px-10'> Expense Name </th>
-                <th className='px-10'> Expense Amount</th>
                 <div className='flex justify-between'>
                   <input
-                    className='mx-3 my-2 border border-slate-700'
+                    className='shadow appearance-none border rounded mx-2 my-2 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                     type='text'
-                    id='plzwork'
                     value={row[0]}
                     onChange={(e) => editRow(index, 0, e.target.value)}
                   />
                   <input
-                    className='my-2 border border-slate-700'
+                    className='shadow appearance-none border rounded mx-2 my-2 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                     type='text'
                     value={row[1]}
                     onChange={(e) => editRow(index, 1, e.target.value)}
                   />
                   <div className='flex justify-end'>
-                    <button className='my-2'>
-                      <PencilIcon className='h-4 w-4 text-blue-500' />
-                    </button>
                     <button
                       className=' my-2'
                       onClick={() => deleteRow(index)}
@@ -71,14 +80,13 @@ export default function Table() {
               </td>
             </tr>
           ))}
-          <tr>
-            <td className='border border-black-700'>
-              <button className='mx-1 my-2 hover:underline' onClick={addRow}>
-                Add Row
-              </button>
-            </td>
-          </tr>
         </tbody>
+      </table>
+      <table className='grid place-items-left'>
+        <tr>
+              <button className='mx-1 my-2 underline' onClick={addRow}> Add Row </button>
+        </tr>
+        <tr className='font-bold '>Total: ${getTotal()}</tr>
       </table>
     </div>
   );

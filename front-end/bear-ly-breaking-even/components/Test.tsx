@@ -44,7 +44,7 @@ function Tab({ label, active, onClick , href}) {
         case 4:
           return <ExpenseTable4 />;
         case 5:
-          return <ExpenseTable5 />;
+          return <ExpenseTable5 />
         default:
           return null;
       }

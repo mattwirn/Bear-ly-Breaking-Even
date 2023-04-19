@@ -12,6 +12,7 @@ export default function Dashboard() {
   const [editIn, setEditIn] = useState(true)
   const [editEx, setEditEx] = useState(true)
   const [data, setData] = useState()
+  const [exp, setExp] = useState(false)
 
   function signupLink() {
     router.push('/signup')
@@ -49,6 +50,10 @@ export default function Dashboard() {
         setEditEx(false)
       else
         setEditEx(true)
+    }
+
+    function showExp(){
+      setExp(true)
     }
 
     function changeIncome(){
@@ -111,10 +116,12 @@ export default function Dashboard() {
             <input className="shadow appearance-none border rounded mx-2 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="income" type="number" placeholder="ex. 125000" ></input>
             <button onClick={changeIncome} className='text-sm underline mx-1 my-2'> Submit </button>
           </div>}
-          <button id="inputButton" onClick= {toggleEditIn} className='text-left text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Income</button><br/>            
+          <button id="inputButton" onClick= {toggleEditIn} className='text-left text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Income</button><br/> 
+           {exp ?
            <div className=' grid place-items-center'>
+           
            <Test/>
-           </div>
+           </div> : <div><button onClick={showExp} className='bg-[#addfad] text-xl drop-shadow-lg rounded-lg px-6 py-3 border border-black'>  Show Expenses  </button></div>}
 
             Total Yearly Expenses: ${total.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
             Capital After Expenses: ${surplus.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})}<br/>
