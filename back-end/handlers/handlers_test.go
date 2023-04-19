@@ -87,6 +87,112 @@ func TestLogin(t *testing.T) {
 	}
 }
 
+func TestDashboardUsername(t *testing.T) {
+
+	instance := username_{Username: "unittest"}
+	expected := []interface{}{instance}
+
+	got := getUsername("unittest")
+
+	if got[0] != expected[0] {
+		t.Error("Expected 'unittest' but didn't receive it")
+	}
+}
+
+func TestDashboardIncome(t *testing.T) {
+
+	instance := income{Income: 0}
+	expected := []interface{}{instance}
+
+	got := getIncome("unittest")
+
+	if got[0] != expected[0] {
+		t.Error("Expected 0 but didn't receive it")
+	}
+}
+
+func TestDashboardTotalSpent(t *testing.T) {
+
+	instance := spent{TotalSpent: 0}
+	expected := []interface{}{instance}
+
+	got := getTotalSpent("unittest")
+
+	if got[0] != expected[0] {
+		t.Error("Expected 0 but didn't receive it")
+	}
+}
+
+func TestDashboardHU(t *testing.T) {
+	instance := total{
+		ExpenseType: "HomeUtils",
+		Total:       0,
+	}
+	expected := []interface{}{instance}
+
+	got := getHomeUts("unittest")
+
+	if got[0] != expected[0] {
+		t.Error("Expected 0 but didn't receive it")
+	}
+}
+
+func TestDashboardT(t *testing.T) {
+	instance := total{
+		ExpenseType: "Travel",
+		Total:       0,
+	}
+	expected := []interface{}{instance}
+
+	got := getTravel("unittest")
+
+	if got[0] != expected[0] {
+		t.Error("Expected 0 but didn't receive it")
+	}
+}
+
+func TestDashboardIncomeF(t *testing.T) {
+	instance := total{
+		ExpenseType: "Food",
+		Total:       0,
+	}
+	expected := []interface{}{instance}
+
+	got := getFood("unittest")
+
+	if got[0] != expected[0] {
+		t.Error("Expected 0 but didn't receive it")
+	}
+}
+
+func TestDashboardIncomeE(t *testing.T) {
+	instance := total{
+		ExpenseType: "Entertainment",
+		Total:       0,
+	}
+	expected := []interface{}{instance}
+
+	got := getEnt("unittest")
+
+	if got[0] != expected[0] {
+		t.Error("Expected 0 but didn't receive it")
+	}
+}
+
+func TestDashboardIncomeH(t *testing.T) {
+	instance := total{
+		ExpenseType: "Health",
+		Total:       0,
+	}
+	expected := []interface{}{instance}
+
+	got := getHealth("unittest")
+
+	if got[0] != expected[0] {
+		t.Error("Expected 0 but didn't receive it")
+	}
+}
+
 func TestInputIncome(t *testing.T) {
 	//initializers.StartDatabase("../.env")
 	bodies := [2]map[string]interface{}{

@@ -57,18 +57,20 @@ func Dashboard(w http.ResponseWriter, r *http.Request) {
 
 }
 
+type username_ struct {
+	Username string `json:"username"`
+}
+
 func getUsername(username string) []interface{} {
-	type username_ struct {
-		Username string `json:"username"`
-	}
 	reformat := username_{Username: username}
 	return []interface{}{reformat}
 }
 
+type income struct {
+	Income uint `json:"income"`
+}
+
 func getIncome(username string) []interface{} {
-	type income struct {
-		Income uint `json:"income"`
-	}
 
 	// Search table for income of user
 	var inc models.Income
@@ -81,10 +83,11 @@ func getIncome(username string) []interface{} {
 	return []interface{}{reformat}
 }
 
+type spent struct {
+	TotalSpent uint `json:"totalspent"`
+}
+
 func getTotalSpent(username string) []interface{} {
-	type spent struct {
-		TotalSpent uint `json:"totalspent"`
-	}
 
 	// Search table for user
 	var user models.User
