@@ -3,7 +3,7 @@ import { TrashIcon, PencilIcon } from '@heroicons/react/solid';
 
 export default function Table() {
   const [rows, setRows] = useState([
-    ['Row 1, Column 1, table 4', 'Row 1, Column 2']
+    ['', '']
 
   ]);
 
