@@ -119,7 +119,7 @@ func getHomeUts(username string) []interface{} {
 
 	// Search user table for expense total
 	var user models.User
-	result := initializers.DB.First(&user, "username = ?", username)
+	initializers.DB.First(&user, "username = ?", username)
 
 	total := total{
 		ExpenseType: "HomeUtils",
@@ -129,7 +129,7 @@ func getHomeUts(username string) []interface{} {
 
 	// Search table for all expenses created the user
 	var exps []models.Home_Uts
-	result = initializers.DB.Find(&exps, "username = ?", username)
+	result := initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
 		return expenses
@@ -153,7 +153,7 @@ func getTravel(username string) []interface{} {
 
 	// Search user table for expense total
 	var user models.User
-	result := initializers.DB.First(&user, "username = ?", username)
+	initializers.DB.First(&user, "username = ?", username)
 
 	total := total{
 		ExpenseType: "Travel",
@@ -163,7 +163,7 @@ func getTravel(username string) []interface{} {
 
 	// Search table for all expenses created the user
 	var exps []models.Travel
-	result = initializers.DB.Find(&exps, "username = ?", username)
+	result := initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
 		return expenses
@@ -187,7 +187,7 @@ func getFood(username string) []interface{} {
 
 	// Search user table for expense total
 	var user models.User
-	result := initializers.DB.First(&user, "username = ?", username)
+	initializers.DB.First(&user, "username = ?", username)
 
 	total := total{
 		ExpenseType: "Food",
@@ -197,7 +197,7 @@ func getFood(username string) []interface{} {
 
 	// Search table for all expenses created the user
 	var exps []models.Food
-	result = initializers.DB.Find(&exps, "username = ?", username)
+	result := initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
 		return expenses
@@ -221,7 +221,7 @@ func getEnt(username string) []interface{} {
 
 	// Search user table for expense total
 	var user models.User
-	result := initializers.DB.First(&user, "username = ?", username)
+	initializers.DB.First(&user, "username = ?", username)
 
 	total := total{
 		ExpenseType: "Entertainment",
@@ -231,7 +231,7 @@ func getEnt(username string) []interface{} {
 
 	// Search table for all expenses created the user
 	var exps []models.Entertainment
-	result = initializers.DB.Find(&exps, "username = ?", username)
+	result := initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
 		return expenses
@@ -255,7 +255,7 @@ func getHealth(username string) []interface{} {
 
 	// Search user table for expense total
 	var user models.User
-	result := initializers.DB.First(&user, "username = ?", username)
+	initializers.DB.First(&user, "username = ?", username)
 
 	total := total{
 		ExpenseType: "Health",
@@ -265,7 +265,7 @@ func getHealth(username string) []interface{} {
 
 	// Search table for all expenses created the user
 	var exps []models.Health
-	result = initializers.DB.Find(&exps, "username = ?", username)
+	result := initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
 		return expenses
