@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { TrashIcon, PencilIcon } from '@heroicons/react/solid';
 
-const LOCAL_STORAGE_KEY = 'table-rows';
+const LOCAL_STORAGE_KEY = 'table-rows2';
 
 export default function Table() {
   const [rows, setRows] = useState(() => {

@@ -51,7 +51,7 @@ function Tab({ label, active, onClick , href}) {
     }
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="justify-center mx-auto px-4">
       <ul className="flex border-b">
         <Tab
           label="Home & Utils"

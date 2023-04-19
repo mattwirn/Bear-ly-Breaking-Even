@@ -112,7 +112,9 @@ export default function Dashboard() {
             <button onClick={changeIncome} className='text-sm underline mx-1 my-2'> Submit </button>
           </div>}
           <button id="inputButton" onClick= {toggleEditIn} className='text-left text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Income</button><br/>            
+           <div className=' grid place-items-center'>
            <Test/>
+           </div>
 
             Total Yearly Expenses: ${total.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
             Capital After Expenses: ${surplus.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})}<br/>
