@@ -36,7 +36,6 @@ export default function Dashboard() {
       setData(result)
     })
   }
-    
   
     function toggleEditIn(){
       if (editIn)
@@ -81,15 +80,12 @@ export default function Dashboard() {
 
     useEffect(() => {
       total = (HnU + transp + food + enter + health + other)
-      //get()
     }, [data, total, HnU, transp, food, enter, health, other])
 
 
     function load() {
       console.log("")
     }
-
-    var Username = "User"
 
   return (
     <div className=''>
@@ -107,9 +103,6 @@ export default function Dashboard() {
           <div className=' flex mx-6 my-5  text-xl font-semibold'>
               Welcome!
           </div>
-
-          
-
           <div className='flex grid px-4 py-1'>
           {editIn === true ? <div className=''> Current Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} </div> : 
           <div className=''> Edit Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =>
@@ -119,10 +112,8 @@ export default function Dashboard() {
           <button id="inputButton" onClick= {toggleEditIn} className='text-left text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Income</button><br/> 
            {exp ?
            <div className=' grid place-items-center pb-10'>
-           
            <Test/>
            </div> : <div><button id='ExpButton' onClick={showExp} className='bg-[#addfad] text-xl drop-shadow-lg rounded-lg px-6 py-3 my-5 border border-black'>  Show Expenses  </button></div>}
-
             </div>
         </div>
         <div className=' flex mx-5 my-5 text-gray-500 text-sm font-semibold'>  </div>
