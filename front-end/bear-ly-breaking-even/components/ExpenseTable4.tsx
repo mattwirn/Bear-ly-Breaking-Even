@@ -64,7 +64,7 @@ export default function Table() {
                   />
                   <input
                     className='shadow appearance-none border rounded mx-2 my-2 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                    type='text'
+                    type='number'
                     value={row[1]}
                     onChange={(e) => editRow(index, 1, e.target.value)}
                   />

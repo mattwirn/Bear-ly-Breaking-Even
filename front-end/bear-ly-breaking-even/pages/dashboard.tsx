@@ -18,7 +18,7 @@ export default function Dashboard() {
     router.push('/signup')
   }
 
-  const [Income, setIncome] = useState(30000)
+  const [Income, setIncome] = useState(0)
   const [HnU, setHnU] = useState(100)
   const [transp, setTransp] = useState(200)
   const [food, setFood] = useState(300)
@@ -89,7 +89,7 @@ export default function Dashboard() {
       console.log("")
     }
 
-    var Username = "testUser"
+    var Username = "User"
 
   return (
     <div className=''>
@@ -105,7 +105,7 @@ export default function Dashboard() {
       <div className='px-3 pt-10'>
         <div className=' flex grid rounded-lg pb-5 mx-auto h-max  bg-[#f2eadf] pb-2 pt-4 border border-black space'>
           <div className=' flex mx-6 my-5  text-xl font-semibold'>
-              Welcome { Username }!
+              Welcome!
           </div>
 
           
@@ -121,14 +121,11 @@ export default function Dashboard() {
            <div className=' grid place-items-center'>
            
            <Test/>
-           </div> : <div><button onClick={showExp} className='bg-[#addfad] text-xl drop-shadow-lg rounded-lg px-6 py-3 border border-black'>  Show Expenses  </button></div>}
+           </div> : <div><button onClick={showExp} className='bg-[#addfad] text-xl drop-shadow-lg rounded-lg px-6 py-3 border border-black py-4 my-5'>  Load Expenses  </button></div>}
 
-            Total Yearly Expenses: ${total.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} <br/>
-            Capital After Expenses: ${surplus.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})}<br/>
-            Monthly Excess Income: ${exc.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})}
             </div>
         </div>
-        <div className=' flex mx-5 my-5 text-gray-500 text-sm font-semibold'> Copyright © 2023 SMD Inc. </div>
+        <div className=' flex mx-5 my-5 text-gray-500 text-sm font-semibold'>  </div>
       </div>
     </div>
 )
