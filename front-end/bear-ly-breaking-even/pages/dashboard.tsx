@@ -98,18 +98,18 @@ export default function Dashboard() {
 
       <PageHeader/>
 
-      <div className='px-3 pt-10'>
-        <div className=' flex grid rounded-lg pb-5 mx-auto h-max  bg-[#f2eadf] pb-2 pt-4 border border-black space'>
-          <div className=' flex mx-6 my-5  text-xl font-semibold'>
+      <div className='min-w-min mx-3 pt-10'>
+        <div className='min-w-min w-1/2 flex grid rounded-lg pb-5 mx-auto h-max  bg-[#f2eadf] pb-2 pt-4 border border-black space'>
+          <div className=' text-center  mx-6 my-5  text-xl font-semibold'>
               Welcome!
           </div>
           <div className='flex grid px-4 py-1'>
-          {editIn === true ? <div className=''> Current Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} </div> : 
-          <div className=''> Edit Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =>
+          {editIn === true ? <div className='mx-10'> Current Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} </div> : 
+          <div className='mx-10'> Edit Yearly Income: ${Income.toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})} =>
             <input className="shadow appearance-none border rounded mx-2 py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="income" type="number" placeholder="ex. 125000" ></input>
             <button onClick={changeIncome} className='text-sm underline mx-1 my-2'> Submit </button>
           </div>}
-          <button id="inputButton" onClick= {toggleEditIn} className='text-left text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Income</button><br/> 
+          <button id="inputButton" onClick= {toggleEditIn} className=' mx-10 text-left text-gray-600 text-xs py-2 underline hover:cursor-pointer'>Toggle Edit Income</button><br/> 
            {exp ?
            <div className=' grid place-items-center pb-10'>
            <Test/>

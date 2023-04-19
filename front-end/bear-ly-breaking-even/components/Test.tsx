@@ -36,25 +36,25 @@ function Tab({ label, active, onClick , href}) {
     const renderTable = () => {
       switch (activeTab) {
         case 1:
-          return <ExpenseTable />;
+          return (<div className="grid place-items-center"><ExpenseTable /></div>);
         case 2:
-          return <ExpenseTable2 />;
+          return (<div className="grid place-items-center"><ExpenseTable2 /></div>);
         case 3:
-          return <ExpenseTable3 />;
+          return (<div className="grid place-items-center"><ExpenseTable3 /></div>);
         case 4:
-          return <ExpenseTable4 />;
+          return (<div className="grid place-items-center"><ExpenseTable4 /></div>);
         case 5:
-          return <ExpenseTable5 />
+          return (<div className="grid place-items-center"><ExpenseTable5 /></div>);
         default:
           return null;
       }
     }
 
   return (
-    <div className="justify-center mx-auto px-4">
+    <div className="items-center mx-auto px-4">
       <ul className="flex border-b">
         <Tab
-          label="Home & Utils"
+          label="Home & Utilities"
           href="#1"
           active={activeTab === 1}
           onClick={() => setActiveTab(1)}
