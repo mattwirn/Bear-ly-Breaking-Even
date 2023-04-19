@@ -36,7 +36,7 @@ function Tab({ label, active, onClick }) {
     const renderTable = () => {
       switch (activeTab) {
         case 1:
-          return <ExpenseTracker />;
+          return <ExpenseTable />;
         case 2:
           return <ExpenseTable2 />;
         case 3:

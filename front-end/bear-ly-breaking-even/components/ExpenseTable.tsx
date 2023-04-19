@@ -1,11 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TrashIcon, PencilIcon } from '@heroicons/react/solid';
 
-export default function Table() {
-  const [rows, setRows] = useState([
-    ['', '']
+const LOCAL_STORAGE_KEY = 'table-rows';
 
-  ]);
+export default function Table() {
+  const [rows, setRows] = useState(() => {
+    const storedRows = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (storedRows) {
+      return JSON.parse(storedRows);
+    }
+    return [['', '']];
+  });
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(rows));
+  }, [rows]);
 
   const addRow = () => {
     const newRow = ['', ''];
@@ -24,10 +33,6 @@ export default function Table() {
     setRows(newRows);
   };
 
-  function showInputFields() {
-
-  }
-
   return (
     <div className='mx-10 my-4'>
       <table className=' border border-black-700'>
@@ -35,9 +40,9 @@ export default function Table() {
           {rows.map((row, index) => (
             <tr key={index}>
               <td className='content-center border border-slate-700'>
-                <th className= 'px-10 '> Expense Name </th>
-                <th className= 'px-10 '> Expense Amount</th>
-                    <div className='flex justify-between'>
+                <th className='px-10'> Expense Name </th>
+                <th className='px-10'> Expense Amount</th>
+                <div className='flex justify-between'>
                   <input
                     className='mx-3 my-2 border border-slate-700'
                     type='text'
@@ -51,7 +56,7 @@ export default function Table() {
                     onChange={(e) => editRow(index, 1, e.target.value)}
                   />
                   <div className='flex justify-end'>
-                  <button onClick={showInputFields} className='my-2'>
+                    <button className='my-2'>
                       <PencilIcon className='h-4 w-4 text-blue-500' />
                     </button>
                     <button
