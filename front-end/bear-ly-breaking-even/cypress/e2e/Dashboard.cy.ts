@@ -4,7 +4,7 @@ describe('template spec', () => {
   })
   it('presses the expenses button, and displays tables', () => {
     cy.visit('http://localhost:8080/dashboard/')
-    cy.get('button[]')
+    cy.get('button[id=ExpButton]').click()
 
   })
 })
