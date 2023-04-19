@@ -57,18 +57,20 @@ func Dashboard(w http.ResponseWriter, r *http.Request) {
 
 }
 
+type username_ struct {
+	Username string `json:"username"`
+}
+
 func getUsername(username string) []interface{} {
-	type username_ struct {
-		Username string `json:"username"`
-	}
 	reformat := username_{Username: username}
 	return []interface{}{reformat}
 }
 
+type income struct {
+	Income uint `json:"income"`
+}
+
 func getIncome(username string) []interface{} {
-	type income struct {
-		Income uint `json:"income"`
-	}
 
 	// Search table for income of user
 	var inc models.Income
@@ -81,10 +83,11 @@ func getIncome(username string) []interface{} {
 	return []interface{}{reformat}
 }
 
+type spent struct {
+	TotalSpent uint `json:"totalspent"`
+}
+
 func getTotalSpent(username string) []interface{} {
-	type spent struct {
-		TotalSpent uint `json:"totalspent"`
-	}
 
 	// Search table for user
 	var user models.User
@@ -119,7 +122,7 @@ func getHomeUts(username string) []interface{} {
 
 	// Search user table for expense total
 	var user models.User
-	result := initializers.DB.First(&user, "username = ?", username)
+	initializers.DB.First(&user, "username = ?", username)
 
 	total := total{
 		ExpenseType: "HomeUtils",
@@ -129,7 +132,7 @@ func getHomeUts(username string) []interface{} {
 
 	// Search table for all expenses created the user
 	var exps []models.Home_Uts
-	result = initializers.DB.Find(&exps, "username = ?", username)
+	result := initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
 		return expenses
@@ -153,7 +156,7 @@ func getTravel(username string) []interface{} {
 
 	// Search user table for expense total
 	var user models.User
-	result := initializers.DB.First(&user, "username = ?", username)
+	initializers.DB.First(&user, "username = ?", username)
 
 	total := total{
 		ExpenseType: "Travel",
@@ -163,7 +166,7 @@ func getTravel(username string) []interface{} {
 
 	// Search table for all expenses created the user
 	var exps []models.Travel
-	result = initializers.DB.Find(&exps, "username = ?", username)
+	result := initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
 		return expenses
@@ -187,7 +190,7 @@ func getFood(username string) []interface{} {
 
 	// Search user table for expense total
 	var user models.User
-	result := initializers.DB.First(&user, "username = ?", username)
+	initializers.DB.First(&user, "username = ?", username)
 
 	total := total{
 		ExpenseType: "Food",
@@ -197,7 +200,7 @@ func getFood(username string) []interface{} {
 
 	// Search table for all expenses created the user
 	var exps []models.Food
-	result = initializers.DB.Find(&exps, "username = ?", username)
+	result := initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
 		return expenses
@@ -221,7 +224,7 @@ func getEnt(username string) []interface{} {
 
 	// Search user table for expense total
 	var user models.User
-	result := initializers.DB.First(&user, "username = ?", username)
+	initializers.DB.First(&user, "username = ?", username)
 
 	total := total{
 		ExpenseType: "Entertainment",
@@ -231,7 +234,7 @@ func getEnt(username string) []interface{} {
 
 	// Search table for all expenses created the user
 	var exps []models.Entertainment
-	result = initializers.DB.Find(&exps, "username = ?", username)
+	result := initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
 		return expenses
@@ -255,7 +258,7 @@ func getHealth(username string) []interface{} {
 
 	// Search user table for expense total
 	var user models.User
-	result := initializers.DB.First(&user, "username = ?", username)
+	initializers.DB.First(&user, "username = ?", username)
 
 	total := total{
 		ExpenseType: "Health",
@@ -265,7 +268,7 @@ func getHealth(username string) []interface{} {
 
 	// Search table for all expenses created the user
 	var exps []models.Health
-	result = initializers.DB.Find(&exps, "username = ?", username)
+	result := initializers.DB.Find(&exps, "username = ?", username)
 
 	if result.RowsAffected == 0 {
 		return expenses
