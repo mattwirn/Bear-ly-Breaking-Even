@@ -1,7 +1,7 @@
 import {useRouter} from 'next/router'
 import Logo from '@/components/Logo'
 
-function PageHeader() {
+function PageHeader({display}: IntrinsitAttributes) {
     const router = useRouter()
 
     function logLink() {
@@ -27,11 +27,12 @@ function PageHeader() {
                     <Logo w={90}/>
                 </button>
             </div>
+            { display ? 
             <div className='text-lg'>
-                <button onClick={dashLink} className='hover:underline mx-1'>Dashboard</button>
                 <button onClick={signupLink} className='hover:underline mx-1'>Sign up</button>
                 <button onClick={logLink} className='hover:underline mx-1'>Log in</button>
             </div>
+            : <div></div> }
         </div>
     )
 }

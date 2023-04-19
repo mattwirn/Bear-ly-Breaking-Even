@@ -57,7 +57,7 @@ export default function Login() {
         <link rel="icon" />
       </Head>
 
-      <PageHeader/>
+      <PageHeader display={true}/>
 
       <div className='flex items-center justify-center pt-10'>
         <div className='grid flex rounded-lg px-16 mx-auto h-fit justify-center bg-[#f2eadf] pb-2 pt-4 border border-black space'>
@@ -81,7 +81,7 @@ export default function Login() {
             <div className='underline hover:cursor-pointer'>Forgot Password</div>
           </div>
           <div className='mx-auto pb-2'>
-            <button onClick={attemptLogin} className='bg-[#addfad] drop-shadow-lg rounded-lg px-6 py-3 border border-black'>
+            <button id="loginButton" onClick={attemptLogin} className='bg-[#addfad] drop-shadow-lg rounded-lg px-6 py-3 border border-black'>
               <div className='font-semibold'>
                 Login
               </div>

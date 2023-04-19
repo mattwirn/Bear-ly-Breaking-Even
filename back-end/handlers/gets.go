@@ -34,6 +34,7 @@ func Dashboard(w http.ResponseWriter, r *http.Request) {
 
 	// Write username to json
 	username := user.Username
+	//allData := getHomeUts(username)
 	allData = append(allData, getUsername(username), getIncome(username), getTotalSpent(username), getAllExpenses(username))
 
 	// Get income of user
