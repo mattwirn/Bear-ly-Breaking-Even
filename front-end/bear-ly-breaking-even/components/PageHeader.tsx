@@ -29,7 +29,6 @@ function PageHeader({display}: IntrinsitAttributes) {
             </div>
             { display ? 
             <div className='text-lg'>
-                <button onClick={dashLink} className='hover:underline mx-1'>Dashboard</button>
                 <button onClick={signupLink} className='hover:underline mx-1'>Sign up</button>
                 <button onClick={logLink} className='hover:underline mx-1'>Log in</button>
             </div>
