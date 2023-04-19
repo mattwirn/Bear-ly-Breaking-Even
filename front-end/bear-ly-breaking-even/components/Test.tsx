@@ -12,9 +12,9 @@ import ExpenseTracker from '@/components/ExpenseTracker'
 import classNames from "classnames";
 
 
-function Tab({ label, active, onClick }) {
+function Tab({ label, active, onClick , href}) {
     return (
-      <li
+      <a
         className={classNames(
           "cursor-pointer",
           "text-gray-600",
@@ -24,9 +24,10 @@ function Tab({ label, active, onClick }) {
           active ? "border-blue-500" : ""
         )}
         onClick={onClick}
+        href={href}
       >
         {label}
-      </li>
+      </a>
     );
   }
 
@@ -55,26 +56,31 @@ function Tab({ label, active, onClick }) {
       <ul className="flex border-b">
         <Tab
           label="Home & Utils"
+          href="#1"
           active={activeTab === 1}
           onClick={() => setActiveTab(1)}
         />
         <Tab
           label="Transportation"
+          href="#2"
           active={activeTab === 2}
           onClick={() => setActiveTab(2)}
         />
         <Tab
           label="Food & Groceries"
+          href="#3"
           active={activeTab === 3}
           onClick={() => setActiveTab(3)}
         />
         <Tab
           label="Entertainment"
+          href="#4"
           active={activeTab === 4}
           onClick={() => setActiveTab(4)}
         />
         <Tab
           label="Health"
+          href="#5"
           active={activeTab === 5}
           onClick={() => setActiveTab(5)}
         />
