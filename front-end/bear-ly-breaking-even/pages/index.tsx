@@ -28,8 +28,7 @@ export default function Home() {
           and savings. Users can input their income as well as categories of expenses that
           they would like to keep track of, and may input specific instances of 
           spending into those categories, which will populate a database. Using this data, 
-          the user will be able to see their spending patterns in each category of spending, 
-           as well as how much of their income is saved, so that they will be more mindful of their budgeting.</h1>
+          the user will be able to see how much of their income is saved, so that they will be more mindful of their budgeting.</h1>
       </div>
     </div>
   )
