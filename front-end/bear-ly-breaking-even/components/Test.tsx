@@ -7,7 +7,6 @@ import ExpenseTable2 from '@/components/ExpenseTable2'
 import ExpenseTable3 from '@/components/ExpenseTable3'
 import ExpenseTable4 from '@/components/ExpenseTable4'
 import ExpenseTable5 from '@/components/ExpenseTable5'
-import ExpenseTracker from '@/components/ExpenseTracker'
 
 import classNames from "classnames";
 
