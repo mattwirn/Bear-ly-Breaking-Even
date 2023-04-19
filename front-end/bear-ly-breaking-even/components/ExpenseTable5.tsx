@@ -36,7 +36,7 @@ export default function Table() {
   const getTotal = () => {
     let total = 0;
     rows.forEach((row) => {
-      total += parseInt(row[1]) || 0;
+      total += parseFloat(row[1]) || 0;
     });
     return total;
   };
@@ -84,9 +84,9 @@ export default function Table() {
       </table>
       <table className='grid place-items-left'>
         <tr>
-              <button className='mx-1 my-2 underline' onClick={addRow}> Add Row </button>
+          <button className='mx-1 my-2 underline' onClick={addRow}> Add Row </button>
         </tr>
-        <tr className='font-bold '>Total: ${getTotal()}</tr>
+        <tr className='font-bold '>Total: ${getTotal().toLocaleString('en', {maximumFractionDigits:2 , minimumFractionDigits: 2})}</tr>
       </table>
     </div>
   );

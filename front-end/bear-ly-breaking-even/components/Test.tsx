@@ -60,7 +60,7 @@ function Tab({ label, active, onClick , href}) {
           onClick={() => setActiveTab(1)}
         />
         <Tab
-          label="Transportation"
+          label="Transportation & Travel"
           href="#2"
           active={activeTab === 2}
           onClick={() => setActiveTab(2)}
