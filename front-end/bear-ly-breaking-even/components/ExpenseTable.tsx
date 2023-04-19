@@ -46,6 +46,7 @@ export default function Table() {
                   <input
                     className='mx-3 my-2 border border-slate-700'
                     type='text'
+                    id='plzwork'
                     value={row[0]}
                     onChange={(e) => editRow(index, 0, e.target.value)}
                   />
