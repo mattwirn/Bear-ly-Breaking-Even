@@ -18,9 +18,9 @@ Bear-ly Breaking Even is a budgeting app that helps users track their spendings 
 - Sean Barney
 
 
-# To run the application:
+# To run the application
 
-## Dependencies:
+## Dependencies
   ### Backend:
   - Go
   - Gorilla Mux
@@ -32,16 +32,16 @@ Bear-ly Breaking Even is a budgeting app that helps users track their spendings 
   - Heroicons v1
   - Cypress
 
-## Paths:
+## Paths
  ### Frontend:
  - "Bear-ly-Breaking-Even\front-end\bear-ly-breaking-even"
  - run the command ```npm run dev```
  
  ### Backend:
- - "Bear-ly-Breaking-Even\back-end
+ - "Bear-ly-Breaking-Even\back-end"
  - run the command ```go run .```
 
-# Backend API Documentation:
+# Backend API Documentation
 
 ## Signup Handler
 Signup is a POST function used to create a user. It takes in username and password strings in json, hashes the password, and stores the user data in a database. A cookie is also made for automatic login, and the newly created user is sent back to the front end.
