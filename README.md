@@ -34,11 +34,11 @@ Bear-ly Breaking Even is a budgeting app that helps users track their spendings 
 
 ## Paths:
  ### Frontend:
- - "Bear-ly-Breaking-Even\Bear-ly-Breaking-Even\front-end\bear-ly-breaking-even"
+ - "Bear-ly-Breaking-Even\front-end\bear-ly-breaking-even"
  - run the command ```npm run dev```
  
  ### Backend:
- - "Bear-ly-Breaking-Even\Bear-ly-Breaking-Even\back-end
+ - "Bear-ly-Breaking-Even\back-end
  - run the command ```go run .```
 
 # Backend API Documentation:
