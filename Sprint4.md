@@ -1,48 +1,48 @@
-# Bear-ly Breaking Even
+## Link to Video Presentation
+[Click me](https://drive.google.com/file/d/1mJJq_biz1d4SMxh9lNZSBc7vX7BOh06f/view?usp=sharing)
 
-## Project Description:
+## Front End
 
-Bear-ly Breaking Even is a budgeting app that helps users track their spendings and savings. Users will input their income as well as categories of expenses that they would like to keep track of, and will be able to input specific instances of spending into those categories, which will populate a database. Users will also be able to input recurring payments and paydays in order to better track budgets in real time. Using this data, the user will be able to see their spending patterns in each category of spending, so that they will be more mindful of their budgeting.
+In this sprint, the dashboard page was further worked on, with many aspects changed and new functionality added:
+- Welcome message changed
+- Page format changed to be centered
+- Added interactive tabs for each individual expense type
+- Created dynamic tables for each tab and expense group 
+- Rows of individual expenses can now be added and deleted 
+- Information remains on tables after component reload
+- Total amount from "Expense Amount" row dynamically added and displayed for each category
+- Removed Login and Signup redirect options from Dashboard page
 
+In sprint 4, we wrote 4 cypress tests which tested the login error handling and the dashboard functionality.
 
-## Group Members:
+- The first test for the login error message tests the component with the text, html and css for the message. It tested whether the text renders on the page in plain html.
+- The second login error test checks whether the entire component—the html, css, and text—renders on the screen when necessary. It types information into the text fields and clicks the login button twice: once with correct information and once with incorrect info. 
+- The third test we wrote checks the component for the tables in the dashboard page. It first renders the plain html onto the screen. Then it checks if adding and deleting rows works.
+- The final test checks whether the tables render onto the screen properly. It first visits the dashboard page, and then clicks the “show expenses” button and checks if the tables render.
 
-### Front End:
+## Back End
 
- - Mario Ponte 
- - Yehuda Cohen
+In this sprint, the dashboard getter was given more functionality, the database was expanded, and some of the expense categories were changed:
+- Added a total spent field to dashboard GET handler that contains the total amount spent across all expenses
+- Added a total of expenses field for each expense type in dashboard GET handler
+    - Expanded users table to include this functionality
+    - All calculations are performed in the backend
+- Replaced "Transportation" category with "Travel"
+- Replaced "Education" category with "Entertainment"
+- Updated dashboard path and documentation as a whole to be more specific
 
-### Back End:
+For the new features, we unit tested the helper getter methods that the Dashboard handler uses to get data from the tables.
 
-- Matthew Wirnowski
-- Sean Barney
-
-
-# To run the application
-
-## Dependencies
-  ### Backend:
-  - Go
-  - Gorilla Mux
-  - GORM
-  ### Frontend:
-  - Typescript
-  - Nextjs
-  - Node
-  - Heroicons v1
-  - Cypress
-
-## Paths
- ### Frontend:
- - "Bear-ly-Breaking-Even\front-end\bear-ly-breaking-even"
- - run the command ```npm run dev```
- 
- ### Backend:
- - "Bear-ly-Breaking-Even\back-end"
- - run the command ```go run .```
+ - "TestDashboardUsername" tests the "getUsername" method to see if it returns the correct username.
+ - "TestDashboardIncome" tests the "getIncome" method to see if it returns the correct income.
+ - "TestDashboardTotalSpent" tests the "getTotalSpent" method to see if it indeed returns the correct amount for the user's total spent.
+ - "TestDashboardHU" tests the "getHomeUts" method to see if it indeed returns the correct total amount spent for the Home & Utilities category.
+ - "TestDashboardT" tests the "getTravel" method to see if it indeed returns the correct total amount spent for the Travel category.
+ - "TestDashboardIncomeF" tests the "getFood" method to see if it indeed returns the correct total amount spent for the Food category.
+ - "TestDashboardIncomeE" tests the "getEnt" method to see if it indeed returns the correct total amount spent for the Entertainment category.
+ - "TestDashboardIncomeH" test the "getHealth" method to see if it indeed returns the correct total amount spent for the Health category.
 
 # Backend API Documentation
-
 ## Signup Handler
 Signup is a POST function used to create a user. It takes in username and password strings in json, hashes the password, and stores the user data in a database. A cookie is also made for automatic login, and the newly created user is sent back to the front end.
 The function itself has 2 parameters, a write json body, "**w**", and a read json body, "**r**". "**w**" is the body the function will write to and send back to the front end, and "**r**" is the body that the function receives with the user's username and password.
