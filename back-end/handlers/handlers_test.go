@@ -240,13 +240,13 @@ func TestAddExpense(t *testing.T) {
 	//initializers.StartDatabase("../.env")
 	bodies := [2]map[string]interface{}{
 		{
-			"Username":    "test",
+			"Username":    "unittest",
 			"ExpenseType": "Food",
 			"ExpenseName": "chikfila",
 			"Amount":      1500,
 		},
 		{
-			"Username":    "test",
+			"Username":    "unittest",
 			"ExpenseType": "f0od",
 			"ExpenseName": "chikfila",
 			"Amount":      1500,
@@ -287,7 +287,7 @@ func TestUpdateExpense(t *testing.T) {
 	//initializers.StartDatabase("../.env")
 	bodies := [4]map[string]interface{}{
 		{
-			"Username":       "test",
+			"Username":       "unittest",
 			"ExpenseType":    "Food",
 			"OldExpenseName": "chikfila",
 			"OldAmount":      1500,
@@ -303,7 +303,7 @@ func TestUpdateExpense(t *testing.T) {
 			"NewAmount":      69,
 		},
 		{
-			"Username":       "test",
+			"Username":       "unittest",
 			"ExpenseType":    "f0od",
 			"OldExpenseName": "chikfila",
 			"OldAmount":      1500,
@@ -311,7 +311,7 @@ func TestUpdateExpense(t *testing.T) {
 			"NewAmount":      69,
 		},
 		{
-			"Username":       "test",
+			"Username":       "unittest",
 			"ExpenseType":    "Food",
 			"OldExpenseName": "cheekfila",
 			"OldAmount":      1500,
@@ -360,13 +360,13 @@ func TestDeleteExpense(t *testing.T) {
 			"Amount":      1500,
 		},
 		{
-			"Username":    "test",
+			"Username":    "unittest",
 			"ExpenseType": "f0od",
 			"ExpenseName": "chikfila",
 			"Amount":      1500,
 		},
 		{
-			"Username":    "test",
+			"Username":    "unittest",
 			"ExpenseType": "Food",
 			"ExpenseName": "chik-fil-a",
 			"Amount":      69,
