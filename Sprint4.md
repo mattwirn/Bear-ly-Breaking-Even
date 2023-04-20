@@ -13,8 +13,12 @@ In this sprint, the dashboard page was further worked on, with many aspects chan
 - Total amount from "Expense Amount" row dynamically added and displayed for each category
 - Removed Login and Signup redirect options from Dashboard page
 
-New Cypress tests have been written to test the new features:
--
+In sprint 4, we wrote 4 cypress tests which tested the login error handling and the dashboard functionality.
+
+- The first test for the login error message tests the component with the text, html and css for the message. It tested whether the text renders on the page in plain html.
+- The second login error test checks whether the entire component—the html, css, and text—renders on the screen when necessary. It types information into the text fields and clicks the login button twice: once with correct information and once with incorrect info. 
+- The third test we wrote checks the component for the tables in the dashboard page. It first renders the plain html onto the screen. Then it checks if adding and deleting rows works.
+- The final test checks whether the tables render onto the screen properly. It first visits the dashboard page, and then clicks the “show expenses” button and checks if the tables render.
 
 ## Back End
 For the new features, we tested the helper getter methods that the Dashboard handler uses to get data from the tables.
