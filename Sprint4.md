@@ -19,11 +19,11 @@ New Cypress tests have been written to test the new features:
 ## Back End
 For the new features, we tested the helper getter methods that the Dashboard handler uses to get data from the tables.
 
-"TestDashboardUsername" tests the "getUsername" method to see if it returns the correct username.
-"TestDashboardIncome" tests the "getIncome" method to see if it returns the correct income.
-"TestDashboardTotalSpent" tests the "getTotalSpent" method to see if it indeed returns the correct amount for the user's total spent.
-"TestDashboardHU" tests the "getHomeUts" method to see if it indeed returns the correct total amount spent for the Home & Utilities category.
-"TestDashboardT" tests the "getTravel" method to see if it indeed returns the correct total amount spent for the Travel category.
-"TestDashboardIncomeF" tests the "getFood" method to see if it indeed returns the correct total amount spent for the Food category.
-"TestDashboardIncomeE" tests the "getEnt" method to see if it indeed returns the correct total amount spent for the Entertainment category.
-"TestDashboardIncomeH" test the "getHealth" method to see if it indeed returns the correct total amount spent for the Health category.
+ - "TestDashboardUsername" tests the "getUsername" method to see if it returns the correct username.
+ - "TestDashboardIncome" tests the "getIncome" method to see if it returns the correct income.
+ - "TestDashboardTotalSpent" tests the "getTotalSpent" method to see if it indeed returns the correct amount for the user's total spent.
+ - "TestDashboardHU" tests the "getHomeUts" method to see if it indeed returns the correct total amount spent for the Home & Utilities category.
+ - "TestDashboardT" tests the "getTravel" method to see if it indeed returns the correct total amount spent for the Travel category.
+ - "TestDashboardIncomeF" tests the "getFood" method to see if it indeed returns the correct total amount spent for the Food category.
+ - "TestDashboardIncomeE" tests the "getEnt" method to see if it indeed returns the correct total amount spent for the Entertainment category.
+ - "TestDashboardIncomeH" test the "getHealth" method to see if it indeed returns the correct total amount spent for the Health category.
